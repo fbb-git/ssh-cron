@@ -23,12 +23,9 @@ class ChildIO: public FBB::Fork
     FBB::Pipe childInput;   // child reads this
     FBB::Pipe childOutput;   // child writes this
 
-    private:
-        void childRedirections();
-        void childProcess();
-        void parentProcess();
-
-//        static void showOut(int fd);
+    void childRedirections()    override;
+    void childProcess()         override;
+    void parentProcess()        override;
 };
 
 using namespace std;
@@ -69,14 +66,16 @@ void ChildIO::parentProcess()
     Selector selector;
     selector.addReadFd(childOutput.readFd());
 
+    string commands[] = 
+    {
+        "/bin/echo ssh-add",
+        ""
+    };
+
     try
     {
-        while (true)
+        for (string &line: commands)
         {
-            cout << "? ";
-            line.clear();
-            getline(cin, line);
-    
             if (line.empty())
             {
                 kill(pid(), SIGTERM);
@@ -107,20 +106,35 @@ void ChildIO::parentProcess()
     catch (Leave)
     {}
 
-//    cout << "Joining..." << endl;
-//
-//    outputThread.join();
-
     cout << "The child returns value " << waitForChild() << endl;
 }
 
+class Daemon: public FBB::Fork
+{
+    void childProcess() override;
+    void parentProcess() override;
+};
 
+void Daemon::childProcess()
+{
+//    prepareDaemon();
+    ChildIO childIO;
+    childIO.fork();
+
+    cerr << "Daemon's child's parent process ends\n";
+    throw 0;                
+}
+
+void Daemon::parentProcess()
+{
+}
+    
 int main()
 try
 {
-    ChildIO io;
+    Daemon daemon;
 
-    io.fork();
+    daemon.fork();
 
     return 0;
 }
