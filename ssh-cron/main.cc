@@ -68,9 +68,11 @@ void ChildIO::parentProcess()
 
     string commands[] = 
     {
-        "/bin/echo ssh-add",
+        "echo /usr/bin/ssh-add",
         ""
     };
+
+    ofstream out("/tmp/ssh-cron.log");
 
     try
     {
@@ -96,7 +98,7 @@ void ChildIO::parentProcess()
 
                         break;
                     }
-                    cout << "Got: " << line << endl;
+                    out << "Got: " << line << endl;
                 }
             }
             catch (exception const &exc)
@@ -106,7 +108,7 @@ void ChildIO::parentProcess()
     catch (Leave)
     {}
 
-    cout << "The child returns value " << waitForChild() << endl;
+    out << "The child returns value " << waitForChild() << endl;
 }
 
 class Daemon: public FBB::Fork
@@ -117,7 +119,7 @@ class Daemon: public FBB::Fork
 
 void Daemon::childProcess()
 {
-//    prepareDaemon();
+    prepareDaemon();
     ChildIO childIO;
     childIO.fork();
 
