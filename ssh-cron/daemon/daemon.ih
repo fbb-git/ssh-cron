@@ -1,0 +1,4 @@
+#include "daemon.h"
+
+using namespace std;
+

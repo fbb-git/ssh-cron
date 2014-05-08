@@ -111,25 +111,6 @@ void ChildIO::parentProcess()
     out << "The child returns value " << waitForChild() << endl;
 }
 
-class Daemon: public FBB::Fork
-{
-    void childProcess() override;
-    void parentProcess() override;
-};
-
-void Daemon::childProcess()
-{
-    prepareDaemon();
-    ChildIO childIO;
-    childIO.fork();
-
-    cerr << "Daemon's child's parent process ends\n";
-    throw 0;                
-}
-
-void Daemon::parentProcess()
-{
-}
     
 int main()
 try
