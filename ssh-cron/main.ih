@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "daemon/daemon.h"
+
 namespace Icmbuild
 {
     extern char version[];
@@ -11,3 +13,5 @@ namespace Icmbuild
 void usage(std::string const &progname);
 
 using namespace std;
+using namespace FBB;
+using namespace Icmbuild;

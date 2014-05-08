@@ -25,3 +25,5 @@
 #   directories (in)directly depending on x (e.g., y) are then automatically 
 #   recompiled by icmbuild.
 
+daemon
+cron

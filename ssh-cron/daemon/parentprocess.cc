@@ -1,4 +1,4 @@
 #include "daemon.ih"
 
-Daemon::parentProcess()
+void Daemon::parentProcess()
 {}

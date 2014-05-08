@@ -1,4 +1,6 @@
 #include "daemon.h"
 
+#include "../cron/cron.h"
+
 using namespace std;
 
