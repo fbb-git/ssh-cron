@@ -1,18 +1,15 @@
 %filenames parser
 %scanner ../scanner/scanner.h
 
-%baseclass-preinclude      parserpre.ih
+%baseclass-preinclude parserpre.ih
 
-
-// %polymorphic STRING: std::string; INT: int
+%polymorphic STRING: std::string; INT: int
 
 %token WS NR ID CHAR
 
-// %left   ','
-// %left   '-'
-
-// %type <STRING>  tokens optTokens
-// %type <INT>     optStep, nr
+%type <STRING>  tokens optTokens noWScolonAssign noWSsequence noWStoken token
+                noWScolonAssignSequence
+%type <INT>     optStep, nr
 
 %%
 

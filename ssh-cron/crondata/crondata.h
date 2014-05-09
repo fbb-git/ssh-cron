@@ -23,11 +23,20 @@ class CronData
     public:
         CronData();
 
-        void setMinutes(std::set<int> const &minutes);
-        void setHours(std::set<int> const &minutes);
-        void setDayOfMonth(std::set<int> const &minutes);
-        void setMonthOfYear(std::set<int> const &minutes);
-        void setDayOfWeek(std::set<int> const &minutes);
+        void addNr(int nr);
+        void addRange(int first, int last, int step);
+        void setAll(int step);
+        void addName(std::string const &str);
+        void setCommand(std::string const &command);
+        void process();
+        void reset(size_t lineNr);
+
+        void setMinutes();
+        void setHours();
+        void setDayOfMonth();
+        void setMonthOfYear();
+        void setDayOfWeek();
+        
     private:
 };
         

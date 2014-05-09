@@ -1,4 +1,4 @@
-noWScolonAssignToken:
+plainNoWScolonAssign:
     NR
 |
     ID
@@ -14,25 +14,47 @@ noWScolonAssignToken:
     CHAR
 ;
 
-noWStoken:
-    noWScolonAssignToken
+noWScolonAssign:
+    plainNoWScolonAssign
+    {
+        $$ = d_scanner.matched();
+    }
+;
+
+plainNoWS:
+    plainNoWScolonAssign
 |
     ':'
 |
     '='
 ;
 
-token:
-    WS
-|
-    noWStoken
+noWStoken:
+    plainNoWS
+    {
+        $$ = d_scanner.matched();
+    }
 ;
 
+plainToken:
+    WS
+|
+    plainNoWS
+;
+
+token:
+    plainToken
+    {
+        $$ = d_scanner.matched();
+    }
+;
 
 optTokens:
     tokens
 |
-    // empty
+    {
+        $$ = string();
+    }
 ;
 
 tokens:
@@ -50,9 +72,15 @@ tokens:
 noWSsequence:
     noWStoken
     optTokens
+    {
+        $$ += $2;
+    }
 ;
 
 noWScolonAssignSequence:
-    noWScolonAssignToken
+    noWScolonAssign
     optTokens
+    {
+        $$ += $2;
+    }
 ;

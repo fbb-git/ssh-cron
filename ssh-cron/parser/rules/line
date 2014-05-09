@@ -6,8 +6,14 @@ contents:
     error
 ;
 
+preamble:
+    {
+        d_cronData.reset(d_scanner.lineNr());
+    }
+;
+
 optContents:
-    contents
+    preamble contents
 |
     // empty
 ;

@@ -8,6 +8,7 @@
 // $insert scanner.h
 #include "../scanner/scanner.h"
 
+class CronData;
 
 #undef Parser
 class Parser: public ParserBase
@@ -15,12 +16,12 @@ class Parser: public ParserBase
     // $insert scannerobject
     Scanner d_scanner;
 
-    std::set<int> d_values;
-    std::vector<std::string>> d_names;
-
-    static bool s_errors;           // set by the 'off' manipulator
+    CronData &d_cronData;
+    
+//    static bool s_errors;           // set by the 'off' manipulator
 
     public:
+        Parser(CronData &cronData);
         int parse();
 
     private:

@@ -5,6 +5,8 @@
 // $insert class.h
 #include "parser.h"
 
+#include "../crondata/crondata.h"
+
 #include <bobcat/mstream>
 
 // $insert lex

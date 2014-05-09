@@ -1,35 +1,35 @@
 minutes:
     numberSpec
     {
-        d_cron.setMinutes();
+        d_cronData.setMinutes();
     }
 ;
 
 hours:
     numberSpec
     {
-        d_cron.setHours();
+        d_cronData.setHours();
     }
 ;
 
 dayOfMonth:
     numberSpec
     {
-        d_cron.setDayOfMonth();
+        d_cronData.setDayOfMonth();
     }
 ;
 
 monthOfYear:
     timeSpec
     {
-        d_cron.setMonthOfYear();
+        d_cronData.setMonthOfYear();
     }
 ;
 
 dayOfWeek:
     timeSpec
     {
-        d_cron.setDayOfWeek();
+        d_cronData.setDayOfWeek();
         d_scanner.getTail();
     }
 ;
@@ -37,13 +37,13 @@ dayOfWeek:
 command:
     noWSsequence
     {
-        d_cron.setCommand($1);
+        d_cronData.setCommand($1);
     }
 ;
 
 cronLine:
     minutes hours dayOfMonth monthOfYear dayOfWeek command
     {
-        d_cron.process();
+        d_cronData.process();
     }
 ;

@@ -5,30 +5,29 @@ nr:
     }
 ;
 
-
 optStep:
     // empty
     {
-        return 1;
+        $$ = 1;
     }
 |
     '/' nr
     {
-        return $2;
+        $$ = $2;
     }
 ;
 
 addNr:
     nr
     {
-        d_cron.addNr($1);
+        d_cronData.addNr($1);
     }
 ;
 
 numberUnit:
     nr '-' nr optStep
     {
-        d_cron.addRange($1, $3, $4);
+        d_cronData.addRange($1, $3, $4);
     }
 |
     addNr
@@ -50,7 +49,7 @@ timeEnds:
 allSequence:
     '*'  optStep timeEnds   // empty set indicates `all valid specifications
     {
-        d_cron.setAll($2);
+        d_cronData.setAll($2);
     }
 ;
 
@@ -66,7 +65,7 @@ timeUnit:
 |
     ID
     {
-        d_cron.addName(d_scanner.matched());
+        d_cronData.addName(d_scanner.matched());
     }
 ;
 
