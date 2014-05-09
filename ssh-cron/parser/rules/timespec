@@ -1,48 +1,86 @@
-//timeEnds:
-//    WS
-//    {
-//        emsg.on();
-//    }
-//;
-//
-//optStep:
-//    // empty
-//    {
-//        return 1;
-//    }
-//|
-//    '/' NR
-//    {
-//        return stol(d_scanner.matched());
-//    }
-//;
-//
+timeEnds:
+    WS
+    {
+        emsg.on();
+    }
+;
+
+nr:
+    NR
+    {
+        stol(d_scanner.matched());
+    }
+;
+
+
+optStep:
+    // empty
+    {
+        return 1;
+    }
+|
+    '/' nr
+;
+
 //timeName:
 //    ID
 //    {
 //        d_cron.addName();
 //    }
 //;
-//
-//timeUnit:
-//    timeName
-////|   
-////    timeRange
-//;
-//
-//timeSequence:
-////    timeSequence ',' timeUnit
-////|
-//    timeUnit
+
+numberUnit:
+    nr '-' nr optStep
+|
+    nr
+;
+
+numberSequence:
+    numberSequence ',' numberUnit
+|
+    numberUnit
+;
+
+allSequence:
+    '*'  optStep timeEnds   // empty set indicates `all valid specifications
+    {
+        d_cron.setAll($2);
+    }
+;
+
+numberSpec:
+    allSequence                                     
+|
+    numberSequence timeEnds
+;
+
+
+//timeName:
+//    ID
 //;
 
-timeSpec:
-    ID WS
-//    '*'  optStep timeEnds   // empty set indicates `all valid specifications
+timeUnit:
+    nr '-' nr optStep
+|
+    nr
+|
+    ID
 //    {
-//        d_cron.setAll($2);
+//        d_cron.addName();
 //    }
-//|
-//    timeSequence timeEnds
 ;
+
+timeSequence:
+    timeSequence ',' timeUnit
+|
+    timeUnit
+;
+
+
+timeSpec:
+    allSequence
+|
+    timeSequence timeEnds
+;
+
 

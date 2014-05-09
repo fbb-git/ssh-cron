@@ -1,3 +1,17 @@
+contents:
+    nameLine            // either an option or an environment var
+|
+    cronLine            // time specification + action
+|
+    error
+;
+
+optContents:
+    contents
+|
+    // empty
+;
+
 line:
     optContents '\n'
 ;

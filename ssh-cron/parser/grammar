@@ -30,7 +30,6 @@ startrule:
 %include rules/timespec
 %include rules/cronline
 
-%include rules/contents
 %include rules/line
 
 

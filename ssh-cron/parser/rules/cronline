@@ -1,19 +1,19 @@
 minutes:
-    timeSpec
+    numberSpec
     {
         d_cron.setMinutes();
     }
 ;
 
 hours:
-    timeSpec
+    numberSpec
     {
         d_cron.setHours();
     }
 ;
 
 dayOfMonth:
-    timeSpec
+    numberSpec
     {
         d_cron.setDayOfMonth();
     }
