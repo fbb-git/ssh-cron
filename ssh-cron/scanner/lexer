@@ -1,0 +1,37 @@
+%filenames scanner
+
+//%interactive
+//%debug
+
+%x tail
+
+ID      [[:alpha:]_][[:alnum:]_-]*
+
+%%
+
+^[ \t]+                         // ignore ws at the beginning of a line
+
+[ \t]*#.*                       // ignore hash-comment
+
+[ \t]+                          return Parser::WS;
+
+[0-9]+                          return Parser::NR;
+
+                                // an ID which is an option remains an option
+                                // otherwise it is a Parser::COMMAND
+{ID}                            checkOption();
+                                    
+.|\n                            return matched()[0];
+
+//%nowarn
+<tail>.*                        {
+                                    begin(StartCondition__::INITIAL);
+                                    if (d_returnCommand)
+                                        return Parser::COMMAND;
+                                }
+
+
+
+
+
+

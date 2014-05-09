@@ -1,8 +1,13 @@
 #include "main.ih"
 
+//#include "parser/parser.h"
+
 int main()
 try
 {
+//    Parser parser;
+//    parser.parse();
+
     Daemon daemon;
     daemon.fork();
 }

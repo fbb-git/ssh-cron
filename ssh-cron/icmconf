@@ -20,7 +20,7 @@
 
     // The compiler options to use. Define CFLAGS instead if a C compiler is
     // used.
-#define CXXFLAGS        " --std=c++0x -Wall -pthread -O2"
+#define CXXFLAGS        " --std=c++0x -Wall -O2"
 //#define CFLAGS        " -Wall -g -O2"
 
     // Options passed to the linker:
@@ -28,7 +28,7 @@
 
     // Uncomment to construct a library. Optionally use another name (don't
     // use lib or an extension like .a)
-//#define LIBRARY           "modules"
+#define LIBRARY           "modules"
 
     // The source containing main():
 #define MAIN                "main.cc"
@@ -38,7 +38,7 @@
 
     // If a parser must be generated define the subdirectory containing the
     // parser's specification file
-#define PARSER_DIR          ""
+#define PARSER_DIR          "parser"
 
     // Specify additional grammar specification files using patterns
     // these files are (in)directly included by PARSSPEC. Specify patterns
@@ -59,11 +59,11 @@
 #define PARSSPEC            "grammar"
 
     // Uncomment to relink the binary, even when no sources were changed 
-//#define REFRESH
+#define REFRESH
 
     // If a lexical scanner must be generated: the subdirectory containing
     // the scanner's specification file.
-#define SCANNER_DIR         ""  
+#define SCANNER_DIR         "scanner"  
 
     // Specify additional lexer specification files using patterns
     // these files are (in)directly included by SCANSPEC
@@ -71,6 +71,7 @@
 
     // Flags to provide SCANGEN with:
 #define SCANFLAGS           ""
+    //                      "-t"
 
     // What is the program generating the lexical scanner?
 #define SCANGEN             "flexc++"
