@@ -1,0 +1,49 @@
+minutes:
+    timeSpec
+    {
+        d_cron.setMinutes();
+    }
+;
+
+hours:
+    timeSpec
+    {
+        d_cron.setHours();
+    }
+;
+
+dayOfMonth:
+    timeSpec
+    {
+        d_cron.setDayOfMonth();
+    }
+;
+
+monthOfYear:
+    timeSpec
+    {
+        d_cron.setMonthOfYear();
+    }
+;
+
+dayOfWeek:
+    timeSpec
+    {
+        d_cron.setDayOfWeek();
+        d_scanner.getTail();
+    }
+;
+
+command:
+    noWSsequence
+    {
+        d_cron.setCommand($1);
+    }
+;
+
+cronLine:
+    minutes hours dayOfMonth monthOfYear dayOfWeek command
+    {
+        d_cron.process();
+    }
+;

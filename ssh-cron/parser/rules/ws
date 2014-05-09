@@ -1,0 +1,5 @@
+optWS:
+    optWS WS
+|
+    // empty
+;

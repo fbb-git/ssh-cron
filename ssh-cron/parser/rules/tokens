@@ -1,0 +1,58 @@
+noWScolonAssignToken:
+    NR
+|
+    ID
+|
+    '*'
+|
+    '/'
+|
+    ','
+|
+    '-'
+|
+    CHAR
+;
+
+noWStoken:
+    noWScolonAssignToken
+|
+    ':'
+|
+    '='
+;
+
+token:
+    WS
+|
+    noWStoken
+;
+
+
+optTokens:
+    tokens
+|
+    // empty
+;
+
+tokens:
+    tokens token
+    {
+        $$ += d_scanner.matched();
+    }
+|
+    token
+    {
+        $$ = d_scanner.matched();
+    }
+;
+
+noWSsequence:
+    noWStoken
+    optTokens
+;
+
+noWScolonAssignSequence:
+    noWScolonAssignToken
+    optTokens
+;

@@ -1,0 +1,10 @@
+
+nameContents:
+    // empty
+|
+    ':' optWS noWSsequence
+|
+    '=' optWS noWSsequence
+|
+    noWScolonAssignSequence
+;

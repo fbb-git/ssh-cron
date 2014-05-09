@@ -4,14 +4,15 @@
 %baseclass-preinclude      parserpre.ih
 
 
-%polymorphic SET: std::set<int>; STRING: std::string
+// %polymorphic STRING: std::string; INT: int
 
-%token COMMAND NR WS
-%left   ','
-%left   '-'
+%token WS NR ID CHAR
 
-%type <SET>     timeSpec, timeRange
-%type <STRING>  tail
+// %left   ','
+// %left   '-'
+
+// %type <STRING>  tokens optTokens
+// %type <INT>     optStep, nr
 
 %%
 
@@ -21,117 +22,27 @@ startrule:
     // empty
 ;
 
-line:
-    optContents '\n'
-;
+%include rules/tokens
+%include rules/ws
+%include rules/namecontents
+%include rules/nameline
 
-optContents:
-    contents
-|
-    // empty
-;
+%include rules/timespec
+%include rules/cronline
 
-contents:
-    command
-|
-    cronLine
-|
-    error
-;
+%include rules/contents
+%include rules/line
 
-command:
-    COMMAND
-    {
-        cout << "Line " << d_scanner.lineNr() << ": command to execute " << 
-                d_scanner.matched() << '\n';
-    }
-;
 
-cronLine:
-    minutes hours dayOfMonth monthOfYear dayOfWeek tail
-    {
-        if (not s_errors)
-            cout << "Line " << d_scanner.lineNr() << ": cron command = " << 
-                    $6 << endl;
-        else
-            s_errors = false;
-    }
-;
 
-minutes:
-    timeSpec
-    {
-        d_minutes = $1;
-    }
-;
 
-hours:
-    timeSpec
-    {
-        d_hours = $1;
-    }
-;
 
-dayOfMonth:
-    timeSpec
-    {
-        d_dayOfMonth = $1;
-    }
-;
 
-monthOfYear:
-    timeSpec
-    {
-        d_monthOfYear = $1;
-    }
-;
 
-dayOfWeek:
-    timeSpec
-    {
-        d_dayOfWeek = $1;
-        d_scanner.getTail();
-    }
-;
 
-tail:
-    COMMAND
-    {
-        $$ = d_scanner.matched();
-    }
-;
 
-timeSpec:
-    '*'  timeEnds             // empty set indicates `all valid specifications
-    {
-        $$ = set<int>();
-    }
-|
-    timeRange timeEnds
-;
 
-timeRange:
-    timeRange ',' timeRange
-    {
-        addSet($1, $3);
-    }
-|
-    timeRange '-' timeRange
-    {
-        defineRange($1, $3);
-    }
 
-|
-    NR
-    {
-        $$ = acceptNr();
-    }
-;
-    
-timeEnds:
-    WS
-    {
-        emsg.on();
-    }
-;
+
+
 

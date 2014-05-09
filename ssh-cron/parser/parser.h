@@ -15,11 +15,8 @@ class Parser: public ParserBase
     // $insert scannerobject
     Scanner d_scanner;
 
-    std::set<int> d_minutes;
-    std::set<int> d_hours;
-    std::set<int> d_dayOfMonth;
-    std::set<int> d_monthOfYear;
-    std::set<int> d_dayOfWeek;
+    std::set<int> d_values;
+    std::vector<std::string>> d_names;
 
     static bool s_errors;           // set by the 'off' manipulator
 

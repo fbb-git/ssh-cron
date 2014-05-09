@@ -43,7 +43,7 @@
     // Specify additional grammar specification files using patterns
     // these files are (in)directly included by PARSSPEC. Specify patterns
     // relative to PARSER_DIR
-//#define PARSFILES           ""
+#define PARSFILES           "rules/*"
 
     // Flags to provide PARSGEN with:
 #define PARSFLAGS           "-V"

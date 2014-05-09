@@ -1,0 +1,48 @@
+//timeEnds:
+//    WS
+//    {
+//        emsg.on();
+//    }
+//;
+//
+//optStep:
+//    // empty
+//    {
+//        return 1;
+//    }
+//|
+//    '/' NR
+//    {
+//        return stol(d_scanner.matched());
+//    }
+//;
+//
+//timeName:
+//    ID
+//    {
+//        d_cron.addName();
+//    }
+//;
+//
+//timeUnit:
+//    timeName
+////|   
+////    timeRange
+//;
+//
+//timeSequence:
+////    timeSequence ',' timeUnit
+////|
+//    timeUnit
+//;
+
+timeSpec:
+    ID WS
+//    '*'  optStep timeEnds   // empty set indicates `all valid specifications
+//    {
+//        d_cron.setAll($2);
+//    }
+//|
+//    timeSequence timeEnds
+;
+
