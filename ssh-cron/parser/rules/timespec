@@ -1,14 +1,7 @@
-timeEnds:
-    WS
-    {
-        emsg.on();
-    }
-;
-
 nr:
     NR
     {
-        stol(d_scanner.matched());
+        $$ = stol(d_scanner.matched());
     }
 ;
 
@@ -20,25 +13,38 @@ optStep:
     }
 |
     '/' nr
+    {
+        return $2;
+    }
 ;
 
-//timeName:
-//    ID
-//    {
-//        d_cron.addName();
-//    }
-//;
+addNr:
+    nr
+    {
+        d_cron.addNr($1);
+    }
+;
 
 numberUnit:
     nr '-' nr optStep
+    {
+        d_cron.addRange($1, $3, $4);
+    }
 |
-    nr
+    addNr
 ;
 
 numberSequence:
     numberSequence ',' numberUnit
 |
     numberUnit
+;
+
+timeEnds:
+    WS
+    {
+        emsg.on();
+    }
 ;
 
 allSequence:
@@ -55,19 +61,13 @@ numberSpec:
 ;
 
 
-//timeName:
-//    ID
-//;
-
 timeUnit:
-    nr '-' nr optStep
-|
-    nr
+    numberUnit
 |
     ID
-//    {
-//        d_cron.addName();
-//    }
+    {
+        d_cron.addName(d_scanner.matched());
+    }
 ;
 
 timeSequence:
