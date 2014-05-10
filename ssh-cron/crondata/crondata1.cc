@@ -3,5 +3,4 @@
 CronData::CronData()
 :
     d_entryName("minutes")
-{
-}
+{}

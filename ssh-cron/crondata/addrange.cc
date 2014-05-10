@@ -2,7 +2,7 @@
 
 void CronData::addRange(size_t first, size_t last, size_t step)
 {
-    if (last >= d_entryEnd)
+    if (first < d_entryBegin or d_entryEnd <= last)
         invalidRange(first, last);
 
     if (step == 0)

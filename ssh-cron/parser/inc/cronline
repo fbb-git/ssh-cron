@@ -1,6 +1,6 @@
 _minutes:
     time_numberedSpec
-    ws_separator
+    WS
     {
         d_cronData.setMinutes();
     }
@@ -8,7 +8,7 @@ _minutes:
 
 _hours:
     time_numberedSpec
-    ws_separator
+    WS
     {
         d_cronData.setHours();
     }
@@ -16,7 +16,7 @@ _hours:
 
 _dayOfMonth:
     time_numberedSpec
-    ws_separator
+    WS
     {
         d_cronData.setDayOfMonth();
     }
@@ -24,7 +24,7 @@ _dayOfMonth:
 
 _monthOfYear:
     time_spec
-    ws_separator
+    WS
     {
         d_cronData.setMonthOfYear();
     }
@@ -32,7 +32,7 @@ _monthOfYear:
 
 _dayOfWeek:
     time_spec
-    ws_separator
+    WS
     {
         d_cronData.setDayOfWeek();
     }

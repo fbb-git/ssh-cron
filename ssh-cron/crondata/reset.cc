@@ -2,12 +2,14 @@
 
 void CronData::reset(size_t lineNr) 
 {
-    if (lineNr != 0)
-        d_lineNr = lineNr;
+    d_lineNr = lineNr;
+    d_entryBegin = 0;
+    d_entryEnd = 60;
+    d_entryName = "minutes";
 
-    d_wip.clear();
     d_names.clear();
-    d_command.clear();
+
     d_all = false;
+    d_wip.clear();
 }
 

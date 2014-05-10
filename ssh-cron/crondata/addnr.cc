@@ -2,13 +2,8 @@
 
 void CronData::addNr(size_t nr)
 {
-    if (nr < d_entryEnd)
+    if (d_entryBegin <= nr && nr < d_entryEnd)
         d_wip.insert(nr);
     else
         outOfRange(nr);
 }
-
-void CronData::setHours() {}
-void CronData::setDayOfMonth() {}
-void CronData::setMonthOfYear() {}
-void CronData::setDayOfWeek() {}

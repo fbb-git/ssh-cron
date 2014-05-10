@@ -6,4 +6,4 @@ AAP: OUTPUT
 AAP
 AAP:
 
-90,1-80   1,2,3,4,5   *   aap,noot   *   /usr/bin/hello world
+90   25   32   Jan,Feb   Sun   /usr/bin/hello world

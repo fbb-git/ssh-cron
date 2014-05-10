@@ -4,10 +4,3 @@ opt_ws:
     // empty
 ;
 
-ws_separator:
-    WS
-    {
-        d_cronData.reset();
-    }
-;
-

@@ -21,6 +21,7 @@ class CronData
     Entry d_next;
 
     std::string d_entryName;
+    size_t d_entryBegin = 0;
     size_t d_entryEnd = 60;
 
     std::vector<Entry> d_entry;
@@ -34,6 +35,8 @@ class CronData
     bool d_all = false;
 
     static size_t s_values[60];
+    static char const *const s_month[12];
+    static char const *const s_day[7];
 
     public:
         CronData();
@@ -53,6 +56,9 @@ class CronData
         void setDayOfWeek();
         
     private:
+        void assign(std::set<size_t> &dest);
+        void assign(std::set<size_t> &dest, char const *const *names,
+                    bool allowEnd = false);
         void invalidRange(size_t first, size_t last) const;
         void outOfRange(size_t nr) const;
 
