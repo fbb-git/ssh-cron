@@ -7,7 +7,7 @@ opt_ws:
 ws_separator:
     WS
     {
-        emsg.on();
+        d_cronData.reset();
     }
 ;
 

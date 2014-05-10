@@ -5,6 +5,4 @@
 
 std::ostream &out(std::ostream &mstream);
 
-extern bool g_errors;
-
 #endif

@@ -2,5 +2,6 @@
 
 void CronData::outOfRange(size_t nr) const
 {
-    emsg << "Line " << d_lineNr << ": nr " << nr << " out of range" << out; 
+    emsg << "Line " << d_lineNr << " (" << d_entryName << "): " << nr << 
+            " out of range" << endl;
 }

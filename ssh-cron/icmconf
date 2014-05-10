@@ -70,7 +70,7 @@
 //#define SCANFILES            ""
 
     // Flags to provide SCANGEN with:
-#define SCANFLAGS           "-t"
+#define SCANFLAGS           ""
     //                      "-t"
 
     // What is the program generating the lexical scanner?

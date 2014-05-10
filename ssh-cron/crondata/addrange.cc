@@ -2,19 +2,19 @@
 
 void CronData::addRange(size_t first, size_t last, size_t step)
 {
-    if (last > 60)
-        outOfRange(last);
+    if (last >= d_entryEnd)
+        invalidRange(first, last);
 
     if (step == 0)
-        emsg << "Line " << d_lineNr << ": step size must be >= 1" << out;
+        emsg << "Line " << d_lineNr << ": step size must be >= 1" << endl;
         
     if (first > last)
     {
         emsg << "Line " << d_lineNr << ": invalid range " << 
-                 first << '-' << last << out;
+                 first << '-' << last << endl;
     }
         
-    if (g_errors)
+    if (emsg.count() != 0)
         return;
 
     for (++first, ++last; first <= last; first += step)

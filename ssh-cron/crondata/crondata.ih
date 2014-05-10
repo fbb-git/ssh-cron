@@ -2,7 +2,7 @@
 
 #include <bobcat/mstream>
 
-#include "../global/global.h"
+// #include "../global/global.h"
 
 using namespace std;
 using namespace FBB;

@@ -7,7 +7,7 @@ ID      [[:alpha:]_][[:alnum:]_-]*
 
 %%
 
-// %nowarn
+//%nowarn
 ^[ \t]*(#.*)?                   // ignore ws (+ comment) at BOL
 
 [ \t]+                          return Parser::WS;

@@ -1,0 +1,68 @@
+htmlbodyopt(text)(#27408B)
+htmlbodyopt(bgcolor)(#FFFAF0)
+
+COMMENT(
+includefile(../ssh-cron/release.yo)
+)
+
+mailto(fbbrokken@users.sourceforge.net)
+
+affiliation(Center for Information Technology, University of Groningen)
+
+notableofcontents()
+
+COMMENT(
+report(Ssh-Cron V _CurVers_)
+      (Frank B. Brokken (f.b.brokken@rug.nl)nl())
+      (_CurYrs_)
+END)
+
+report(Ssh-Cron V 0.00.00)
+      (Frank B. Brokken (f.b.brokken@rug.nl)nl())
+      (2014)
+
+center(
+    htmlcommand(
+        <img src="chronos.jpg" border="0" 
+            alt="ssh-cron Image" />
+    )
+  )
+
+COMMENT(
+    htmlcommand(
+        <a href="http://sourceforge.net">
+        <img src="http://sourceforge.net/sflogo.php?group_id=2220629&amp;type=2"
+        width="125" height="37" border="0" alt="SourceForge.net Logo" />
+        </a>
+    )
+END COMMENT)
+
+This is the main page of the ssh-cron project as hosted on Sourceforge.net.
+
+The project itself can be reached at 
+lurl(http://sourceforge.net/projects/sshcron/)
+
+htmlcommand(
+<a href="http://sourceforge.net/projects/sshcron"><img
+src="http://sflogo.sourceforge.net/sflogo.php?group_id=2220629&type=8"
+width="80" height="15" border="0" alt="Get ssh-cron at SourceForge.net. Fast,
+secure and Free Open Source software downloads" /></a>
+    )
+
+COMMENT(
+    itemization(
+    it() Here is the url(html-version of the ssh-cron man-page)(ssh-cron.1.html).
+    )
+
+)
+
+This project is very much in its alpha stage. Parts have been constructed, and
+the major bottlenecks have been removed, but as yet there isn't a running
+program available. However, that probably changes in the near future.
+
+Hopefully, shortly you will be able to enjoy ssh-cron !
+
+includefile(/home/frank/git/PROJECTS.yo)
+
+Contact the author through url(his sourceforge e-mail address)
+                              (mailto:fbbrokken@users.sourceforge.net)
