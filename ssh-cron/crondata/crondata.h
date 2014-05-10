@@ -9,23 +9,29 @@ class CronData
 {
     struct Entry
     {
-        std::set<int>   d_minutes;
-        std::set<int>   d_hours;
-        std::set<int>   d_dayOfMonth;
-        std::set<int>   d_monthOfYear;
-        std::set<int>   d_dayOfWeek;
-
-        std::string     d_command;
+        std::set<size_t>    d_minutes;
+        std::set<size_t>    d_hours;
+        std::set<size_t>    d_dayOfMonth;
+        std::set<size_t>    d_monthOfYear;
+        std::set<size_t>    d_dayOfWeek;
+    
+        std::string         d_command;
     };
-
     std::vector<Entry> d_entry;
+
+    std::set<size_t> d_wip;
+    std::vector<std::string> d_names;
+    std::string d_command;
+
+    size_t d_lineNr;
+    bool d_all = false;
 
     public:
         CronData();
 
-        void addNr(int nr);
-        void addRange(int first, int last, int step);
-        void setAll(int step);
+        void addNr(size_t nr);
+        void addRange(size_t first, size_t last, size_t step);
+        void setAll(size_t step);
         void addName(std::string const &str);
         void setCommand(std::string const &command);
         void process();
@@ -38,6 +44,9 @@ class CronData
         void setDayOfWeek();
         
     private:
+
+        void outOfRange(size_t nr) const;
+
 };
         
 #endif

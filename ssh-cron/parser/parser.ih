@@ -5,6 +5,7 @@
 // $insert class.h
 #include "parser.h"
 
+#include "../global/global.h"
 #include "../crondata/crondata.h"
 
 #include <bobcat/mstream>

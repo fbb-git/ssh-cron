@@ -1,9 +1,7 @@
-#include "crondata.h"
+#include "global.h"
 
+#include <ostream>
 #include <bobcat/mstream>
-
-#include "../global/global.h"
 
 using namespace std;
 using namespace FBB;
-

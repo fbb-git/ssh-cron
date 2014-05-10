@@ -2,3 +2,4 @@
 daemon
 cron
 crondata
+global

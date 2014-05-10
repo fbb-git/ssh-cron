@@ -46,7 +46,7 @@
 #define PARSFILES           "inc/*"
 
     // Flags to provide PARSGEN with:
-#define PARSFLAGS           "-D -V"
+#define PARSFLAGS           "-V"
 
     // What is the program generating a parser?
 #define PARSGEN             "bisonc++"

@@ -18,18 +18,12 @@ class Parser: public ParserBase
 
     CronData &d_cronData;
     
-    static bool s_errors;           // set by the 'off' manipulator
-
     public:
         Parser(CronData &cronData);
         int parse();
 
     private:
         void addSet(std::set<int> &lhs, std::set<int> const &rhs) const;
-        void defineRange(std::set<int> &lhs, std::set<int> const &rhs) const;
-        std::set<int> acceptNr() const;
-
-        static std::ostream &off(std::ostream &mstream);
 
         void error(char const *msg);    // called on (syntax) errors
         int lex();                      // returns the next token from the

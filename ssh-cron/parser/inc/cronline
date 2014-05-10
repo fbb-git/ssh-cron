@@ -35,7 +35,6 @@ _dayOfWeek:
     ws_separator
     {
         d_cronData.setDayOfWeek();
-        d_scanner.getTail();
     }
 ;
 
@@ -43,7 +42,7 @@ _command:
     token_noWs
     opt_tokens
     {
-        d_cronData.setCommand($1);
+        d_cronData.setCommand($1 + $2);
     }
 ;
 
