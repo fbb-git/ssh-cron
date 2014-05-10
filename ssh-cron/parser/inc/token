@@ -35,14 +35,6 @@ _tokenScanner:
 ;
 
 
-//noWsColonAssign:
-//    _token_noWsColonAssign
-//    _tokenMatched
-//    {
-//        $$ = $2;
-//    }
-//;
-
 _tokenAnyMatched:
     _tokenAny
     _tokenScanner
@@ -79,18 +71,12 @@ opt_tokens:
     }
 ;
 
-//noWsSequence:
-//    noWStoken
-//    optTokens
-//    {
-//        $$ += $2;
-//    }
-//;
-//
-//noWsColonAssignSequence:
-//    noWsColonAssign
-//    optTokens
-//    {
-//        $$ += $2;
-//    }
-//;
+opt_tokens_1stNotColonOrAssign:
+    _tokenNoWsColonAssign
+    _tokenScanner
+    opt_tokens
+|
+    {
+        $$ = string();
+    }
+;

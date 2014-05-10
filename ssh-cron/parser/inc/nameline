@@ -1,4 +1,20 @@
+// OK input is:
+//
+//  ID
+//  ID  whatever
+//  ID:
+//  ID: whatever
+//  ID = whatever
+// the blanks around the = are optional and will be removed
+
+_nameContents:
+    ':' opt_tokens              // ID:(contents-to-be-stripped)?
+|
+    opt_ws opt_tokens_1stNotColonOrAssign
+|
+    opt_ws '=' opt_tokens       // ID =(contents-to-be-stripped)?
+;
 
 nameLine:
-    ID optWS nameContents
+    ID _nameContents
 ;

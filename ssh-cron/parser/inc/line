@@ -1,6 +1,6 @@
 _line_contents:
-//    nameLine            // either an option or an environment var
-//|
+    nameLine            // either an option or an environment var
+|
     cronLine            // time specification + action
 |
     error
