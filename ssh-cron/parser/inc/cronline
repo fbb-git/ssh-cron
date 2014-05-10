@@ -1,48 +1,54 @@
-minutes:
-    numberSpec
+_minutes:
+    time_numberedSpec
+    ws_separator
     {
         d_cronData.setMinutes();
     }
 ;
 
-hours:
-    numberSpec
+_hours:
+    time_numberedSpec
+    ws_separator
     {
         d_cronData.setHours();
     }
 ;
 
-dayOfMonth:
-    numberSpec
+_dayOfMonth:
+    time_numberedSpec
+    ws_separator
     {
         d_cronData.setDayOfMonth();
     }
 ;
 
-monthOfYear:
-    timeSpec
+_monthOfYear:
+    time_spec
+    ws_separator
     {
         d_cronData.setMonthOfYear();
     }
 ;
 
-dayOfWeek:
-    timeSpec
+_dayOfWeek:
+    time_spec
+    ws_separator
     {
         d_cronData.setDayOfWeek();
         d_scanner.getTail();
     }
 ;
 
-command:
-    noWSsequence
+_command:
+    token_noWs
+    opt_tokens
     {
         d_cronData.setCommand($1);
     }
 ;
 
 cronLine:
-    minutes hours dayOfMonth monthOfYear dayOfWeek command
+    _minutes _hours _dayOfMonth _monthOfYear _dayOfWeek _command
     {
         d_cronData.process();
     }

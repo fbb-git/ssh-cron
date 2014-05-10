@@ -1,0 +1,96 @@
+_tokenNoWsColonAssign:
+    NR
+|
+    ID
+|
+    '*'
+|
+    '/'
+|
+    ','
+|
+    '-'
+|
+    CHAR
+;
+
+_tokenNoWs:
+    _tokenNoWsColonAssign
+|
+    ':'
+|
+    '='
+;
+
+_tokenAny:
+    WS
+|
+    _tokenNoWs
+;
+
+_tokenScanner:
+    {
+        $$ = d_scanner.matched();
+    }
+;
+
+
+//noWsColonAssign:
+//    _token_noWsColonAssign
+//    _tokenMatched
+//    {
+//        $$ = $2;
+//    }
+//;
+
+_tokenAnyMatched:
+    _tokenAny
+    _tokenScanner
+    {
+        $$ = $2;
+    }
+;
+
+token_noWs:
+    _tokenNoWs
+    _tokenScanner
+    {
+        $$ =$2;
+    }
+;
+
+tokens:
+    tokens _tokenAny
+    {
+        $$ += d_scanner.matched();
+    }
+|
+    _tokenAnyMatched
+    {
+        $$ = $$
+    }
+;
+
+opt_tokens:
+    tokens
+|
+    {
+        $$ = string();
+    }
+;
+
+//noWsSequence:
+//    noWStoken
+//    optTokens
+//    {
+//        $$ += $2;
+//    }
+//;
+//
+//noWsColonAssignSequence:
+//    noWsColonAssign
+//    optTokens
+//    {
+//        $$ += $2;
+//    }
+//;

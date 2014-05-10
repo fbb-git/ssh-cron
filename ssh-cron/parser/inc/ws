@@ -1,0 +1,13 @@
+//opt_ws:
+//    WS
+//|
+//    // empty
+//;
+
+ws_separator:
+    WS
+    {
+        emsg.on();
+    }
+;
+

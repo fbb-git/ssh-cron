@@ -1,0 +1,23 @@
+_line_contents:
+//    nameLine            // either an option or an environment var
+//|
+    cronLine            // time specification + action
+|
+    error
+;
+
+_line_preamble:
+    {
+        d_cronData.reset(d_scanner.lineNr());
+    }
+;
+
+_opt_line_contents:
+    _line_preamble _line_contents
+|
+    // empty
+;
+
+line:
+    _opt_line_contents '\n'
+;

@@ -7,9 +7,8 @@
 
 %token WS NR ID CHAR
 
-%type <STRING>  tokens optTokens noWScolonAssign noWSsequence noWStoken token
-                noWScolonAssignSequence
-%type <INT>     optStep, nr
+%type <STRING>  opt_tokens tokens token_noWs _tokenAnyMatched _tokenScanner 
+%type <INT>     nr opt_nr_step
 
 %%
 
@@ -19,15 +18,16 @@ startrule:
     // empty
 ;
 
-%include rules/tokens
-%include rules/ws
-%include rules/namecontents
-%include rules/nameline
+%include inc/nr
+%include inc/ws
+%include inc/token
+//%include inc/namecontents
+//%include inc/nameline
 
-%include rules/timespec
-%include rules/cronline
+%include inc/time
+%include inc/cronline
 
-%include rules/line
+%include inc/line
 
 
 

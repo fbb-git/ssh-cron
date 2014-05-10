@@ -1,0 +1,38 @@
+_all:
+    '*'  opt_nr_step        // empty set indicates `all valid specifications
+    {
+        d_cronData.setAll($2);
+    }
+;
+
+_timeUnit:
+    nr_range
+|
+    ID
+    {
+        d_cronData.addName(d_scanner.matched());
+    }
+;
+
+_timeSequence:
+    _timeSequence ',' _timeUnit
+|
+    _timeUnit
+;
+
+//------------------------------------------------------------------
+
+time_numberedSpec:
+    _all
+|
+    nr_Sequence
+;
+
+
+time_spec:
+    _all
+|
+    _timeSequence
+;
+
+
