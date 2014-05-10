@@ -18,7 +18,7 @@ class Parser: public ParserBase
 
     CronData &d_cronData;
     
-//    static bool s_errors;           // set by the 'off' manipulator
+    static bool s_errors;           // set by the 'off' manipulator
 
     public:
         Parser(CronData &cronData);

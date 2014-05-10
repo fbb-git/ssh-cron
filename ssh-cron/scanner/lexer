@@ -7,7 +7,8 @@ ID      [[:alpha:]_][[:alnum:]_-]*
 
 %%
 
-^[ \t]+(#.*)?                   // ignore ws (+ comment) at BOL
+// %nowarn
+^[ \t]*(#.*)?                   // ignore ws (+ comment) at BOL
 
 [ \t]+                          return Parser::WS;
 
@@ -15,7 +16,7 @@ ID      [[:alpha:]_][[:alnum:]_-]*
 
 {ID}                            return Parser::ID;
 
-[*/,:=\n-]                          return matched()[0];
+[*/,:=\n-]                      return matched()[0];
 
 .                               return Parser::CHAR;
 

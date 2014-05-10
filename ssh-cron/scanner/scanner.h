@@ -21,8 +21,6 @@ class Scanner: public ScannerBase
         // $insert lexFunctionDecl
         int lex();
 
-        void getTail();
-
     private:
         int lex__();
         int executeAction__(size_t ruleNr);
@@ -35,7 +33,6 @@ class Scanner: public ScannerBase
                             // re-implement this function for code that must 
                             // be exec'ed after the rules's actions.
 
-        void checkOption();
 };
 
 // $insert scannerConstructors

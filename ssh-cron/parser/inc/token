@@ -59,7 +59,7 @@ tokens:
 |
     _tokenAnyMatched
     {
-        $$ = $$
+        $$ = $$;
     }
 ;
 

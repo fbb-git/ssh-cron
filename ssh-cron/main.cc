@@ -1,15 +1,17 @@
 #include "main.ih"
 
-//#include "parser/parser.h"
+#include "parser/parser.h"
 
 int main()
 try
 {
-//    Parser parser;
-//    parser.parse();
+    CronData cronData;
 
-    Daemon daemon;
-    daemon.fork();
+    Parser parser(cronData);
+    parser.parse();
+
+//    Daemon daemon;
+//    daemon.fork();
 }
 catch(exception const &exc)
 {

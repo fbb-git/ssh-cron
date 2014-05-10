@@ -2,6 +2,7 @@
 #include <string>
 
 #include "daemon/daemon.h"
+#include "crondata/crondata.h"
 
 namespace Icmbuild
 {
