@@ -17,9 +17,9 @@ void CronData::assign(set<size_t> &dest,  char const *const *names,
 
     d_names.clear();
      
-    if (allowEnd && d_wip.find(size) != d_wip.end())
+    if (allowEnd && d_wip.find(d_entryEnd) != d_wip.end())
     {
-        d_wip.erase(size);
+        d_wip.erase(d_entryEnd);
         d_wip.insert(0);
     }
 

@@ -9,17 +9,19 @@
 #include "../scanner/scanner.h"
 
 class CronData;
+class Options;
 
 #undef Parser
 class Parser: public ParserBase
 {
+    Options &d_options;
+    CronData &d_cronData;
+    
     // $insert scannerobject
     Scanner d_scanner;
 
-    CronData &d_cronData;
-    
     public:
-        Parser(CronData &cronData);
+        Parser(Options &options, CronData &cronData);
         int parse();
 
     private:

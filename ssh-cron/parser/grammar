@@ -8,7 +8,7 @@
 %token WS NR ID CHAR
 
 %type <STRING>  opt_tokens tokens token_noWs _tokenAnyMatched _tokenScanner 
-                opt_tokens_1stNotColonOrAssign
+                opt_tokens_1stNotColonOrAssign _nameContents _nameID nameLine
 %type <INT>     nr opt_nr_step
 
 %%
@@ -29,17 +29,3 @@ startrule:
 %include inc/cronline
 
 %include inc/line
-
-
-
-
-
-
-
-
-
-
-
-
-
-

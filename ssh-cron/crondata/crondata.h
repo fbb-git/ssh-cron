@@ -1,6 +1,7 @@
 #ifndef INCLUDED_CRONDATA_
 #define INCLUDED_CRONDATA_
 
+#include <iosfwd>
 #include <string>
 #include <set>
 #include <vector>
@@ -18,6 +19,7 @@ class CronData
     
         std::string         command;
     };
+    friend std::ostream &operator<<(std::ostream &out, Entry const &entry);
 
     std::vector<std::string> d_environment;
     std::vector<Entry> d_entry;
@@ -32,10 +34,14 @@ class CronData
     std::set<size_t> d_wip;
 
     std::vector<std::string> d_names;
-    std::string d_command;
 
     size_t d_lineNr;
     bool d_all = false;
+
+    enum
+    {
+        STAR = 100                  // * used to specify time
+    };
 
     static size_t s_values[60];
     static char const *const s_month[12];
@@ -57,14 +63,25 @@ class CronData
         void setDayOfMonth();
         void setMonthOfYear();
         void setDayOfWeek();
-        
+
+        void setEnvVar(std::string const &var, std::string const &value);
+
+        size_t lineNr() const;
+
     private:
         void assign(std::set<size_t> &dest);
         void assign(std::set<size_t> &dest, char const *const *names,
                     bool allowEnd = false);
         void invalidRange(size_t first, size_t last) const;
-        void outOfRange(size_t nr) const;
+        void outOfRange(size_t nr);
         void addCronCommand();
+
+        static void showSet(std::ostream &out, std::set<size_t> const &nrSet);
 };
+
+inline size_t CronData::lineNr() const
+{
+    return d_lineNr;
+}
         
 #endif

@@ -2,5 +2,5 @@
 
 void CronData::setCommand(std::string const &command)
 {
-    d_command = command;
+    d_next.command = command;
 }

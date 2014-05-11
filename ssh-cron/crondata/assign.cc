@@ -17,7 +17,10 @@ void CronData::assign(set<size_t> &dest)
         if (!d_all)
             dest = d_wip;
         else
+        {
             dest.insert(s_values, s_values + d_entryEnd);
+            dest.insert(dest.end(), STAR);
+        }
     }
 
     d_wip.clear();

@@ -5,8 +5,6 @@
 #include <bobcat/mstream>
 #include <bobcat/string>
 
-// #include "../global/global.h"
-
 using namespace std;
 using namespace FBB;
 

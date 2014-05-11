@@ -33,29 +33,26 @@ try
     
     arg.versionHelp(usage, Icmbuild::version, 0);
 
-    if (arg.nArgs() == 0 && arg.nOptions() == 0 && arg.nLongOptions() == 0)
-    {
-        usage(arg.basename());
-        return 0;
-    }
-
-    arg.open(arg[0]);               // read the arg config file, which is also
-                                    // the cron-file
+    Options options;
 
     CronData cronData;
 
-    Parser parser(cronData);
+    Parser parser(options, cronData);
     parser.parse();
 
 //    Daemon daemon;
 //    daemon.fork();
 }
-catch(exception const &exc)
+catch (exception const &exc)
 {
     cerr << "Exception: " << exc.what() << endl;
 }
-catch(int x)
+catch (int x)
 {
     cout << "The child terminates with: " << x << endl;
     return x;
+}
+catch (bool)
+{
+    return 0;
 }

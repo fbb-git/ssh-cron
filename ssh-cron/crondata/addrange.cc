@@ -17,6 +17,6 @@ void CronData::addRange(size_t first, size_t last, size_t step)
     if (emsg.count() != 0)
         return;
 
-    for (++first, ++last; first <= last; first += step)
+    for ( ; first <= last; first += step)
         d_wip.insert(first);
 }

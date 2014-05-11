@@ -8,6 +8,7 @@
 #include <bobcat/argconfig>
 #include <bobcat/mstream>
 
+#include "../options/options.h"
 #include "../crondata/crondata.h"
 
 // $insert lex

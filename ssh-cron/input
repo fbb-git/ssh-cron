@@ -6,4 +6,7 @@ AAP: OUTPUT
 AAP
 AAP:
 
+# min hr day-of-month month-of-year day-of-week  cmnd
+
+*/15   0   *   *   *    
 90   25   32   Jan,Feb   Sun   /usr/bin/hello world

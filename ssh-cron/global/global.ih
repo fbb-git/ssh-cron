@@ -1,7 +1,0 @@
-#include "global.h"
-
-#include <ostream>
-#include <bobcat/mstream>
-
-using namespace std;
-using namespace FBB;

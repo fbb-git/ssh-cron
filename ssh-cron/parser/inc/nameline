@@ -8,13 +8,35 @@
 // the blanks around the = are optional and will be removed
 
 _nameContents:
-    ':' opt_tokens              // ID:(contents-to-be-stripped)?
+    ':' opt_tokens              // ID:(contents)?   [ an option: ignored ]
+    {
+        $$  = string();
+    }
 |
-    opt_ws opt_tokens_1stNotColonOrAssign
+    opt_ws opt_tokens_1stNotColonOrAssign   // an option: ignored
+    {
+        $$ = string();
+    }
 |
     opt_ws '=' opt_tokens       // ID =(contents-to-be-stripped)?
+    {
+        $$ = $3 + ' ';          // return non-empty string
+    }
+;
+
+_nameID:
+    ID
+    {
+        $$ = d_scanner.matched();
+    }
 ;
 
 nameLine:
-    ID _nameContents
+    _nameID _nameContents
+    {
+        d_cronData.setEnvVar($1, $2);
+    }
 ;
+
+
+

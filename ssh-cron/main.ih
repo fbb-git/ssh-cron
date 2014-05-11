@@ -5,6 +5,7 @@
 
 #include "daemon/daemon.h"
 #include "crondata/crondata.h"
+#include "options/options.h"
 
 namespace Icmbuild
 {

@@ -1,0 +1,11 @@
+#include "options.h"
+
+#include <string>
+#include <bobcat/mstream>
+#include <bobcat/argconfig>
+
+void usage(std::string const &progname);
+
+using namespace std;
+using namespace FBB;
+
