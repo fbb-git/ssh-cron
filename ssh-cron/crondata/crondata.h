@@ -9,6 +9,7 @@ class CronData
 {
     struct Entry
     {
+        size_t              nSettings  = 0;
         std::set<size_t>    minutes;
         std::set<size_t>    hours;
         std::set<size_t>    dayOfMonth;
@@ -18,13 +19,15 @@ class CronData
         std::string         command;
     };
 
+    std::vector<std::string> d_environment;
+    std::vector<Entry> d_entry;
+
     Entry d_next;
 
     std::string d_entryName;
     size_t d_entryBegin = 0;
     size_t d_entryEnd = 60;
 
-    std::vector<Entry> d_entry;
 
     std::set<size_t> d_wip;
 
@@ -61,7 +64,7 @@ class CronData
                     bool allowEnd = false);
         void invalidRange(size_t first, size_t last) const;
         void outOfRange(size_t nr) const;
-
+        void addCronCommand();
 };
         
 #endif

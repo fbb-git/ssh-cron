@@ -5,11 +5,10 @@
 // $insert class.h
 #include "parser.h"
 
-//#include "../global/global.h"
+#include <bobcat/argconfig>
+#include <bobcat/mstream>
 
 #include "../crondata/crondata.h"
-
-#include <bobcat/mstream>
 
 // $insert lex
 inline int Parser::lex()
