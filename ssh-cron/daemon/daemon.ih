@@ -1,5 +1,6 @@
 #include "daemon.h"
 
+#include "../crondata/crondata.h"
 #include "../cron/cron.h"
 
 using namespace std;

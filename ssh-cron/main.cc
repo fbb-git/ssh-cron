@@ -34,13 +34,15 @@ try
     arg.versionHelp(usage, Icmbuild::version, 0);
 
     Options options;
-
     CronData cronData;
 
     Parser parser(options, cronData);
     parser.parse();
 
-//    Daemon daemon;
+    Cron cron(cronData);
+    cron.runParentProcess();
+    
+//    Daemon daemon(cronData);
 //    daemon.fork();
 }
 catch (exception const &exc)

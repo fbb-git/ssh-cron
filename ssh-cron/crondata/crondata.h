@@ -1,30 +1,18 @@
 #ifndef INCLUDED_CRONDATA_
 #define INCLUDED_CRONDATA_
 
-#include <iosfwd>
 #include <string>
 #include <set>
 #include <vector>
 
+#include "../cronentry/cronentry.h"
+
 class CronData
 {
-    struct Entry
-    {
-        size_t              nSettings  = 0;
-        std::set<size_t>    minutes;
-        std::set<size_t>    hours;
-        std::set<size_t>    dayOfMonth;
-        std::set<size_t>    monthOfYear;
-        std::set<size_t>    dayOfWeek;
-    
-        std::string         command;
-    };
-    friend std::ostream &operator<<(std::ostream &out, Entry const &entry);
-
     std::vector<std::string> d_environment;
-    std::vector<Entry> d_entry;
+    std::vector<CronEntry> d_cronEntries;
 
-    Entry d_next;
+    CronEntry d_next;
 
     std::string d_entryName;
     size_t d_entryBegin = 0;
@@ -37,11 +25,6 @@ class CronData
 
     size_t d_lineNr;
     bool d_all = false;
-
-    enum
-    {
-        STAR = 100                  // * used to specify time
-    };
 
     static size_t s_values[60];
     static char const *const s_month[12];
@@ -67,21 +50,32 @@ class CronData
         void setEnvVar(std::string const &var, std::string const &value);
 
         size_t lineNr() const;
+        std::vector<CronEntry> const &cronEntries() const;
+        std::vector<std::string> const &environment() const;
 
     private:
-        void assign(std::set<size_t> &dest);
-        void assign(std::set<size_t> &dest, char const *const *names,
-                    bool allowEnd = false);
+        std::set<size_t> assign();
+        std::set<size_t> assign(char const *const *names,
+                                                    bool allowEnd = false);
+
         void invalidRange(size_t first, size_t last) const;
         void outOfRange(size_t nr);
         void addCronCommand();
-
-        static void showSet(std::ostream &out, std::set<size_t> const &nrSet);
 };
 
 inline size_t CronData::lineNr() const
 {
     return d_lineNr;
+}
+
+inline std::vector<CronEntry> const &CronData::cronEntries() const
+{
+    return d_cronEntries;
+}
+        
+inline std::vector<std::string> const &CronData::environment() const
+{
+    return d_environment;
 }
         
 #endif

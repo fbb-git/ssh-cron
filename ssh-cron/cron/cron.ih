@@ -3,14 +3,24 @@
 #include <unistd.h>
 #include <signal.h>
 
+#include <ctime>
+
 //#include <sys/types.h>
 
 #include <bobcat/ofdstream>
 #include <bobcat/ifdstream>
 #include <bobcat/process>
-
+#include <bobcat/datetime>
+#include <bobcat/mstream>
 #include <bobcat/selector>
+
+#include "../crondata/crondata.h"
+#include "../cronentry/cronentry.h"
 
 using namespace std;
 using namespace FBB;
 
+inline bool Cron::specified(size_t value, set<size_t> const &request)
+{
+    return request.find(value) != request.end();
+}

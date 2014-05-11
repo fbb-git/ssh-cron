@@ -7,6 +7,6 @@ void CronData::process()
 
     d_entryName = "minutes";
     d_entryEnd = 60;
-    d_next = Entry();
+    d_next = CronEntry();
     emsg.setCount(0);
 }

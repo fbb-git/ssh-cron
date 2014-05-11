@@ -2,7 +2,7 @@
 
 void CronData::setHours()
 {
-    assign(d_next.hours);
+    d_next.setHours(assign());
 
     d_entryName = "day of month";
     d_entryBegin = 1;

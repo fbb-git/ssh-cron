@@ -2,5 +2,5 @@
 
 void CronData::setDayOfWeek()
 {
-    assign(d_next.dayOfWeek, s_day, true);
+    d_next.setDayOfWeek(assign(s_day, true));
 }

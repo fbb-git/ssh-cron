@@ -1,14 +1,16 @@
 #include "crondata.ih"
 
-void CronData::assign(set<size_t> &dest)
+set<size_t> CronData::assign()
 {
+    set<size_t> dest;
+
     if (d_wip.size())
     {
         size_t last = *d_wip.rbegin();
         if (last >= d_entryEnd)
         {
             outOfRange(last);
-            return;
+            return dest;
         }
     }
 
@@ -19,10 +21,12 @@ void CronData::assign(set<size_t> &dest)
         else
         {
             dest.insert(s_values, s_values + d_entryEnd);
-            dest.insert(dest.end(), STAR);
+            dest.insert(dest.end(), CronEntry::STAR);
         }
     }
 
     d_wip.clear();
     d_all = false;
+
+    return dest;
 }

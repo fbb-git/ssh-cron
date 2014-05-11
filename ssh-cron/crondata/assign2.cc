@@ -1,7 +1,6 @@
 #include "crondata.ih"
 
-void CronData::assign(set<size_t> &dest,  char const *const *names,
-                    bool allowEnd)
+set<size_t> CronData::assign(char const *const *names, bool allowEnd)
 {
     size_t size = d_entryEnd - d_entryBegin;
 
@@ -23,6 +22,6 @@ void CronData::assign(set<size_t> &dest,  char const *const *names,
         d_wip.insert(0);
     }
 
-    assign(dest);
+    return assign();
 }
 

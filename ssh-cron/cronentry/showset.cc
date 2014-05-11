@@ -1,6 +1,6 @@
-#include "crondata.ih"
+#include "cronentry.ih"
 
-void CronData::showSet(ostream &out, set<size_t> const &nrSet)
+void CronEntry::showSet(ostream &out, set<size_t> const &nrSet)
 {
     if (nrSet.find(STAR) != nrSet.end())
     {

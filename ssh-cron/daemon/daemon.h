@@ -3,10 +3,17 @@
 
 #include <bobcat/fork>
 
+class CronData;
+
 class Daemon: public FBB::Fork
 {
-    void childProcess()     override;
-    void parentProcess()    override;
+    CronData const &d_cronData;
+    public:
+         Daemon(CronData const &cronData);
+
+    private:
+        void childProcess()     override;
+        void parentProcess()    override;
 };
         
 #endif

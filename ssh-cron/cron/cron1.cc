@@ -1,4 +1,6 @@
 #include "cron.ih"
 
-Cron::Cron()
+Cron::Cron(CronData const &cronData)
+:
+    d_cronData(cronData)
 {}

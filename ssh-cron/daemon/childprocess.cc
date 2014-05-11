@@ -4,7 +4,7 @@ void Daemon::childProcess()
 {
     prepareDaemon();
 
-    Cron cron;
+    Cron cron(d_cronData);
     cron.fork();
     // to be logged:  "Daemon's child's parent process ends\n";
 

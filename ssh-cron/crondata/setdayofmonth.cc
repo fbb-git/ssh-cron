@@ -2,7 +2,7 @@
 
 void CronData::setDayOfMonth()
 {
-    assign(d_next.dayOfMonth);
+    d_next.setDayOfMonth(assign());
 
     d_entryName = "month of year";
     d_entryEnd = 13;
