@@ -35,10 +35,10 @@ try
 
     Daemon daemon;
 
-    if (arg.option(0, "no-daemon"))
-        daemon.runParentProcess();
-    else
+    if (Options::instance().daemon())
         daemon.fork();
+    else
+        daemon.runParentProcess();
 }
 catch (exception const &exc)
 {

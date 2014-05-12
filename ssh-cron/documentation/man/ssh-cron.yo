@@ -23,6 +23,9 @@ DEFINEMACRO(soption)(1)(\
 DEFINEMACRO(s)(0)(bf(ssh-cron))
 DEFINEMACRO(S)(0)(bf(Ssh-Cron))
 
+DELETEMACRO(tt)
+DEFINEMACRO(tt)(1)(em(ARG1))
+
 
 manpage(ssh-cron)(1)(_CurYrs_)(ssh-cron__CurVers_.tar.gz)
         (ssh-cron - ssh-aware cron-like daemon)
@@ -99,6 +102,19 @@ manpageoptions()
     Where available, single letter options are listed between parentheses
 following their associated long-option variants. Single letter options require
 arguments if their associated long options require arguments as well.
+
+All options, except for tt(help) and tt(verbose) can also be specified in the
+configuration file. The configuration file ignores empty lines and all
+information on lines beginning with a hash-mark (tt(#), optionally preceded by
+blanks and/or tabs). In the configuration file option names initial option
+hyphens must not be used, and options may immediately be followed by a
+colon. Multi-word arguments should not be surrounded by quotes. Examples:
+            verb(
+    stdout
+    syslog-facility: LOCAL0
+            )
+    Command-line options override configuration file options.
+
     itemization(
     it() loption(help) (soption(h))nl()
        Basic usage information is written to the standard output stream.
@@ -107,14 +123,77 @@ arguments if their associated long options require arguments as well.
        S() is not run as a daemon. To end s(), not running as a daemon, press
         the `Enter' key.
 
+    it() loption(no-syslog)nl()
+       By default s() writes syslog messages to the tt(DAEMON) facility
+        with priority tt(NOTICE). No messages are sent to the syslog daemon
+        when this option is specified.
+
+    it() lsoption(pid-file)(p)(path)nl()
+       When s() runs as a daemon, then tt(path) is the name of
+        the path of the file holding the daemon's process-id. By default this
+        is em(/run/ssh-cron.pid). To end the daemon, send a SIGTERM signal to
+        the process-id contained in the tt(pid-file). S() ignores
+        tt(SIGHUP) signals (but writes a log message if a tt(SIGHUP) signal
+        is received).
+        
+    it() loption(stdout) (soption(s))nl() 
+       Syslog-equivalent messages are sent to the standard output.
+        This option is implied by tt(--verbose), but is suppressed when
+        s() runs as a daemon..
+
+    it() laoption(syslog-facility)(facility)nl()
+       The facility that is used to write the syslog messages to. By default
+        this is tt(DAEMON). For an overview of facilities and their meanings,
+        see, e.g., bf(syslog)(3). With s() the facilities tt(DAEMON,
+        LOCAL0, LOCAL1, LOCAL2, LOCAL3, LOCAL4, LOCAL5, LOCAL6, LOCAL7), and
+        tt(USER) can be used.
+
+    it() laoption(syslog-priority)(priority)nl()
+       The priority that is used to write the syslog messages to. By default
+        this is tt(NOTICE). For an overview of priorities and their meanings,
+        see, e.g., bf(syslog)(3). With s() all defined priorities can
+        be used. E.g., tt( EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO) and
+        tt(DEBUG).
+
+    it() laoption(syslog-tag)(tag)nl()
+       When syslog messages are generated they can be provided with a
+        em(tag), which can be used to filter s()'s syslog messages from
+        the log-files. By default the tag tt(SSH-CRON) is used. 
+        See also section tt(RSYSLOG FILTERING) below.
+
+    it() loption(verbose)nl() 
+       Additional messages about s()'s mode of operation are sent to
+        the standard output stream. When u() runs as a daemon these
+        messages are sent to the syslog daemon, unless em(--no-syslog) was
+        specified. 
+
     it() loption(version) (soption(v))nl()
        s()'s version number is written to the standard output stream.
     ) 
     
+manpagesection(RSYSLOG FILTERING)
+
+    When using bf(rsyslogd)(1) property based filters may be used to filter
+syslog messages and write them to a file of your choice. E.g., to filter
+messages starting with the syslog message tag (e.g., tt(SSH-CRON)) use
+        verb(
+:syslogtag, isequal, "SSH-CRON:"   /var/log/ssh-cron.log
+:syslogtag, isequal, "SSH-CRON:"   ~
+        )
+    Note that the colon is part of the tag, but is not specified with the 
+tt(syslog-tag) option.
+
+    This causes all messages having the tt(SSH-CRON:) tag to be written on
+tt(/var/log/ssh-cron.log) after which they are discarded. More extensive
+filtering is also supported, see, e.g.,
+tt(http://www.rsyslog.com/doc/rsyslog_conf_filter.html) and
+tt(http://www.rsyslog.com/doc/property_replacer.html)
+
 manpageseealso() 
 
-bf(cron)(1), bf(crontab)(1), bf(crontab)(5), bf(ssh)(1), bf(ssh-add)(1),
-bf(ssh-agent)(1), bf(ssh-askpass)(1), bf(stealth)(1)
+bf(cron)(1), bf(crontab)(1), bf(crontab)(5), , bf(rsyslogd)(1), bf(ssh)(1), 
+bf(ssh-add)(1), bf(ssh-agent)(1), bf(ssh-askpass)(1), bf(stealth)(1), 
+bf(syslog)(3)
 
 manpagebugs()
     Too early to say anything useful here, but as yet: none reported :-)

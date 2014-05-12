@@ -5,8 +5,11 @@
 
 #include "../crondata/crondata.h"
 
+class Options;
+
 class Daemon: public FBB::Fork
 {
+    Options &d_options;
     CronData d_cronData;
 
     public:

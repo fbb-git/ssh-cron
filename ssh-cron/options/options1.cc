@@ -16,6 +16,12 @@ Options::Options()
     d_arg.open(d_arg[0]);           // read the arg config file, which is also
                                     // the cron-file
 
-    if (not d_arg.option(0, "verbose"))
+    if (not d_arg.option(&d_PIDfile, 'p'))
+        d_PIDfile = s_defaultPIDfile;
+
+    setSyslogParams();
+    setBoolMembers();
+
+    if (not d_verbose)
         imsg.off();
 }       

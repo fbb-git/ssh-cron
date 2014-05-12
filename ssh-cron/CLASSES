@@ -9,4 +9,4 @@ options
 scanner
 parser          scanner
 
-daemon
+daemon          parser options
