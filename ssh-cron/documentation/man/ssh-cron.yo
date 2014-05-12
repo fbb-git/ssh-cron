@@ -110,7 +110,7 @@ arguments if their associated long options require arguments as well.
 manpageseealso() 
 
 bf(cron)(1), bf(crontab)(1), bf(crontab)(5), bf(ssh)(1), bf(ssh-add)(1),
-bf(ssh-agent)(1), bf(ssh-askpass)(1)
+bf(ssh-agent)(1), bf(ssh-askpass)(1), bf(stealth)(1)
 
 manpagebugs()
     Too early to say anything useful here, but as yet: none reported :-)
