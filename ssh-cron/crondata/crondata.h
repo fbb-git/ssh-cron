@@ -50,7 +50,10 @@ class CronData
         void setEnvVar(std::string const &var, std::string const &value);
 
         size_t lineNr() const;
+
         std::vector<CronEntry> const &cronEntries() const;
+        size_t nCronCommands() const;
+
         std::vector<std::string> const &environment() const;
 
     private:
@@ -73,6 +76,11 @@ inline std::vector<CronEntry> const &CronData::cronEntries() const
     return d_cronEntries;
 }
         
+inline size_t CronData::nCronCommands() const
+{
+    return d_cronEntries.size();
+}
+
 inline std::vector<std::string> const &CronData::environment() const
 {
     return d_environment;

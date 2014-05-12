@@ -16,14 +16,11 @@
     // process 
 //#define CLS
 
-    // The compiler to use. Define CC instead if a C compiler should be used.
+    // The compiler to use. 
 #define CXX            "g++"
-//#define CC            "gcc"
 
-    // The compiler options to use. Define CFLAGS instead if a C compiler is
-    // used.
-#define CXXFLAGS        " --std=c++0x -Wall -O2"
-//#define CFLAGS        " -Wall -g -O2"
+    // The compiler options to use. 
+//#define CXXFLAGS  is in INSTALL.im
 
     // Options passed to the linker:
 #define LDFLAGS         ""

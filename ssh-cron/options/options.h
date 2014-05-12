@@ -10,10 +10,15 @@ class Options
 {
     FBB::ArgConfig &d_arg;
 
+    static Options *s_options;
+
     public:
-        Options();
+        static Options &instance();
+
+        Options(Options const &other) = delete;
 
     private:
+        Options();
 };
 
         

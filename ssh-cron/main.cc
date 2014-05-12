@@ -33,28 +33,18 @@ try
     
     arg.versionHelp(usage, Icmbuild::version, 0);
 
-    Options options;
-    CronData cronData;
+    Daemon daemon;
 
-    Parser parser(options, cronData);
-    parser.parse();
-
-//    Cron cron(cronData);
-//    cron.runParentProcess();
-    
-    Daemon daemon(cronData);
-    daemon.fork();
+    if (arg.option(0, "no-daemon"))
+        daemon.runParentProcess();
+    else
+        daemon.fork();
 }
 catch (exception const &exc)
 {
-    cerr << "Exception: " << exc.what() << endl;
+    cerr << exc.what() << endl;
 }
 catch (int x)
 {
-    cout << "The child terminates with: " << x << endl;
-    return x;
-}
-catch (bool)
-{
-    return 0;
+    return ArgConfig::instance().option("hv") ? 0 : x;
 }

@@ -12,6 +12,7 @@ void usage(std::string const &progname)
     "Where:\n"
     "   [options] - optional arguments (short options between parentheses):\n"
     "      --help (-h)      - provide this help\n"
+    "      --no-daemon      - do not run as a daemon\n"
     "      --version (-v)   - show version information and terminate\n"
     "   args   - explain additional arguments.\n"
     "\n";

@@ -4,8 +4,6 @@
 #include <bobcat/argconfig>
 
 #include "daemon/daemon.h"
-#include "crondata/crondata.h"
-#include "cron/cron.h"
 #include "options/options.h"
 
 namespace Icmbuild
