@@ -13,6 +13,7 @@
 #include <bobcat/datetime>
 #include <bobcat/mstream>
 #include <bobcat/selector>
+#include <bobcat/argconfig>
 
 #include "../crondata/crondata.h"
 #include "../cronentry/cronentry.h"

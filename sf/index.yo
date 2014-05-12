@@ -1,9 +1,7 @@
 htmlbodyopt(text)(#27408B)
 htmlbodyopt(bgcolor)(#FFFAF0)
 
-COMMENT(
 includefile(../ssh-cron/release.yo)
-)
 
 mailto(fbbrokken@users.sourceforge.net)
 
@@ -11,15 +9,9 @@ affiliation(Center for Information Technology, University of Groningen)
 
 notableofcontents()
 
-COMMENT(
 report(Ssh-Cron V _CurVers_)
       (Frank B. Brokken (f.b.brokken@rug.nl)nl())
       (_CurYrs_)
-END)
-
-report(Ssh-Cron V 0.00.00)
-      (Frank B. Brokken (f.b.brokken@rug.nl)nl())
-      (2014)
 
 center(
     htmlcommand(
@@ -49,11 +41,8 @@ width="80" height="15" border="0" alt="Get ssh-cron at SourceForge.net. Fast,
 secure and Free Open Source software downloads" /></a>
     )
 
-COMMENT(
-    itemization(
-    it() Here is the url(html-version of the ssh-cron man-page)(ssh-cron.1.html).
-    )
-
+itemization(
+it() Here is the url(html-version of the ssh-cron man-page)(ssh-cron.1.html).
 )
 
 This project is very much in its alpha stage. Parts have been constructed, and

@@ -39,11 +39,11 @@ try
     Parser parser(options, cronData);
     parser.parse();
 
-    Cron cron(cronData);
-    cron.runParentProcess();
+//    Cron cron(cronData);
+//    cron.runParentProcess();
     
-//    Daemon daemon(cronData);
-//    daemon.fork();
+    Daemon daemon(cronData);
+    daemon.fork();
 }
 catch (exception const &exc)
 {

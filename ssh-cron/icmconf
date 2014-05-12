@@ -1,3 +1,5 @@
+#include "INSTALL.im"
+
     // Inspect the following #defines. Change them to taste. If you don't
     // need a particular option, change its value into an empty string
 

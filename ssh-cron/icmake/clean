@@ -1,0 +1,18 @@
+void clean(int dist)
+{
+    run("rm -rf "
+            "build-stamp configure-stamp "
+            "options/SKEL "
+            "tmp/*.o tmp/*-stamp " + 
+            "o */o release.yo tmp/lib*.a "    
+    );
+
+    if (dist)
+        run("rm -rf tmp");
+
+    exit(0);
+}
+
+
+
+

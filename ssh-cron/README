@@ -1,0 +1,2 @@
+Simply starting ssh-agent and then crontab as a child process doesn't work:
+crontab loses access to ssh-agent's pass phrases.

@@ -1,0 +1,131 @@
+gagmacrowarning(cron)
+
+includefile(../../release.yo)
+
+htmlbodyopt(text)(#27408B)
+htmlbodyopt(bgcolor)(#FFFAF0)
+
+gagmacrowarning(ssh-cron)
+mailto(f.b.brokken@rug.nl)
+
+DEFINEMACRO(lsoption)(3)(\
+    bf(--ARG1)=tt(ARG3) (bf(-ARG2))\
+)
+DEFINEMACRO(laoption)(2)(\
+    bf(--ARG1)=tt(ARG2)\
+)
+DEFINEMACRO(loption)(1)(\
+    bf(--ARG1)\
+)
+DEFINEMACRO(soption)(1)(\
+    bf(-ARG1)\
+)
+DEFINEMACRO(s)(0)(bf(ssh-cron))
+DEFINEMACRO(S)(0)(bf(Ssh-Cron))
+
+
+manpage(ssh-cron)(1)(_CurYrs_)(ssh-cron__CurVers_.tar.gz)
+        (ssh-cron - ssh-aware cron-like daemon)
+
+manpagename(ssh-cron)(cron-like daemon able to use ssh-connections)
+
+manpagesynopsis()
+       bf(ssh-cron) [OPTIONS] tt([crontab-file]) nl()
+        [OPTIONS] - cf. section bf(OPTIONS)nl()
+        [crontab-file] - file containing jobs to run.nl()
+
+manpagedescription()
+
+This program is still very much in its alpha stage. It should not yet be used,
+unless you know what you're doing.
+
+Consider the situation where a computer every now and then must access a
+remote computer to do some useful things (like running a bf(stealth)(1) file
+integrity scan). In order to do that it must be allowed to make bf(ssh)(1)
+connections, but since the commands are not executed by the user, but by 
+bf(cron)(1), the ssh-keys which are required to access the remote systems
+cannot use passwords.
+
+Of course this is an undesirable situation: if the computer running the
+tt(ssh) commands gets compromised, then the remote computers are compromised
+as well, since the attacker may access these remote systems using the
+password-less ssh keys.
+
+S() intends to solve this problem as follows:
+
+itemization(
+    it() S() is a daemon program. When the program starts it first reads and
+       parses a crontab-like specification file. Normally, the following
+       actions are performed by the daemon's child program, which itself
+       spawns a child process:
+    
+    it() The viable cron commands are passed to the program's child (the
+       daemon), and s()'s parent process dies;
+
+    it() Next, the daemon spawns its own child process, which executes
+       em(/usr/bin/ssh-agent /bin/bash). In addition, the daemon defines
+       communcation channels between the daemon and the bf(ssh-agent)(1) child
+       process;
+
+    it() The daemon then sends its child as its first command to execute the
+       command bf(ssh-add)(1), and through normal user-interaction means
+       (e.g., using bf(ssh-askpass)(1)) em(ssh-agent) is provided with the
+       required pass phrase for the ssh key.
+
+    it() The daemon now monitors the time, firing off the commands at their
+       required moments in time. If these commands require access to a remote
+       computer, then this access is granted, as em(ssh-agent) is able to
+       provide the pass phrase.
+    )
+
+The user originally providing the passphrase may leave the system, and the
+daemon continues to performs its duties. If, in the meantime, the computer is
+broken into, the hacker may find the ssh keys, but will not be able to use
+them to compromise another computer, as he/she doesn't have the required pass
+phrases.
+
+The above-mentioned scenario doesn't work using bf(crontab)(1) itself. E.g.,
+when loading a crontab file using em(crontab), after having started
+em(ssh-agent), access to the ssh keys through em(ssh-agent) is lost for the
+commands fired off by em(cron) itself.
+
+manpagesection(RETURN VALUE)
+
+    S() returns 0 if the daemon was successfully started. Otherwise 1 is
+returned. 
+
+manpageoptions()
+
+    Where available, single letter options are listed between parentheses
+following their associated long-option variants. Single letter options require
+arguments if their associated long options require arguments as well.
+    itemization(
+    it() loption(help) (soption(h))nl()
+       Basic usage information is written to the standard output stream.
+
+    it() loption(version) (soption(v))nl()
+       s()'s version number is written to the standard output stream.
+    ) 
+    
+manpageseealso() 
+
+bf(cron)(1), bf(crontab)(1), bf(crontab)(5), bf(ssh)(1), bf(ssh-add)(1),
+bf(ssh-agent)(1), bf(ssh-askpass)(1)
+
+manpagebugs()
+    Too early to say anything useful here, but as yet: none reported :-)
+
+manpagesection(COPYRIGHT)
+    This is free software, distributed under the terms of the `GNU General
+Public License'. Copyright remains with the author. s() is available at
+tt(http://sshcron.sourceforge.net/).
+
+manpagesection(ORGANIZATION)
+    Center for Information Technology, University of Groningen.
+
+manpageauthor()
+    Frank B. Brokken (bf(f.b.brokken@rug.nl)).
+
+
+
+

@@ -1,11 +1,12 @@
 #ifndef INCLUDED_CRON_
 #define INCLUDED_CRON_
 
-#include <string>
 #include <set>
+#include <fstream>
 
 #include <bobcat/fork>
 #include <bobcat/pipe>
+#include <bobcat/selector>
 
 namespace FBB
 {
@@ -28,6 +29,14 @@ class Cron: public FBB::Fork
 
     CronData const &d_cronData;
 
+    bool d_sendCommands;
+    FBB::Selector d_selector;
+    
+    std::ofstream d_log;
+
+    std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
+    std::ostream *d_toChild = 0;
+
     public:
         Cron(CronData const &cronData);
         void runParentProcess();
@@ -37,6 +46,7 @@ class Cron: public FBB::Fork
         void childProcess()         override;
         void parentProcess()        override;
 
+        void sendCommand(std::string line);
         void cronLoop();
         void runCronJobs();
         bool call(FBB::DateTime const &now, CronEntry const &entry);

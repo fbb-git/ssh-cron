@@ -1,0 +1,5 @@
+# this file is used in the POC demo, and is for my use only.
+# it requires the ssh-key to log into suffix.rc.rug.nl
+
+* * * * *   /bin/date >> /tmp/out
+* * * * *   /usr/bin/ssh suffix.rc.rug.nl ls www >> /tmp/out

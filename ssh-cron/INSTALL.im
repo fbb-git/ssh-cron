@@ -1,0 +1,36 @@
+    // Specify the name of the project:
+#define PROJECT             "ssh-cron"
+
+    // When defined, these overrule COMPILER and COMPILER_OPTIONS
+    // COMPILER and COMPILER_OPTIONS are now obsolete
+    // Instead of CXX and CXXFLAGS, CC and CFLAGS can be used.
+    // Their #define values are overruled by identically named environment
+    // variables. 
+
+#define CXX                 "g++"
+    // the compiler to use. 
+
+#define CXXFLAGS            "--std=c++0x -Wall -O2"
+    // the compiler options to use.
+
+#define LDFLAGS             ""
+    // flags passed to the linker
+
+// =========================================================================
+// The following locations are overruled by `build install' arguments
+
+#define BINARY     "/usr/bin/"${PROJECT}
+    // the full path of the final program
+
+#define MAN     "/usr/share/man/man1"
+    // the directory whre the manual page is stored
+
+#define STD     "/usr/share/doc/"${PROJECT}
+    // the directory where the standard documentation is stored 
+
+
+
+
+
+
+

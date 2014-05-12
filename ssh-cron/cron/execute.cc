@@ -10,4 +10,5 @@ void Cron::execute(CronEntry const &entry)
     command += entry.command() + ")&";
 
     imsg << command << '\n';
+    sendCommand(command);
 }
