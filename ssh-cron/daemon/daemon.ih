@@ -1,17 +1,19 @@
 #include "daemon.h"
 
-#include <sys/types.h>
+#include <iostream>
 #include <csignal>
 #include <limits>
 #include <unistd.h>
+#include <sys/types.h>
 
 #include <bobcat/exception>
+#include <bobcat/syslogstream>
+#include <bobcat/mstream>
 
 #include "../options/options.h"
 #include "../cron/cron.h"
 
 #include "../parser/parser.h"
-
 
 using namespace std;
 using namespace FBB;
