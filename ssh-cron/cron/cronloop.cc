@@ -9,12 +9,28 @@ void Cron::cronLoop()
         if (seconds != 0)
         {
             d_log << "Sleeping for " << (60 - seconds) << " seconds" << endl;
-            sleep(60 - seconds);
+            sleep(60 - seconds);    // ends at a sighup signal
         }
 
         runCronJobs();
 
         if (time(0) % 60 == 0)
-            sleep(1);
+            sleep(1);               // ends at a sighup signal
+
+        switch (d_action)
+        {
+            case LIST:
+                list();
+            break;
+
+            case RELOAD:
+                reload();
+            break;
+
+            default:
+            break;
+        }
+        d_action = LOOP;
     }
 }
+

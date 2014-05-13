@@ -7,6 +7,7 @@
 #include <bobcat/fork>
 #include <bobcat/pipe>
 #include <bobcat/selector>
+#include <bobcat/signal>
 
 namespace FBB
 {
@@ -16,11 +17,20 @@ namespace FBB
 class CronEntry;
 class CronData;
 
-class Cron: public FBB::Fork
+class Cron: public FBB::Fork, public FBB::SignalHandler
 {
     enum Leave 
     {};
 
+    enum Action         // TERMINATE is implemented as a thrown exception 
+    {
+        LOOP,
+        LIST,
+        RELOAD
+    };
+
+    volatile Action d_action = LOOP;
+    
     std::ofstream &d_stdMsg;
     CronData const &d_cronData;
 
@@ -44,6 +54,7 @@ class Cron: public FBB::Fork
         void childRedirections()    override;
         void childProcess()         override;
         void parentProcess()        override;
+        void signalHandler(size_t signum)   override;
 
         void sendCommand(std::string line);
         void cronLoop();

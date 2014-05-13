@@ -33,6 +33,7 @@ class Daemon: public FBB::Fork
     public:
         Daemon();
         void runParentProcess();
+        void sendSignal();
 
     private:
         void setupStdMsg();
@@ -41,8 +42,10 @@ class Daemon: public FBB::Fork
         void setupDaemonMsg();
         void setupNonDaemonMsg();
 
-        void childProcess()     override;
-        void parentProcess()    override;
+        pid_t cronPid() const;
+
+        void childProcess()                 override;
+        void parentProcess()                override;
 };
         
 #endif

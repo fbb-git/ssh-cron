@@ -1,7 +1,5 @@
 #include "main.ih"
 
-#include "parser/parser.h"
-
 // Room for Args initialization
 namespace   // the anonymous namespace can be used here
 {
@@ -35,17 +33,19 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("hlp:st::v", 
+    ArgConfig &arg = ArgConfig::initialize("hl::p:st::v", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);
 
     Daemon daemon;
 
-    if (Options::instance().daemon())
-        daemon.fork();
-    else
+    if (Options::instance().signal())
+        daemon.sendSignal();
+    else if (not Options::instance().daemon())
         daemon.runParentProcess();
+    else
+        daemon.fork();
 }
 catch (exception const &exc)
 {

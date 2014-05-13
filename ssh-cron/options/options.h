@@ -23,12 +23,12 @@ class Options
                                                         d_syslogFacility;
     FBB::LinearMap<std::string, FBB::Priority>::const_iterator 
                                                         d_syslogPriority;
-
-
     bool d_daemon;
     bool d_verbose;
     bool d_stdout;
     bool d_useSyslog;
+    bool d_terminate;
+    bool d_list;
 
     static Options *s_options;
 
@@ -52,6 +52,9 @@ class Options
         bool verbose() const;
         bool stdout() const;
         bool syslog() const;
+        bool signal() const;
+        bool terminate() const;
+        bool list() const;
 
 
         std::string const &agent() const;
@@ -77,6 +80,7 @@ class Options
     private:
         Options();
 
+        void setSignalMembers();
         void setSyslogParams();
         void setBoolMembers();
         void setSyslogFacility();
@@ -102,6 +106,22 @@ inline bool Options::verbose() const
 {   
     return d_verbose;
 }
+
+inline bool Options::signal() const
+{   
+    return d_terminate || d_list;
+}
+
+inline bool Options::terminate() const
+{   
+    return d_terminate;
+}
+
+inline bool Options::list() const
+{   
+    return d_list;
+}
+
 
 inline std::string const &Options::agent() const
 {   

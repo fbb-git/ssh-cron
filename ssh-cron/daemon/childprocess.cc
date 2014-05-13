@@ -2,10 +2,17 @@
 
 void Daemon::childProcess()
 {
+    Cron cron(d_stdMsg, d_cronData);
+
     if (d_options.daemon())
+    {
         prepareDaemon();
 
-    Cron cron(d_stdMsg, d_cronData);
+        Signal::instance().add(SIGHUP,  cron);
+        Signal::instance().add(SIGTERM, cron);
+        Signal::instance().add(SIGUSR1, cron);
+    }
+
     cron.fork();
 
         // when the child process ends it throws away its own pid file:
