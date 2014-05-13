@@ -2,7 +2,7 @@
 #define INCLUDED_CRON_
 
 #include <set>
-#include <fstream>
+#include <iosfwd>
 
 #include <bobcat/fork>
 #include <bobcat/pipe>
@@ -21,24 +21,23 @@ class Cron: public FBB::Fork
     enum Leave 
     {};
 
-    static std::string s_shell;
-    static std::string s_agent;
+    std::ofstream &d_stdMsg;
+    CronData const &d_cronData;
 
     FBB::Pipe d_childInput;     // child reads this
     FBB::Pipe d_childOutput;    // child writes this
 
-    CronData const &d_cronData;
 
     bool d_sendCommands;
     FBB::Selector d_selector;
     
-    std::ofstream d_log;
-
     std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
     std::ostream *d_toChild = 0;
 
+    static std::string s_agent;
+
     public:
-        Cron(CronData const &cronData);
+        Cron(std::ofstream &stdMsg, CronData const &cronData);
         void runParentProcess();
 
     private:

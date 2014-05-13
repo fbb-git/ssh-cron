@@ -2,11 +2,12 @@
 
 Options *Options::s_options = 0;
 
+char const Options::s_defaultAgent[]    = "/usr/bin/ssh-agent /bin/bash";
+char const Options::s_defaultPIDfile[]  = "/run/ssh-cron.pid";
+
 char const Options::s_defaultSyslogIdent[]      = "SSH-CRON";
 char const Options::s_defaultSyslogFacility[]   = "DAEMON";
 char const Options::s_defaultSyslogPriority[]   = "NOTICE";
-
-char const Options::s_defaultPIDfile[]          = "/run/ssh-cron.pid";
 
 LinearMap<string, Facility> const Options::s_syslogFacilities = 
     {

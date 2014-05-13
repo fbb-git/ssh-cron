@@ -13,6 +13,7 @@ class Options
 {
     FBB::ArgConfig &d_arg;
 
+    std::string d_agent;
     std::string d_PIDfile;
     std::string d_syslogTag;
     std::string d_syslogPriorityError;
@@ -31,6 +32,7 @@ class Options
 
     static Options *s_options;
 
+    static char const s_defaultAgent[];
     static char const s_defaultPIDfile[];
     static char const s_defaultSyslogIdent[];
     static char const s_defaultSyslogFacility[];
@@ -52,6 +54,7 @@ class Options
         bool syslog() const;
 
 
+        std::string const &agent() const;
         std::string const &pidFile() const;
         std::string const &syslogTag() const;
 
@@ -65,6 +68,7 @@ class Options
         std::string syslogFacilityError() const;
 
 
+        static char const *defaultAgent();
         static char const *defaultSyslogIdent();
         static char const *defaultSyslogFacility();
         static char const *defaultSyslogPriority();
@@ -97,6 +101,11 @@ inline bool Options::syslog() const
 inline bool Options::verbose() const
 {   
     return d_verbose;
+}
+
+inline std::string const &Options::agent() const
+{   
+    return d_agent;
 }
 
 inline std::string const &Options::pidFile() const
@@ -142,6 +151,11 @@ inline std::string const &Options::facility() const
 inline char const *Options::defaultSyslogIdent() 
 {
     return s_defaultSyslogIdent;
+}
+
+inline char const *Options::defaultAgent() 
+{
+    return s_defaultAgent;
 }
 
 inline char const *Options::defaultSyslogFacility() 

@@ -7,9 +7,14 @@ namespace   // the anonymous namespace can be used here
 {
     Arg::LongOption longOptions[] =
     {
+        Arg::LongOption("agent", Arg::Required),
+
         Arg::LongOption("help", 'h'),
+        Arg::LongOption("list", 'l'),
+
         Arg::LongOption("no-daemon", Arg::None),
         Arg::LongOption("no-syslog", Arg::None),
+
         Arg::LongOption("pid-file", 'p'),
 
         Arg::LongOption("stdout", 's'),
@@ -17,6 +22,8 @@ namespace   // the anonymous namespace can be used here
         Arg::LongOption("syslog-facility", Arg::Required),
         Arg::LongOption("syslog-priority", Arg::Required),
         Arg::LongOption("syslog-tag", Arg::Required),
+
+        Arg::LongOption("terminate", 't'),
 
         Arg::LongOption("verbose", Arg::None),
         Arg::LongOption("version", 'v'),
@@ -28,7 +35,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("hlp:sv", 
+    ArgConfig &arg = ArgConfig::initialize("hlp:st::v", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);

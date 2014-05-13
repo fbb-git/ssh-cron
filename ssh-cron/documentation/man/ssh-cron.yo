@@ -58,9 +58,9 @@ S() intends to solve this problem as follows:
 
 itemization(
     it() S() is a daemon program. When the program starts it first reads and
-       parses a crontab-like specification file. Normally, the following
-       actions are performed by the daemon's child program, which itself
-       spawns a child process:
+        parses a crontab-like specification file. Unless a s() program is
+        already running, the following actions are performed by the daemon's
+        child program, which itself spawns a child process:
     
     it() The viable cron commands are passed to the program's child (the
        daemon), and s()'s parent process dies;
@@ -79,6 +79,12 @@ itemization(
        required moments in time. If these commands require access to a remote
        computer, then this access is granted, as em(ssh-agent) is able to
        provide the pass phrase.
+
+    it() If an existing (default or specified using the tt(-p) option, see
+        below) pid-file is found, then the tt(crontab-file) argument is
+        parsed, and the recognized commands and environment variable
+        specifications are sent to the running s() program, replacing its
+        currently stored commands and environment definitions.
     )
 
 The user originally providing the passphrase may leave the system, and the
@@ -116,8 +122,16 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
     Command-line options override configuration file options.
 
     itemization(
+    it() laption(agent)(agent)nl()
+       absolute path to the agent program (plus its argument(s)) providing the
+        ssh-keys. 
+
     it() loption(help) (soption(h))nl()
        Basic usage information is written to the standard output stream.
+
+    it() loption(list) (soption(l))nl()
+       list the currently defined cron-commands (the tt(crontab-file) argument
+        must be omitted).
 
     it() loption(no-daemon) nl()
        S() is not run as a daemon. To end s(), not running as a daemon, press
@@ -160,6 +174,10 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
         em(tag), which can be used to filter s()'s syslog messages from
         the log-files. By default the tag tt(SSH-CRON) is used. 
         See also section tt(RSYSLOG FILTERING) below.
+
+    it() lsoption(terminate)(t)([pid-file])nl()
+       terminate a running s() program. Pid-file is the name of a non-default
+        pid file (the tt(crontab-file) argument must be omitted).
 
     it() loption(verbose)nl() 
        Additional messages about s()'s mode of operation are sent to

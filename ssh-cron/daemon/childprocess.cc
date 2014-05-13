@@ -5,7 +5,7 @@ void Daemon::childProcess()
     if (d_options.daemon())
         prepareDaemon();
 
-    Cron cron(d_cronData);
+    Cron cron(d_stdMsg, d_cronData);
     cron.fork();
 
         // when the child process ends it throws away its own pid file:

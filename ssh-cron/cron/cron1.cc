@@ -1,6 +1,6 @@
 #include "cron.ih"
 
-Cron::Cron(CronData const &cronData)
+Cron::Cron(ofstream &stdMsg, CronData const &cronData)
 :
     d_cronData(cronData),
     d_sendCommands(ArgConfig::instance().option(0, "verbose") == 0),
