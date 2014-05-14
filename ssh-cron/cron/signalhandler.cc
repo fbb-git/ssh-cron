@@ -1,6 +1,6 @@
 #include "cron.ih"
 
-Cron::signalHandler(size_t signum)
+void Cron::signalHandler(size_t signum)
 {
     switch (signum)
     {

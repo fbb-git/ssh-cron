@@ -20,7 +20,7 @@ void Cron::parentProcess()
     catch (Leave)
     {}
 
-    d_log << "The child returns value " << waitForChild() << endl;
+    imsg << "child returns " << waitForChild() << endl;
 }
 
 

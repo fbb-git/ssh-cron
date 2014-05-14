@@ -5,7 +5,7 @@ void Cron::sendCommand(string line)
     if (not d_sendCommands)
         return;
 
-    d_log << "Sending command `" << line << '\'' << endl;
+    imsg << "Sending command `" << line << '\'' << endl;
 
     *d_toChild << line << endl;
 
@@ -21,7 +21,7 @@ void Cron::sendCommand(string line)
 
                 break;
             }
-            d_log << "Received: " << line << endl;
+            imsg << "Received: " << line << endl;
         }
     }
     catch (exception const &)

@@ -8,7 +8,7 @@ void Cron::cronLoop()
         
         if (seconds != 0)
         {
-            d_log << "Sleeping for " << (60 - seconds) << " seconds" << endl;
+            imsg << "Sleeping for " << (60 - seconds) << " seconds" << endl;
             sleep(60 - seconds);    // ends at a sighup signal
         }
 
@@ -20,11 +20,11 @@ void Cron::cronLoop()
         switch (d_action)
         {
             case LIST:
-                list();
+//                list();
             break;
 
             case RELOAD:
-                reload();
+//                reload();
             break;
 
             default:

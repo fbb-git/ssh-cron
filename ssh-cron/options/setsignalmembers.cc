@@ -13,7 +13,7 @@ void Options::setSignalMembers()
     d_arg.option(&pidFile, 'p');      // see if '-p' has a pidFile
 
     if (not d_list and not d_terminate)
-        d_pidFile = pidFile;
+        d_PIDfile = pidFile;
     else if (pidFile.length())
     {
         wmsg << "--pid-file ignored with --list and --terminate" << endl;

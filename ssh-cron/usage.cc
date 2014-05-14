@@ -41,7 +41,6 @@ void usage(std::string const &progname)
                                 Options::defaultSyslogIdent() << "')\n"
     "      --terminate (-t) [pid-file] - terminate a running " << progname <<
                                                                     "\n"
-    "
     "                           program. Pid-file is the name of a "
                                                             "non-default\n"
     "                           pid file (the `crontab' file argument must "
@@ -54,9 +53,9 @@ void usage(std::string const &progname)
     "                                                 to the syslog daemon\n"
     "      --version (-v)   - show version information and terminate\n"
     "   crontab     - crontab-like file specifying crontab commands, and\n"
-    "                 (optional) environment variable definitions and/or 
+    "                 (optional) environment variable definitions and/or "
                                                                     "long\n"
-    "                 options. If a pid-file exists, the commands which are
+    "                 options. If a pid-file exists, the commands which are\n"
     "                 defined in `crontab' replace the commands defined for\n"
     "                 the currently running " << progname << "\n" 
     "\n";

@@ -31,7 +31,7 @@ class Cron: public FBB::Fork, public FBB::SignalHandler
 
     volatile Action d_action = LOOP;
     
-    std::ofstream &d_stdMsg;
+    std::ostream &d_stdMsg;
     CronData const &d_cronData;
 
     FBB::Pipe d_childInput;     // child reads this
@@ -47,7 +47,7 @@ class Cron: public FBB::Fork, public FBB::SignalHandler
     static std::string s_agent;
 
     public:
-        Cron(std::ofstream &stdMsg, CronData const &cronData);
+        Cron(std::ostream &stdMsg, CronData const &cronData);
         void runParentProcess();
 
     private:
