@@ -131,8 +131,13 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
 
     it() loption(list) (soption(l))nl()
        list the currently defined cron-commands (the tt(crontab-file) argument
-        must be omitted).
+        must be omitted). The tt(crontab-file) argument must be omitted. This
+        option is incompatible tt with the (--terminate) option.
 
+    it() lsoption(log)(L)(path)nl()
+       log messages are appended to tt(path). If tt(path) does not exist, it
+        is created first.
+ 
     it() loption(no-daemon) nl()
        S() is not run as a daemon. To end s(), not running as a daemon, press
         the `Enter' key.
@@ -177,7 +182,8 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
 
     it() lsoption(terminate)(t)([pid-file])nl()
        terminate a running s() program. Pid-file is the name of a non-default
-        pid file (the tt(crontab-file) argument must be omitted).
+        pid file. The tt(crontab-file) argument must be omitted. This
+        option is incompatible tt with the (--list) option.
 
     it() loption(verbose)nl() 
        Additional messages about s()'s mode of operation are sent to

@@ -4,7 +4,11 @@
 #include <csignal>
 #include <limits>
 #include <unistd.h>
+#include <termios.h>
+#include <fcntl.h>
+
 #include <sys/types.h>
+#include <sys/stat.h>
 
 #include <bobcat/exception>
 #include <bobcat/syslogstream>

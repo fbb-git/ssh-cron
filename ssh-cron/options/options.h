@@ -1,13 +1,9 @@
 #ifndef INCLUDED_OPTIONS_
 #define INCLUDED_OPTIONS_
 
-#include <bobcat/syslogstream>      // for the enums
+#include <bobcat/syslogstream>
 #include <bobcat/linearmap>
-
-namespace FBB
-{
-    class ArgConfig;
-}
+#include <bobcat/argconfig>
 
 class Options
 {
@@ -18,6 +14,7 @@ class Options
     std::string d_syslogTag;
     std::string d_syslogPriorityError;
     std::string d_syslogFacilityError;
+    std::string d_logName;
 
     FBB::LinearMap<std::string, FBB::Facility>::const_iterator 
                                                         d_syslogFacility;
@@ -29,6 +26,7 @@ class Options
     bool d_useSyslog;
     bool d_terminate;
     bool d_list;
+    bool d_log;
 
     static Options *s_options;
 
@@ -55,9 +53,11 @@ class Options
         bool signal() const;
         bool terminate() const;
         bool list() const;
-
+        bool log() const;
 
         std::string const &agent() const;
+        std::string const &basename() const;
+        std::string const &logName() const;
         std::string const &pidFile() const;
         std::string const &syslogTag() const;
 
@@ -122,10 +122,24 @@ inline bool Options::list() const
     return d_list;
 }
 
+inline bool Options::log() const
+{   
+    return d_log;
+}
 
 inline std::string const &Options::agent() const
 {   
     return d_agent;
+}
+
+inline std::string const &Options::basename() const
+{   
+    return d_arg.basename();
+}
+
+inline std::string const &Options::logName() const
+{   
+    return d_logName;
 }
 
 inline std::string const &Options::pidFile() const

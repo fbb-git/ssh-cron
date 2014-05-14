@@ -9,6 +9,7 @@ namespace   // the anonymous namespace can be used here
 
         Arg::LongOption("help", 'h'),
         Arg::LongOption("list", 'l'),
+        Arg::LongOption("log",  'L'),
 
         Arg::LongOption("no-daemon", Arg::None),
         Arg::LongOption("no-syslog", Arg::None),
@@ -33,19 +34,19 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("hl::p:st::v", 
+    ArgConfig &arg = ArgConfig::initialize("hl::L:p:st::v", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);
 
     Daemon daemon;
 
-    if (Options::instance().signal())
-        daemon.sendSignal();
-    else if (not Options::instance().daemon())
-        daemon.runParentProcess();
-    else
-        daemon.fork();
+//    if (Options::instance().signal())
+//        daemon.sendSignal();
+//    else if (not Options::instance().daemon())
+//        daemon.runParentProcess();
+//    else
+//        daemon.fork();
 }
 catch (exception const &exc)
 {
@@ -55,3 +56,5 @@ catch (int x)
 {
     return ArgConfig::instance().option("hv") ? 0 : x;
 }
+
+

@@ -11,4 +11,5 @@ void Options::setBoolMembers()
     d_verbose = d_arg.option(0, "verbose");
     d_stdout = d_verbose || d_arg.option('s');
 
+    d_log = d_arg.option(&d_logName, 'L');
 }

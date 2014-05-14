@@ -5,6 +5,7 @@
 
 #include <bobcat/fork>
 #include <bobcat/multistreambuf>
+#include <bobcat/log>
 
 #include "../crondata/crondata.h"
 
@@ -21,6 +22,7 @@ class Daemon: public FBB::Fork
     CronData d_cronData;
 
     std::unique_ptr<FBB::SyslogStream> d_syslog;
+    FBB::Log d_log;
 
     FBB::MultiStreambuf d_multiStreambuf;
     std::ostream d_stdMsg;                  // d_stdMsg is used for messages
@@ -42,6 +44,7 @@ class Daemon: public FBB::Fork
         void setupDaemonMsg();
         void setupNonDaemonMsg();
 
+        void noEcho() const;
         pid_t cronPid() const;
 
         void childProcess()                 override;
