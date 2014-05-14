@@ -16,6 +16,8 @@ namespace   // the anonymous namespace can be used here
 
         Arg::LongOption("pid-file", 'p'),
 
+        Arg::LongOption("reload", 'r'),
+
         Arg::LongOption("stdout", 's'),
 
         Arg::LongOption("syslog-facility", Arg::Required),
@@ -34,7 +36,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("hl::L:p:st::v", 
+    ArgConfig &arg = ArgConfig::initialize("hl:L:p:rst:v", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);

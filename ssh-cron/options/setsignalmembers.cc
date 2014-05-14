@@ -10,7 +10,6 @@ void Options::setSignalMembers()
         fmsg << "--list and --terminate cannot both be specified" << endl;
 
     string pidFile;
-    d_arg.option(&pidFile, 'p');      // see if '-p' has a pidFile
 
     if (not d_list and not d_terminate)
         d_PIDfile = pidFile;

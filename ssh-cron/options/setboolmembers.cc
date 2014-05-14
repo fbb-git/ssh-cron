@@ -9,7 +9,4 @@ void Options::setBoolMembers()
         fmsg << "--daemon incompatible with --list and --terminate";
 
     d_verbose = d_arg.option(0, "verbose");
-    d_stdout = d_verbose || d_arg.option('s');
-
-    d_log = d_arg.option(&d_logName, 'L');
 }
