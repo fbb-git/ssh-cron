@@ -1,4 +1,4 @@
-_tokenNoWsColonAssign:
+_tokenNoWs:
     NR
 |
     ID
@@ -12,12 +12,6 @@ _tokenNoWsColonAssign:
     '-'
 |
     CHAR
-;
-
-_tokenNoWs:
-    _tokenNoWsColonAssign
-|
-    ':'
 |
     '='
 ;
@@ -28,7 +22,7 @@ _tokenAny:
     _tokenNoWs
 ;
 
-_tokenScanner:
+_tokenMatched:
     {
         $$ = d_scanner.matched();
     }
@@ -37,7 +31,7 @@ _tokenScanner:
 
 _tokenAnyMatched:
     _tokenAny
-    _tokenScanner
+    _tokenMatched
     {
         $$ = $2;
     }
@@ -45,7 +39,7 @@ _tokenAnyMatched:
 
 token_noWs:
     _tokenNoWs
-    _tokenScanner
+    _tokenMatched
     {
         $$ =$2;
     }
@@ -65,16 +59,6 @@ tokens:
 
 opt_tokens:
     tokens
-|
-    {
-        $$ = string();
-    }
-;
-
-opt_tokens_1stNotColonOrAssign:
-    _tokenNoWsColonAssign
-    _tokenScanner
-    opt_tokens
 |
     {
         $$ = string();

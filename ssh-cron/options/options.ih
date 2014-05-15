@@ -1,7 +1,9 @@
 #include "options.h"
 
+#include <unistd.h>
 #include <string>
 #include <bobcat/mstream>
+#include <bobcat/user>
 
 void usage(std::string const &progname);
 

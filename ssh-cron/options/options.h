@@ -35,6 +35,7 @@ class Options
     static char const s_defaultSyslogIdent[];
     static char const s_defaultSyslogFacility[];
     static char const s_defaultSyslogPriority[];
+    static char const Options::s_defaultConfig[];
 
     static FBB::LinearMap<std::string, FBB::Facility> const 
                                                        s_syslogFacilities;

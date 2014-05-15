@@ -12,13 +12,16 @@ void usage(std::string const &progname)
     "Where:\n"
     "   [options] - optional arguments (short options between parentheses,\n"
     "               option descriptions starting with (C) may also be
-    "               specified in the crontab file):\n"
+    "               specified in the config file (see option --config)):\n"
     "      --agent agent    - (C) absolute path to the agent program "
                                                                 "providing\n"
 
     "                         the ssh-keys\n"
     "                         (default `" << 
                                         Options::defaultAgent() << "')\n"
+    "      --config (-c) path - config file containing long option "
+                                                            "specifications\n"
+    "                         (default `$HOME/.ssh-cron/config)`\n"
     "      --help (-h)      - provide this help\n"
     "      --list (-l)      - list the currently defined cron-commands\n"
     "                         (the `crontab' file is only used to specify "

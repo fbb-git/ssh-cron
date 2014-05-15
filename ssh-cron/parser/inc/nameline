@@ -1,26 +1,12 @@
 // OK input is:
 //
-//  ID
-//  ID  whatever
-//  ID:
-//  ID: whatever
 //  ID = whatever
 // the blanks around the = are optional and will be removed
 
 _nameContents:
-    ':' opt_tokens              // ID:(contents)?   [ an option: ignored ]
-    {
-        $$  = string();
-    }
-|
-    opt_ws opt_tokens_1stNotColonOrAssign   // an option: ignored
-    {
-        $$ = string();
-    }
-|
     opt_ws '=' opt_tokens       // ID =(contents-to-be-stripped)?
     {
-        $$ = $3 + ' ';          // return non-empty string
+        $$ = $3;
     }
 ;
 

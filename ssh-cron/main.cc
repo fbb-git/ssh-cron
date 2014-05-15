@@ -6,6 +6,7 @@ namespace   // the anonymous namespace can be used here
     Arg::LongOption longOptions[] =
     {
         Arg::LongOption("agent", Arg::Required),
+        Arg::LongOption("config", 'c'),
 
         Arg::LongOption("help", 'h'),
         Arg::LongOption("list", 'l'),
@@ -36,7 +37,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("hl:L:p:rst:v", 
+    ArgConfig &arg = ArgConfig::initialize("c:hl:L:p:rst:v", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);

@@ -15,9 +15,7 @@ Options::Options()
 
     d_terminate = d_arg.option('t')    
 
-    if (d_arg.nArgs())
-        d_arg.open(d_arg[0]);       // read the arg config file, which is also
-                                    // the cron-file
+    loadConfigFile();
 
     if (not d_arg.option(&d_PIDfile, 'p'))
         d_PIDfile = s_defaultPIDfile;

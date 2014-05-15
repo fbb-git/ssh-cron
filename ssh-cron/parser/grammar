@@ -7,8 +7,8 @@
 
 %token WS NR ID CHAR
 
-%type <STRING>  opt_tokens tokens token_noWs _tokenAnyMatched _tokenScanner 
-                opt_tokens_1stNotColonOrAssign _nameContents _nameID nameLine
+%type <STRING>  opt_tokens tokens token_noWs _tokenAnyMatched _tokenMatched
+                _nameContents _nameID nameLine
 %type <INT>     nr opt_nr_step
 
 %%

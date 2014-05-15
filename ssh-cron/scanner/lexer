@@ -16,7 +16,7 @@ ID      [[:alpha:]_][[:alnum:]_-]*
 
 {ID}                            return Parser::ID;
 
-[*/,:=\n-]                      return matched()[0];
+[*/,=\n-]                       return matched()[0];
 
 .                               return Parser::CHAR;
 
