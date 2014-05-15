@@ -21,7 +21,8 @@ void usage(std::string const &progname)
                                         Options::defaultAgent() << "')\n"
     "      --config (-c) path - config file containing long option "
                                                             "specifications\n"
-    "                         (default `$HOME/.ssh-cron/config)`\n"
+    "                         (default `$HOME/" <<
+                                    Options::defaultConfigFile() << ")`\n"
     "      --help (-h)      - provide this help\n"
     "      --list (-l)      - list the currently defined cron-commands\n"
     "                         (the `crontab' file is only used to specify "

@@ -73,6 +73,7 @@ class Options
 
 
         static char const *defaultAgent();
+        static char const *defaultConfigFile();
         static char const *defaultSyslogIdent();
         static char const *defaultSyslogFacility();
         static char const *defaultSyslogPriority();
@@ -186,6 +187,11 @@ inline std::string const &Options::facility() const
 inline char const *Options::defaultSyslogIdent() 
 {
     return s_defaultSyslogIdent;
+}
+
+inline char const *Options::defaultConfigFile() 
+{
+    return s_defaultConfigFile;
 }
 
 inline char const *Options::defaultAgent() 

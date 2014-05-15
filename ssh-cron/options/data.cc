@@ -4,7 +4,7 @@ Options *Options::s_options = 0;
 
 char const Options::s_defaultAgent[]    = "/usr/bin/ssh-agent /bin/bash";
 char const Options::s_defaultPIDfile[]  = "/run/ssh-cron.pid";
-char const Options::s_defaultConfig[]   = ".ssh-cron/config";
+char const Options::s_defaultConfig[]   = ".ssh-cron";
 
 char const Options::s_defaultSyslogIdent[]      = "SSH-CRON";
 char const Options::s_defaultSyslogFacility[]   = "DAEMON";
