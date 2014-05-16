@@ -13,7 +13,9 @@ Options::Options()
 
     d_reload = d_arg.option('r');
 
-    d_terminate = d_arg.option('t')    
+    d_terminate = d_arg.option('t')
+
+    checkAction();
 
     loadConfigFile();
 

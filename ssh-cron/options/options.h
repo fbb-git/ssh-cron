@@ -87,6 +87,7 @@ class Options
         void setBoolMembers();
         void setSyslogFacility();
         void setSyslogPriority();
+        void checkAction() const;
 };
 
 inline bool Options::daemon() const
