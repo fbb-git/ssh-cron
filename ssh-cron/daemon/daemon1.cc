@@ -10,11 +10,11 @@ Daemon::Daemon()
 //
 //    if (d_cronData.nCronCommands() == 0)
 //        throw Exception() << "Terminating: no viable cron-commands.";
-//
-//    setupStdMsg();
-//
-//    if (d_options.daemon())
-//        setupDaemonMsg();
-//    else
-//        setupNonDaemonMsg();
+
+    setupStdMsg();
+
+    if (d_options.daemon())
+        setupDaemonMsg();
+    else
+        setupNonDaemonMsg();
 }

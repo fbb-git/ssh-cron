@@ -10,14 +10,21 @@ void Daemon::terminate() const
     pidFile >> shmemId;
 
     SharedMemory shmem(shmemId);
-
     SharedCondition &cond = SharedCondition::attach(shmem);
     
     Cron::Function request = Cron::TERMINATE;
     cond.lock();
+
     shmem.seek(sizeof(SharedCondition));
-    shmem.write(reinterpret_cast<char *>(&request), sizeof(request);
+
+    shmem.write(request, sizeof(SharedCondition));
+
     shmem.seek(0);
+
     cond.notify();
     cond.unlock();
 }
+
+
+
+

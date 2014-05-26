@@ -31,15 +31,6 @@ struct Cron: public FBB::Fork
         enum Leave 
         {};
     
-        enum Action
-        {
-            LOOP,
-            LIST,
-            RELOAD
-        };
-    
-        volatile Action d_action = LOOP;
-        
         std::ostream &d_stdMsg;
         CronData const &d_cronData;
     
@@ -52,7 +43,9 @@ struct Cron: public FBB::Fork
         
         std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
         std::ostream *d_toChild = 0;
-    
+
+        volatile bool d_run = true;     // set to false by requestHandler
+
         static std::string s_agent;
     
     public:
@@ -71,7 +64,8 @@ struct Cron: public FBB::Fork
         void execute(CronEntry const &entry);
         static bool specified(size_t value, std::set<size_t> const &request);
 
-        static void requestHandler(
+        static void requestHandler(Cron *cron);
+        void handleRequests();
 };
         
 #endif

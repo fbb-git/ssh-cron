@@ -2,7 +2,7 @@
 
 void Cron::cronLoop()
 {
-    while (true)
+    while (d_run)
     {
         size_t seconds = time(0) % 60;
         
@@ -16,21 +16,6 @@ void Cron::cronLoop()
 
         if (time(0) % 60 == 0)
             sleep(1);               // ends at a sighup signal
-
-        switch (d_action)
-        {
-            case LIST:
-//                list();
-            break;
-
-            case RELOAD:
-//                reload();
-            break;
-
-            default:
-            break;
-        }
-        d_action = LOOP;
     }
 }
 
