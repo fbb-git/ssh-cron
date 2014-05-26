@@ -13,7 +13,7 @@ Options::Options()
 
     d_reload = d_arg.option('r');
 
-    d_terminate = d_arg.option('t')
+    d_terminate = d_arg.option('t');
 
     checkAction();
 
@@ -32,9 +32,6 @@ Options::Options()
     d_verbose = d_arg.option(0, "verbose");
 
     setSyslogParams();
-
-
-
 
     if (
         d_arg.nArgs() == 0 && d_arg.nOptions() == 0 && 

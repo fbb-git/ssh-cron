@@ -21,12 +21,13 @@ class Options
     FBB::LinearMap<std::string, FBB::Priority>::const_iterator 
                                                         d_syslogPriority;
     bool d_daemon;
-    bool d_verbose;
-    bool d_stdout;
-    bool d_useSyslog;
-    bool d_terminate;
     bool d_list;
     bool d_log;
+    bool d_reload;
+    bool d_stdout;
+    bool d_terminate;
+    bool d_useSyslog;
+    bool d_verbose;
 
     static Options *s_options;
 
@@ -35,7 +36,7 @@ class Options
     static char const s_defaultSyslogIdent[];
     static char const s_defaultSyslogFacility[];
     static char const s_defaultSyslogPriority[];
-    static char const Options::s_defaultConfig[];
+    static char const s_defaultConfigFile[];
 
     static FBB::LinearMap<std::string, FBB::Facility> const 
                                                        s_syslogFacilities;
@@ -88,6 +89,7 @@ class Options
         void setSyslogFacility();
         void setSyslogPriority();
         void checkAction() const;
+        void loadConfigFile();
 };
 
 inline bool Options::daemon() const

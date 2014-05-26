@@ -5,13 +5,7 @@ void Daemon::childProcess()
     Cron cron(d_stdMsg, d_cronData);
 
     if (d_options.daemon())
-    {
         prepareDaemon();
-
-        Signal::instance().add(SIGHUP,  cron);
-        Signal::instance().add(SIGTERM, cron);
-        Signal::instance().add(SIGUSR1, cron);
-    }
 
     cron.fork();
 

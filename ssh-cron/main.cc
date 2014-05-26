@@ -37,19 +37,17 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hl:L:p:rst:v", 
+    ArgConfig &arg = ArgConfig::initialize("c:hl:L:p:rstv", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);
 
     Daemon daemon;
 
-//    if (Options::instance().signal())
-//        daemon.sendSignal();
-//    else if (not Options::instance().daemon())
-//        daemon.runParentProcess();
-//    else
-//        daemon.fork();
+    if (not Options::instance().daemon())
+        daemon.runParentProcess();
+    else
+        daemon.fork();
 }
 catch (exception const &exc)
 {

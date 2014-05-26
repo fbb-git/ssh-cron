@@ -32,6 +32,8 @@ class Daemon: public FBB::Fork
                                             // wmsg is for warnings
                                             // emasg is for errors, used by 
                                             // the compiler.
+    int d_shmemId = 0;
+
     public:
         Daemon();
         void runParentProcess();
@@ -49,6 +51,8 @@ class Daemon: public FBB::Fork
 
         void childProcess()                 override;
         void parentProcess()                override;
+
+        void terminate() const;
 };
         
 #endif

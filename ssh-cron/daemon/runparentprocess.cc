@@ -2,6 +2,11 @@
 
 void Daemon::runParentProcess()
 {
+    if (d_options.terminate())
+        terminate();
+
+return;
+
     cout << "Press `Enter' to end " << d_options.basename() << endl;
 
     noEcho();

@@ -11,7 +11,7 @@ void usage(std::string const &progname)
     "Usage: " << progname << " [options] [crontab]\n"
     "Where:\n"
     "   [options] - optional arguments (short options between parentheses,\n"
-    "               option descriptions starting with (C) may also be
+    "               option descriptions starting with (C) may also be\n"
     "               specified in the config file (see option --config)):\n"
     "      --agent agent    - (C) absolute path to the agent program "
                                                                 "providing\n"

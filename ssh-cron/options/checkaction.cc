@@ -1,6 +1,6 @@
 #include "options.ih"
 
-void Options::checkAction()
+void Options::checkAction() const
 {
     if (d_list + d_reload + d_terminate + not d_daemon > 1)
     {
@@ -21,10 +21,10 @@ void Options::checkAction()
         fmsg << endl;
     }
 
-    if (d_arg.nArgs == 0)
+    if (d_arg.nArgs() == 0)
     {
         if (not (d_list || d_terminate))
-            fmsg << "config file required" << endl;
+            fmsg << "crontab file required" << endl;
     }
     else if (d_list || d_terminate)
         fmsg << "crontab file incompatible with --list and --terminate" <<
