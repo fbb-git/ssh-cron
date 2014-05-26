@@ -1,0 +1,63 @@
+When using the daemon, the following protocol is used to communicate with the
+daemon:
+
+The pid file contains the process ID of the daemon and the ID of its 
+shared memory. The daemon started a service thread, calling the SharedCondition
+wait() function and waiting for things to happen.
+
+To request an action from the child, a process puts a request value (enum
+value) in the shared memory's assigned location, and notifies the daemon. This
+may be all that's needed, or the daemon has to respond.
+
+The organization of the shared memory is as follows:
+
+    SharedCondition | request-field | free-area...
+
+The following requests and actions are defined:
+
+    Request:    Action:
+
+    TERMINATE   the daemon terminates, no further action
+    LIST        the requesting process starts a transmission loop,
+                the child writes info about the current cron-actions until
+                changing the request field into DONE
+    LOAD        the daemon starts a transmission loop and the requesting
+                process writes info about the new set of cron-actions until
+                changing the request field into DONE
+    DONE        communication loop completed
+
+A communication loop looks like this:
+
+---------------------------------------------------------------------
+    Initiating process              Handling process
+---------------------------------------------------------------------
+                                    loop:
+                                        lock
+loop:                              
+                                        wait
+    lock
+    write request 
+    write free area, if 
+        neeeded
+
+    notify
+    release
+
+    maybe end the loop 
+    (at, e.g., TERMINATE)
+    
+                                        lock
+    wait_for(seconds(2))                
+                                        process request
+
+                                        maybe end the loop
+                                        (at, e.g., TERMINATE)
+
+                                        notify
+                                        release
+    error if timeout
+                                        back to loop 
+    back to loop
+---------------------------------------------------------------------
+
+
