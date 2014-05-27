@@ -31,7 +31,7 @@ struct Cron: public FBB::Fork
         enum Leave 
         {};
     
-        std::ostream &d_stdMsg;
+        Options &d_options;
         CronData const &d_cronData;
     
         FBB::Pipe d_childInput;     // child reads this
@@ -49,7 +49,7 @@ struct Cron: public FBB::Fork
         static std::string s_agent;
     
     public:
-        Cron(std::ostream &stdMsg, CronData const &cronData);
+        Cron(CronData const &cronData);
         void runParentProcess();
 
     private:

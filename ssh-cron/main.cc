@@ -5,30 +5,31 @@ namespace   // the anonymous namespace can be used here
 {
     Arg::LongOption longOptions[] =
     {
-        Arg::LongOption("agent", Arg::Required),
-        Arg::LongOption("config", 'c'),
+                // only interpreted from the command-line
 
         Arg::LongOption("help", 'h'),
+        Arg::LongOption("version", 'v'),
+
         Arg::LongOption("list", 'l'),
+        Arg::LongOption("no-daemon", Arg::None),
+        Arg::LongOption("reload", 'r'),
+        Arg::LongOption("terminate", 't'),
+
+        Arg::LongOption("config", 'c'),
+
+                // all options below are also interpreted when specified by
+                // the config file
+
+        Arg::LongOption("agent", Arg::Required),
+        Arg::LongOption("ipc-file", 'i'),
         Arg::LongOption("log",  'L'),
 
-        Arg::LongOption("no-daemon", Arg::None),
-        Arg::LongOption("no-syslog", Arg::None),
-
-        Arg::LongOption("pid-file", 'p'),
-
-        Arg::LongOption("reload", 'r'),
-
-        Arg::LongOption("stdout", 's'),
-
+        Arg::LongOption("syslog", Arg::None),
         Arg::LongOption("syslog-facility", Arg::Required),
         Arg::LongOption("syslog-priority", Arg::Required),
         Arg::LongOption("syslog-tag", Arg::Required),
 
-        Arg::LongOption("terminate", 't'),
-
         Arg::LongOption("verbose", Arg::None),
-        Arg::LongOption("version", 'v'),
     };
 
     auto longEnd = longOptions + sizeof(longOptions) / sizeof(longOptions[0]);
@@ -37,7 +38,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hl:L:p:rstv", 
+    ArgConfig &arg = ArgConfig::initialize("c:hi:l:L:rtv", 
                         longOptions, longEnd, argc, argv);
     
     arg.versionHelp(usage, Icmbuild::version, 0);

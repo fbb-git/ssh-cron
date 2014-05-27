@@ -2,8 +2,7 @@
 
 Daemon::Daemon()
 :
-    d_options(Options::instance()),
-    d_stdMsg(&d_multiStreambuf)
+    d_options(Options::instance())
 {
 //    Parser parser(d_cronData);
 //    parser.parse();
@@ -11,10 +10,4 @@ Daemon::Daemon()
 //    if (d_cronData.nCronCommands() == 0)
 //        throw Exception() << "Terminating: no viable cron-commands.";
 
-    setupStdMsg();
-
-    if (d_options.daemon())
-        setupDaemonMsg();
-    else
-        setupNonDaemonMsg();
 }

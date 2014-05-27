@@ -81,7 +81,7 @@ itemization(
        provide the pass phrase.
 
     it() If an existing (default or specified using the tt(-p) option, see
-        below) pid-file is found, then the tt(crontab-file) argument is
+        below) ipc-file is found, then the tt(crontab-file) argument is
         parsed, and the recognized commands and environment variable
         specifications are sent to the running s() program, replacing its
         currently stored commands and environment definitions.
@@ -147,11 +147,11 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
         with priority tt(NOTICE). No messages are sent to the syslog daemon
         when this option is specified.
 
-    it() lsoption(pid-file)(p)(path)nl()
+    it() lsoption(ipc-file)(p)(path)nl()
        When s() runs as a daemon, then tt(path) is the name of
         the path of the file holding the daemon's process-id. By default this
-        is em(/run/ssh-cron.pid). To end the daemon, send a SIGTERM signal to
-        the process-id contained in the tt(pid-file). S() ignores
+        is em(/run/ssh-cron.ipc). To end the daemon, send a SIGTERM signal to
+        the process-id contained in the tt(ipc-file). S() ignores
         tt(SIGHUP) signals (but writes a log message if a tt(SIGHUP) signal
         is received).
         
@@ -180,9 +180,9 @@ colon. Multi-word arguments should not be surrounded by quotes. Examples:
         the log-files. By default the tag tt(SSH-CRON) is used. 
         See also section tt(RSYSLOG FILTERING) below.
 
-    it() lsoption(terminate)(t)([pid-file])nl()
+    it() lsoption(terminate)(t)([ipc-file])nl()
        terminate a running s() program. Pid-file is the name of a non-default
-        pid file. The tt(crontab-file) argument must be omitted. This
+        ipc file. The tt(crontab-file) argument must be omitted. This
         option is incompatible tt with the (--list) option.
 
     it() loption(verbose)nl() 

@@ -2,12 +2,12 @@
 
 void Cron::handleRequests()
 {
-    ifstream pidFile;
-    Exception::open(pidFile, Options::instance().pidFile());
+    ifstream ipcFile;
+    Exception::open(ipcFile, Options::instance().ipcFile());
 
     int shmemId;
 
-    pidFile >> shmemId;
+    ipcFile >> shmemId;
 
     SharedMemory shmem(shmemId);
     SharedCondition &cond = SharedCondition::attach(shmem);
@@ -29,8 +29,8 @@ void Cron::handleRequests()
 
             case TERMINATE:
                 d_run = false;
-                pidFile.close();
-                unlink(Options::instance().pidFile().c_str());
+                ipcFile.close();
+                unlink(Options::instance().ipcFile().c_str());
                 
                 shmem.kill();
             return;

@@ -13,11 +13,11 @@ void Daemon::parentProcess()
     if (pos != 0)
         fmsg << "internal error: SharedCondition not at 0" << endl;
 
-    // write the daemon's pid-file:
-    ofstream pidFile;
-    Exception::open(pidFile, Options::instance().pidFile());
+    // write the daemon's ipc-file:
+    ofstream ipcFile;
+    Exception::open(ipcFile, Options::instance().ipcFile());
 
-    pidFile << (d_shmemId = shmem.id()) << endl;
+    ipcFile << (d_shmemId = shmem.id()) << endl;
 }
 
 

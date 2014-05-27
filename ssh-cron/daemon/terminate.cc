@@ -2,12 +2,12 @@
 
 void Daemon::terminate() const
 {
-    ifstream pidFile;
-    Exception::open(pidFile, Options::instance().pidFile());
+    ifstream ipcFile;
+    Exception::open(ipcFile, Options::instance().ipcFile());
 
     int shmemId;
 
-    pidFile >> shmemId;
+    ipcFile >> shmemId;
 
     SharedMemory shmem(shmemId);
     SharedCondition &cond = SharedCondition::attach(shmem);

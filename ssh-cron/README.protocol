@@ -1,7 +1,7 @@
 When using the daemon, the following protocol is used to communicate with the
 daemon:
 
-The pid file contains the process ID of the daemon and the ID of its 
+The ipc file contains the process ID of the daemon and the ID of its 
 shared memory. The daemon started a service thread, calling the SharedCondition
 wait() function and waiting for things to happen.
 
