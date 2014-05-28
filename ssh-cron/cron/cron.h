@@ -47,13 +47,14 @@ struct Cron: public FBB::Fork
         std::ostream *d_toChild = 0;
 
         volatile bool d_run = true;     // set to false by requestHandler
+        volatile bool d_interrupted = false;
 
         static std::string s_agent;
     
     public:
         Cron(CronData const &cronData);
         void runParentProcess();
-        void stop();
+        void stop(size_t signal);
 
     private:
         void childRedirections()    override;

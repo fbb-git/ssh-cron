@@ -2,6 +2,6 @@
 
 void Daemon::signalHandler(size_t signal)
 {
-    d_cron.stop();
+    d_cron.stop(signal);
     cerr << '\n';
 }

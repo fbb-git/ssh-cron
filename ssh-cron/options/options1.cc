@@ -17,7 +17,9 @@ Options::Options()
         throw 0;
     }
 
+    
     d_foreground = d_arg.option(0, "no-daemon");
+
     d_list = d_arg.option('l');
     d_reload = d_arg.option('r');
     d_terminate = d_arg.option('t');
@@ -50,6 +52,8 @@ Options::Options()
     else
         wmsg << "--verbose ignored: --syslog or --log not specified" << endl;
 }       
+
+
 
 
 

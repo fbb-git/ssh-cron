@@ -9,6 +9,6 @@ options
 scanner
 parser          scanner
 
-daemon          parser options
+daemon          parser options cron
 
 

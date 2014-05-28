@@ -4,6 +4,12 @@ void Cron::sendCommand(string line)
 {
     imsg << "Sending command `" << line << '\'' << endl;
 
+    if (d_interrupted)
+    {
+        d_toChild->setstate(ios::eofbit);
+        return;
+    }
+
     *d_toChild << line << endl;
 
     d_selector.setAlarm(0, 300000);
@@ -24,5 +30,7 @@ void Cron::sendCommand(string line)
     catch (exception const &)
     {}
 }
+
+
 
 

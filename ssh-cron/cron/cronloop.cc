@@ -3,7 +3,7 @@
 void Cron::cronLoop()               // called from parentprocess
 try
 {
-    imsg << "Cron::cronloop: d_run = " << d_run << endl;
+    imsg << "Cron::cronloop" << endl;
 
     while (d_run)
     {
