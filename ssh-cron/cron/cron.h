@@ -28,6 +28,8 @@ struct Cron: public FBB::Fork
     };
 
     private:
+        enum EndOfRun
+        {};
     
         enum Leave 
         {};
@@ -39,7 +41,6 @@ struct Cron: public FBB::Fork
         FBB::Pipe d_childOutput;    // child writes this
     
     
-        bool d_sendCommands;
         FBB::Selector d_selector;
         
         std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
@@ -52,6 +53,7 @@ struct Cron: public FBB::Fork
     public:
         Cron(CronData const &cronData);
         void runParentProcess();
+        void stop();
 
     private:
         void childRedirections()    override;
@@ -68,7 +70,7 @@ struct Cron: public FBB::Fork
         static void requestHandler(Cron *cron);
         void handleRequests();
 };
-        
+
 #endif
 
 

@@ -1,7 +1,10 @@
 #include "cron.ih"
 
-void Cron::cronLoop()
+void Cron::cronLoop()               // called from parentprocess
+try
 {
+    imsg << "Cron::cronloop: d_run = " << d_run << endl;
+
     while (d_run)
     {
         size_t seconds = time(0) % 60;
@@ -9,7 +12,7 @@ void Cron::cronLoop()
         if (seconds != 0)
         {
             imsg << "Sleeping for " << (60 - seconds) << " seconds" << endl;
-            sleep(60 - seconds);    // ends at a sighup signal
+            sleep(60 - seconds);    // ends at a sigint signal
         }
 
         runCronJobs();
@@ -18,4 +21,6 @@ void Cron::cronLoop()
             sleep(1);               // ends at a sighup signal
     }
 }
+catch(EndOfRun)
+{}
 

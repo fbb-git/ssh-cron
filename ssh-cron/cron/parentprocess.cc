@@ -11,24 +11,32 @@ void Cron::parentProcess()
 
     d_selector.addReadFd(d_childOutput.readFd());
 
-    thread requestThread(requestHandler, this);
+    thread requestThread;
+
+    if (d_options.daemon())
+    {
+        requestThread = thread(requestHandler, this);
+        requestThread.detach();
+    }
 
     try
     {
-        sendCommand("/bin/echo hello world");
         sendCommand("/usr/bin/ssh-add");
         cronLoop();
 
         sendCommand("exit");
-        // kill(pid(), SIGTERM);
-        //log << "Child process " << pid() << " got SIGTERM" << endl;
     }
     catch (Leave)
     {}
 
-    requestThread.join();
+//    if (d_options.daemon())
+//    {
+//        imsg << "waiting for the thread" << endl;
+//
+//        requestThread.join();
 
     imsg << "child returns " << waitForChild() << endl;
 }
+
 
 

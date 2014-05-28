@@ -2,9 +2,6 @@
 
 void Cron::sendCommand(string line)
 {
-    if (not d_sendCommands)
-        return;
-
     imsg << "Sending command `" << line << '\'' << endl;
 
     *d_toChild << line << endl;

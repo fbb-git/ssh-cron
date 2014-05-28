@@ -6,21 +6,15 @@
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-
-       #include <signal.h>
+#include <cstring>
+#include <memory>
 
 #include <bobcat/exception>
 #include <bobcat/syslogstream>
 #include <bobcat/mstream>
-#include <bobcat/sharedmemory>
 #include <bobcat/sharedcondition>
 
 #include "../options/options.h"
-#include "../cron/cron.h"
-
 #include "../parser/parser.h"
 
 using namespace std;

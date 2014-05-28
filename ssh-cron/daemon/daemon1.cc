@@ -2,7 +2,8 @@
 
 Daemon::Daemon()
 :
-    d_options(Options::instance())
+    d_options(Options::instance()),
+    d_cron(d_cronData)
 {
 //    Parser parser(d_cronData);
 //    parser.parse();

@@ -20,7 +20,7 @@ void Cron::handleRequests()
 
         Function request;
 
-        shmem.read(sizeof(SharedCondition), &request);
+        shmem.read(&request, sizeof(SharedCondition));
 
         switch (request)
         {
@@ -29,9 +29,6 @@ void Cron::handleRequests()
 
             case TERMINATE:
                 d_run = false;
-                ipcFile.close();
-                unlink(Options::instance().ipcFile().c_str());
-                
                 shmem.kill();
             return;
         }

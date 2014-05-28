@@ -2,21 +2,16 @@
 
 void Daemon::childProcess()
 {
-    Cron cron(d_cronData);
+    Signal::instance().add(SIGINT, *this);
+    Signal::instance().add(SIGTERM, *this);
 
     if (d_options.daemon())
         prepareDaemon();
 
-    cron.fork();
+    d_cron.fork();              // start the scheduler and ssh-agent
 
-        // when the child process ends it throws away its own pid file:
-    ifstream ipcFile(d_options.ipcFile());
-    size_t shmemID;
-    if (ipcFile >> shmemID)
-    {
-        ipcFile.close();
-        unlink(d_options.ipcFile().c_str());
-    }
+    if (d_options.daemon())
+        cleanup();
 
     throw 0;                    // correctly end the child process at main
 }

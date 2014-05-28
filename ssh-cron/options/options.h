@@ -57,6 +57,7 @@ class Options
         Options(Options const &other) = delete;
 
         bool foreground() const;
+        bool daemon() const;
         bool ipc() const;
         bool terminate() const;
         bool list() const;
@@ -90,6 +91,11 @@ inline std::ostream &Options::msg()
 inline bool Options::foreground() const
 {   
     return d_foreground;
+}
+
+inline bool Options::daemon() const
+{   
+    return not d_foreground;
 }
 
 inline bool Options::ipc() const

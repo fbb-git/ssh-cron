@@ -2,5 +2,5 @@
 
 void Daemon::foreground()
 {
-
+    childProcess();
 }

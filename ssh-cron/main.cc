@@ -40,18 +40,10 @@ try
 {
     ArgConfig &arg = ArgConfig::initialize("c:hi:lL:rtv", 
                         longOptions, longEnd, argc, argv);
-    
-    arg.versionHelp(Options::usage, Icmbuild::version, 0);
+        arg.versionHelp(Options::usage, Icmbuild::version, 0);
 
     Daemon daemon;
-
-    if (Options::instance().ipc())
-        daemon.ipc();
-    else if (Options::instance().foreground())
-        daemon.foreground();
-    else
-        daemon.daemonize();     
-
+    daemon.run();
 }
 catch (exception const &exc)
 {

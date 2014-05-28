@@ -2,7 +2,7 @@
 
 void Daemon::daemonize()
 {
-    if (access(d_options.ipcFile().c_str(), F_OK))
+    if (access(d_options.ipcFile().c_str(), F_OK) == 0)
         fmsg << d_options.ipcFile() << " is in the way. Remove it first" <<
                 endl;
 
@@ -11,19 +11,23 @@ void Daemon::daemonize()
     ofstream ipcFile;           // open the daemon's ipc-file:
     Exception::open(ipcFile, Options::instance().ipcFile());
 
-    SharedMemory shmem(1, SharedMemory::kB);    // create the shared memory
+    d_shmem = SharedMemory(1, SharedMemory::kB);// create the shared memory
 
     streamsize pos;                             // create the shared condition
-    SharedCondition::create(&pos, shmem);
+    SharedCondition::create(&pos, d_shmem);
 
     if (pos != 0)
     {
-        shmem.kill();
+        d_shmem.kill();
         fmsg << "Daemon::daemonize internal error: "
                                         "SharedCondition not at 0" << endl;
     }
 
-    ipcFile << (d_shmemId = shmem.id()) << endl;
+    ipcFile << d_shmem.id() << endl;
 
     fork();
 }
+
+
+
+
