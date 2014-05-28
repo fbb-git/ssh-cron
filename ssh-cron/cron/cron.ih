@@ -8,7 +8,6 @@
 //#include <sys/types.h>
 //#include <signal.h>
 
-#include <bobcat/log>
 #include <bobcat/ofdstream>
 #include <bobcat/ifdstream>
 #include <bobcat/process>

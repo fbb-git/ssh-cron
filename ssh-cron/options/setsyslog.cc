@@ -1,9 +1,9 @@
 #include "options.ih"
 
-void Options::setSyslog()
+bool Options::setSyslog()
 {
     if (not d_arg.option(0, "syslog"))
-        return;
+        return false;
 
     d_syslog.reset(
                 new SyslogStream(
@@ -12,4 +12,5 @@ void Options::setSyslog()
             );
 
     d_multiStreambuf.insert(*d_syslog);
+    return true;
 }

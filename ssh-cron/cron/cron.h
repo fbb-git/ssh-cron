@@ -15,6 +15,7 @@ namespace FBB
 
 class CronEntry;
 class CronData;
+class Options;
 
 struct Cron: public FBB::Fork
 {

@@ -1,5 +1,6 @@
 #include "options.h"
 
+#include <iostream>
 #include <unistd.h>
 #include <string>
 #include <bobcat/mstream>
@@ -7,6 +8,14 @@
 
 void usage(std::string const &progname);
 
+namespace Icmbuild
+{
+    extern char version[];
+    extern char years[];
+    extern char author[];
+};
+
 using namespace std;
 using namespace FBB;
+using namespace Icmbuild;
 

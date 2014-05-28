@@ -1,12 +1,12 @@
 //                     usage.cc
 
-#include "main.ih"
+#include "options.ih"
 
-void usage(std::string const &progname)
+void Options::usage(std::string const &progname)
 {
     cout << "\n" <<
-    progname << " by " << Icmbuild::author << "\n" <<
-    progname << " V" << Icmbuild::version << " " << Icmbuild::years << "\n"
+    progname << " by " << author << "\n" <<
+    progname << " V" << version << " " << years << "\n"
     "\n"
     "Usage: " << progname << " [options] [crontab]\n"
     "Where:\n"
@@ -17,17 +17,15 @@ void usage(std::string const &progname)
                                                                 "providing\n"
 
     "                         the ssh-keys\n"
-    "                         (default `" << 
-                                        Options::defaultAgent() << "')\n"
+    "                         (default `" << s_defaultAgent << "')\n"
     "      --config (-c) path - config file containing long option "
                                                             "specifications\n"
     "                         (default `$HOME/" <<
-                                    Options::defaultConfigFile() << ")`\n"
+                                    s_defaultConfigFile << ")`\n"
     "      --help (-h)      - provide this help\n"
     "      --ipc-file (-i) path - (C) `path' is the path name of the file\n"
     "                         containing the info used for IPC\n"
-    "                         (default `" <<
-                                        Options::defaultIPCfile() << "')\n"
+    "                         (default `" << s_defaultIPCfile << "')\n"
     "      --list (-l)      - list the currently defined cron-commands\n"
     "                         (the `crontab' file is only used to specify "
                                                             "options)\n"
@@ -39,20 +37,18 @@ void usage(std::string const &progname)
     "                         with the specifications in the crontab-file\n"
     "      --syslog         - (C) write syslog messages\n"
     "      --syslog-facility fac  - (C) fac: syslog facility to use\n"
-    "                         (default `" << 
-                                    Options::defaultSyslogFacility() << "')\n"
+    "                         (default `" << s_defaultSyslogFacility << "')\n"
     "      --syslog-priority pri  - (C) pri: syslog priority to use\n"
-    "                         (default `" << 
-                                    Options::defaultSyslogPriority() << "')\n"
+    "                         (default `" << s_defaultSyslogPriority << "')\n"
     "      --syslog-tag id  - (C) id: identifier prefixed to syslog "
                                                                 "messages\n"
-    "                         (default `" << 
-                                    Options::defaultSyslogIdent() << "')\n"
+    "                         (default `" << s_defaultSyslogIdent << "')\n"
     "      --terminate (-t) - terminate a running " << progname << 
                                                                 " program\n"
     "                         (the `crontab' file is only used to specify "
                                                             "options)\n"
-    "      --verbose        - (C) write additional information\n"
+    "      --verbose        - (C) logs additional information. Implies "
+                                                            "--syslog\n"
     "      --version (-v)   - show version information and terminate\n"
     "\n"
     "   crontab     - crontab-like file specifying crontab commands, and\n"

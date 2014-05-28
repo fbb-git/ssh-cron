@@ -1,7 +1,7 @@
 #include "cron.ih"
 
-Cron::Cron(ostream &stdMsg, CronData const &cronData)
+Cron::Cron(CronData const &cronData)
 :
-    d_stdMsg(stdMsg),
+    d_options(Options::instance()),
     d_cronData(cronData)
 {}

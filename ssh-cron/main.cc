@@ -38,10 +38,10 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hi:l:L:rtv", 
+    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:rtv", 
                         longOptions, longEnd, argc, argv);
     
-    arg.versionHelp(usage, Icmbuild::version, 0);
+    arg.versionHelp(Options::usage, Icmbuild::version, 0);
 
     Daemon daemon;
 
@@ -52,7 +52,9 @@ try
 }
 catch (exception const &exc)
 {
-    cerr << exc.what() << endl;
+    if (exc.what() != to_string(fmsg.id()))
+        cerr << exc.what() << endl;
+    return 1;
 }
 catch (int x)
 {

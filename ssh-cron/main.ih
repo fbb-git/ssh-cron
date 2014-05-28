@@ -2,6 +2,7 @@
 #include <string>
 
 #include <bobcat/argconfig>
+#include <bobcat/mstream>
 
 #include "daemon/daemon.h"
 #include "options/options.h"
@@ -12,8 +13,6 @@ namespace Icmbuild
     extern char years[];
     extern char author[];
 };
-
-void usage(std::string const &progname);
 
 using namespace std;
 using namespace FBB;

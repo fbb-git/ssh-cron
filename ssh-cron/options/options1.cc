@@ -5,13 +5,22 @@ Options::Options()
     d_arg(ArgConfig::instance()),
     d_msg(&d_multiStreambuf)
 {
-    // --help and --version already handled by versionHelp
+
+    // --help and --version already handled by versionHelp, but if nothing
+    // is requested on the command line help is also provided.
+    if (
+        d_arg.nArgs() == 0 && d_arg.nOptions() == 0 && 
+        d_arg.nLongOptions() == 0
+    )
+    {
+        usage(d_arg.basename());
+        throw 0;
+    }
 
     d_noDaemon = d_arg.option(0, "no-daemon");
     d_list = d_arg.option('l');
     d_reload = d_arg.option('r');
     d_terminate = d_arg.option('t');
-
     checkAction();
 
     loadConfigFile();
@@ -33,35 +42,14 @@ Options::Options()
         d_multiStreambuf.insert(d_log);
     }
 
-    setSyslog();
+    bool useSyslog = setSyslog();
 
-
-    if d_verbose = d_arg.option(0, "verbose");
-
-    if (
-        d_arg.nArgs() == 0 && d_arg.nOptions() == 0 && 
-        d_arg.nLongOptions() == 0
-    )
-    {
-        usage(d_arg.basename());
-        throw 0;
-    }
-
-    setSignalMembers();
-    setBoolMembers();
-
-
-    if (not d_verbose)
-        imsg.off();
-
-/////////////////////
-    setupStdMsg();
-
-    if (d_options.daemon())
-        setupDaemonMsg();
+    if (not d_arg.option(0, "verbose"))     // verbose messages appear in the
+        imsg.off();                         // logs
+    else if (useSyslog || not logName.empty())
+        imsg.reset(d_msg);
     else
-        setupNonDaemonMsg();
-
+        wmsg << "--verbose ignored: --syslog or --log not specified" << endl;
 }       
 
 

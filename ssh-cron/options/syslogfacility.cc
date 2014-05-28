@@ -10,7 +10,7 @@ Facility Options::syslogFacility() const
     else
     {
         LinearMap<string, Facility>::const_iterator 
-            iter = s_syslogPriorities.find(option);
+            iter = s_syslogFacilities.find(option);
     
         if (iter == s_syslogFacilities.end())
             fmsg << "syslog facility " << option << " not supported" << endl;
