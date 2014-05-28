@@ -16,12 +16,14 @@ class Daemon: public FBB::Fork
 
     public:
         Daemon();
-        void runParentProcess();
-        void sendSignal();
+        void foreground();          // don't fork, just call the child process
+        void daemonize();           // run the daemon in the background
+        void ipc();                 // do the other commands, involving ipc
 
     private:
-        void checkSyslogParam(char const *label, std::string const &actual, 
-                                                 std::string const &err);
+        void createIPCfile();
+
+
         void noEcho() const;
         pid_t cronPid() const;
 

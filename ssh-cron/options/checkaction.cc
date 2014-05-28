@@ -4,7 +4,7 @@ void Options::checkAction() const
 {
             // only one of these options may be specified
 
-    if (d_list + d_reload + d_terminate + d_noDaemon > 1)
+    if (d_list + d_reload + d_terminate + d_foreground > 1)
     {
         fmsg << "incompatible options:";
 
@@ -17,13 +17,11 @@ void Options::checkAction() const
         if (d_terminate)
             fmsg << " --terminate";
         
-        if (d_noDaemon)
+        if (d_foreground)
             fmsg << " --no-daemon";
 
         fmsg << endl;
     }
-
-fmsg << "ending" << endl;
 
         // if no argument then --list or --terminate are required
     if (d_arg.nArgs() == 0)

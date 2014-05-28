@@ -45,10 +45,13 @@ try
 
     Daemon daemon;
 
-    if (not Options::instance().daemon())
-        daemon.runParentProcess();
+    if (Options::instance().ipc())
+        daemon.ipc();
+    else if (Options::instance().foreground())
+        daemon.foreground();
     else
-        daemon.fork();
+        daemon.daemonize();     
+
 }
 catch (exception const &exc)
 {

@@ -32,7 +32,7 @@ class Options
                                                         d_syslogFacility;
     FBB::LinearMap<std::string, FBB::Priority>::const_iterator 
                                                         d_syslogPriority;
-    bool d_noDaemon;
+    bool d_foreground;
     bool d_list;
     bool d_reload;
     bool d_terminate;
@@ -56,7 +56,8 @@ class Options
 
         Options(Options const &other) = delete;
 
-        bool daemon() const;
+        bool foreground() const;
+        bool ipc() const;
         bool terminate() const;
         bool list() const;
 
@@ -86,9 +87,14 @@ inline std::ostream &Options::msg()
     return d_msg;
 }
 
-inline bool Options::daemon() const
+inline bool Options::foreground() const
 {   
-    return not d_noDaemon;
+    return d_foreground;
+}
+
+inline bool Options::ipc() const
+{   
+    return d_list || d_terminate || d_reload;
 }
 
 inline bool Options::terminate() const

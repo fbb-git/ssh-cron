@@ -17,7 +17,7 @@ Options::Options()
         throw 0;
     }
 
-    d_noDaemon = d_arg.option(0, "no-daemon");
+    d_foreground = d_arg.option(0, "no-daemon");
     d_list = d_arg.option('l');
     d_reload = d_arg.option('r');
     d_terminate = d_arg.option('t');
@@ -38,7 +38,6 @@ Options::Options()
         if (not d_log)
             fmsg << "could not open " << logName << endl;
 
-        d_log.setLevel(0);              // to be removed with bobcat > 3.22.01
         d_multiStreambuf.insert(d_log);
     }
 
