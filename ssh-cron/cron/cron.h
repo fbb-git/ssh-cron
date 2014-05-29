@@ -12,6 +12,7 @@
 namespace FBB
 {
     class DateTime;
+    class SharedMemory;
 }
 
 class CronEntry;
@@ -54,6 +55,9 @@ class Cron: public IPCFunction, public FBB::Fork
 
         static void requestHandler(Cron *cron);
         void handleRequests();      // separate thread
+
+        void list(size_t *index, FBB::SharedMemory &shmem);
+
 };
 
 #endif

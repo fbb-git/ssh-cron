@@ -3,13 +3,17 @@
 
 #include <iosfwd>
 #include <set>
+#include <vector>
 #include <string>
 
 class CronEntry
 {
     friend std::ostream &operator<<(std::ostream &out, CronEntry const &entry);
 
-    size_t              d_nSettings  = 0;
+    size_t              d_begin  = 0;
+    size_t              d_end = 0;
+    std::vector<std::string> const *d_environment;
+
     std::set<size_t>    d_minutes;
     std::set<size_t>    d_hours;
     std::set<size_t>    d_dayOfMonth;
@@ -24,7 +28,8 @@ class CronEntry
             STAR = 100                  // * used to specify time
         };
 
-        void setNsettings(size_t nSettings);
+        void setEnvironment(size_t begin, size_t end, 
+                          std::vector<std::string> const *environment);
         void setCommand(std::string const &src);
 
         void setMinutes(std::set<size_t> &&src);
@@ -45,11 +50,6 @@ class CronEntry
     private:
         static void showSet(std::ostream &out, std::set<size_t> const &nrSet);
 };
-
-inline void CronEntry::setNsettings(size_t nSettings)
-{
-    d_nSettings = nSettings;
-}
 
 inline void CronEntry::setCommand(std::string const &src)
 {
@@ -83,7 +83,7 @@ inline void CronEntry::setDayOfWeek(std::set<size_t> &&src)
 
 inline size_t CronEntry::nSettings() const
 {
-    return d_nSettings;
+    return d_end;
 }
 
 inline std::string const &CronEntry::command() const

@@ -11,13 +11,13 @@ class CronData
 {
     std::vector<std::string> d_environment;
     std::vector<CronEntry> d_cronEntries;
+    size_t d_lastSize = 0;
 
     CronEntry d_next;
 
     std::string d_entryName;
     size_t d_entryBegin = 0;
     size_t d_entryEnd = 60;
-
 
     std::set<size_t> d_wip;
 
@@ -50,9 +50,10 @@ class CronData
         void setEnvVar(std::string const &var, std::string const &value);
 
         size_t lineNr() const;
+        size_t size() const;
 
         std::vector<CronEntry> const &cronEntries() const;
-        size_t nCronCommands() const;
+        CronEntry const &operator[](size_t index) const;
 
         std::vector<std::string> const &environment() const;
 
@@ -71,12 +72,17 @@ inline size_t CronData::lineNr() const
     return d_lineNr;
 }
 
+inline CronEntry const &CronData::operator[](size_t index) const
+{
+    return d_cronEntries[index];
+}
+
 inline std::vector<CronEntry> const &CronData::cronEntries() const
 {
     return d_cronEntries;
 }
-        
-inline size_t CronData::nCronCommands() const
+
+inline size_t CronData::size() const
 {
     return d_cronEntries.size();
 }

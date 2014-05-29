@@ -2,8 +2,15 @@
 
 ostream &operator<<(ostream &out, CronEntry const &entry)
 {
-    if (entry.d_nSettings > 0)
-        out << "using " << entry.d_nSettings << " env. settings:\n";
+    for 
+    (
+        auto begin = entry.d_environment->begin() + entry.d_begin,
+             end   = entry.d_environment->begin() + entry.d_end;
+
+            begin != end;
+                ++begin
+    )
+        out << *begin << '\n';
 
     CronEntry::showSet(out, entry.d_minutes);
     out << "    ";

@@ -14,55 +14,45 @@ void Cron::handleRequests()
     
     cond.lock();
 
+    size_t index;       // index for CronData elements
+
     while (true)
     {
-        imsg << "server: waiting for requests" << endl;
-
         cond.wait();
 
         Function request;
         shmem.read(sizeof(SharedCondition), &request);
 
-        imsg << "server: got request " << request << endl;
-
         switch (request)
         {
             case LIST:
             {
+                index = 0;  
                 request = MORE;
 
                 shmem.write(sizeof(SharedCondition), &request);
-
-                imsg << "server: answers request " << request << 
-                        ", now at offset " << shmem.offset() << endl;
-
-                string text("hello world");
-                size_t length = text.length();
-                shmem.write(&length);
-
-                imsg << "server: writing " << length << " bytes" << 
-                        ", now at offset " << shmem.offset() << endl;
-
-                shmem.write(text.c_str(), text.length());
-
-                imsg << "server: wrote " << length << " bytes" << endl;
+                list(&index, shmem);
             }
             break;
         
             case MORE:
-                request = DONE;
-                shmem.write(sizeof(SharedCondition), &request);
-                imsg << "server: answers request " << request << endl;
+                if (index != d_cronData.size())
+                    list(&index, shmem);
+                else
+                {
+                    request = DONE;
+                    shmem.write(sizeof(SharedCondition), &request);
+                }
             break;
             
             default:
             break;
         }
-        imsg << "server: notifies the client" << endl;
         shmem.seek(0);
         cond.notify();
     }
 }
+
 
 
 

@@ -14,13 +14,13 @@ bool Daemon::listInfo(SharedCondition &cond)
     imsg << "client: shmem at offset " << d_shmem.offset() << endl;
 
 
-    size_t size = 0;                        // read the amount of info
+    streamsize size = 0;                    // read the amount of info
 
     d_shmem.read(&size);
 
     imsg << "client: " << size << " bytes are available" << endl;
 
-    if (size != 11)
+    if (size + d_shmem.offset() > d_shmem.maxOffset())
         return false;
 
     char *buffer = new char[size];
