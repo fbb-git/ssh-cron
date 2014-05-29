@@ -9,12 +9,14 @@
 #include <bobcat/multistreambuf>
 #include <bobcat/syslogstream>
 
+#include "../ipcfunction/ipcfunction.h"
+
 namespace FBB
 {
     class SyslogStream;
 }
 
-class Options
+class Options: public IPCFunction
 {
     FBB::ArgConfig &d_arg;
 
@@ -37,6 +39,8 @@ class Options
     bool d_list;
     bool d_reload;
     bool d_terminate;
+
+    Function d_ipcFunction = NONE;
 
     static Options *s_options;
 
@@ -61,9 +65,11 @@ class Options
         bool foreground() const;
         bool daemon() const;
         bool ipc() const;
-        bool terminate() const;
-        bool list() const;
+//        bool terminate() const;
+//        bool list() const;
         bool cronfile() const;
+
+        Function ipcFunction() const;
 
         std::string const &agent() const;
         std::string const &basename() const;
@@ -107,19 +113,24 @@ inline bool Options::ipc() const
     return d_list || d_terminate || d_reload;
 }
 
-inline bool Options::terminate() const
-{   
-    return d_terminate;
-}
-
-inline bool Options::list() const
-{   
-    return d_list;
-}
+//inline bool Options::terminate() const
+//{   
+//    return d_terminate;
+//}
+//
+//inline bool Options::list() const
+//{   
+//    return d_list;
+//}
 
 inline bool Options::cronfile() const
 {   
     return d_arg.nArgs();
+}
+
+inline IPCFunction::Function Options::ipcFunction() const
+{   
+    return d_ipcFunction;
 }
 
 inline std::string const &Options::agent() const

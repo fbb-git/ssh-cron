@@ -2,7 +2,18 @@
 
 void Daemon::ipc()
 {
-    if (d_options.terminate())
-        terminate();
+    switch (d_options.ipcFunction())
+    {
+        case TERMINATE:
+            terminate();
+        break;
+
+        case LIST:
+            list();
+        break;
+
+        default:
+        break;
+    }
 }
 

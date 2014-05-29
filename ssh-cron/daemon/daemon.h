@@ -5,12 +5,18 @@
 #include <bobcat/sharedmemory>
 #include <bobcat/signal>
 
+#include "../ipcfunction/ipcfunction.h"
 #include "../crondata/crondata.h"
 #include "../cron/cron.h"
 
 class Options;
 
-class Daemon: public FBB::Fork, public FBB::SignalHandler
+namespace FBB
+{
+    class SharedCondition;
+}
+
+class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
 {
     Options &d_options;
     CronData d_cronData;
@@ -35,6 +41,11 @@ class Daemon: public FBB::Fork, public FBB::SignalHandler
         void signalHandler(size_t signum)   override;
 
         void terminate() const;
+        size_t getSharedMemory();
+
+        void list();
+        void request(FBB::SharedCondition &cond, Function function);
+        bool listInfo(FBB::SharedCondition &cond);
 };
         
 #endif

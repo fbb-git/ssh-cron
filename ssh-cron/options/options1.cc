@@ -19,9 +19,15 @@ Options::Options()
     
     d_foreground = d_arg.option(0, "no-daemon");
 
-    d_list = d_arg.option('l');
-    d_reload = d_arg.option('r');
-    d_terminate = d_arg.option('t');
+    if ((d_list = d_arg.option('l')))
+        d_ipcFunction = LIST;
+
+    if ((d_reload = d_arg.option('r')))
+        d_ipcFunction = RELOAD;
+
+    if ((d_terminate = d_arg.option('t')))
+        d_ipcFunction = TERMINATE;
+
     checkAction();
 
     if (d_arg.option('s'))

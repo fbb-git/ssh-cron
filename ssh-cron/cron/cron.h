@@ -7,6 +7,8 @@
 #include <bobcat/fork>
 #include <bobcat/pipe>
 
+#include "../ipcfunction/ipcfunction.h"
+
 namespace FBB
 {
     class DateTime;
@@ -16,30 +18,21 @@ class CronEntry;
 class CronData;
 class Options;
 
-struct Cron: public FBB::Fork
+class Cron: public IPCFunction, public FBB::Fork
 {
-    enum Function
-    {
-        TERMINATE,
-        LIST,
-        RELOAD,
-        DONE
-    };
+    enum EndOfRun
+    {};
 
-    private:
-        enum EndOfRun
-        {};
+    Options &d_options;
+    CronData const &d_cronData;
 
-        Options &d_options;
-        CronData const &d_cronData;
+    FBB::Pipe d_childInput;     // child reads this
     
-        FBB::Pipe d_childInput;     // child reads this
-        
-        std::ostream *d_toChild = 0;
+    std::ostream *d_toChild = 0;
 
-        volatile bool d_run = true;     // set to false by stop
+    volatile bool d_run = true;     // set to false by stop
 
-        static std::string s_agent;
+    static std::string s_agent;
     
     public:
         Cron(CronData const &cronData);
@@ -60,7 +53,7 @@ struct Cron: public FBB::Fork
         static bool specified(size_t value, std::set<size_t> const &request);
 
         static void requestHandler(Cron *cron);
-        void handleRequests();
+        void handleRequests();      // separate thread
 };
 
 #endif

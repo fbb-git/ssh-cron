@@ -13,7 +13,6 @@
 #include <bobcat/argconfig>
 #include <bobcat/datetime>
 #include <bobcat/exception>
-#include <bobcat/ifdstream>
 #include <bobcat/mstream>
 #include <bobcat/ofdstream>
 #include <bobcat/process>
