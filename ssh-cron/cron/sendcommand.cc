@@ -2,7 +2,7 @@
 
 void Cron::sendCommand(string line)
 {
-    imsg << "Sending command `" << line << '\'' << endl;
+    imsg << "command: " << line << '\n';
 
     *d_toChild << line << endl;
 

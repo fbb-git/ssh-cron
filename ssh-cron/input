@@ -8,5 +8,5 @@ PATH = /usr/local/bin:/usr/bin
 # */15   0   *   *   *    
 # 90   25   32   Jan,Feb   Sun   /usr/bin/hello world
 
-# *   *   *   *   *   command to execute
+*   *   *   *   *   echo hello world
 

@@ -60,6 +60,7 @@ struct Cron: public FBB::Fork
         void childProcess()         override;
         void parentProcess()        override;
 
+        void defineRunFunction();
         void sendCommand(std::string line);
         void cronLoop();
         void runCronJobs();

@@ -7,8 +7,9 @@ void Cron::execute(CronEntry const &entry)
     for (size_t idx = 0, end = entry.nSettings(); idx != end; ++idx)
         command += d_cronData.environment()[idx] + ';';
 
-    command += entry.command() + ")&";
+    command += "_run_ " + entry.command() + ")&";
 
-    imsg << command << '\n';
+    d_options.msg() << entry.command() << endl;
+
     sendCommand(command);
 }

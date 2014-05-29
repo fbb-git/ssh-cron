@@ -23,6 +23,7 @@ namespace   // the anonymous namespace can be used here
         Arg::LongOption("agent", Arg::Required),
         Arg::LongOption("ipc-file", 'i'),
         Arg::LongOption("log",  'L'),
+        Arg::LongOption("mailer", 'm'),
 
         Arg::LongOption("syslog", Arg::None),
         Arg::LongOption("syslog-facility", Arg::Required),
@@ -38,7 +39,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:rtv", 
+    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:mrtv", 
                         longOptions, longEnd, argc, argv);
         arg.versionHelp(Options::usage, Icmbuild::version, 0);
 

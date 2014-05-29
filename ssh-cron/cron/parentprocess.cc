@@ -24,6 +24,7 @@ void Cron::parentProcess()
 
     try
     {
+        defineRunFunction();
         sendCommand("/usr/bin/ssh-add");
         cronLoop();
     }

@@ -27,6 +27,7 @@ class Options
 
     std::string d_agent;
     std::string d_IPCfile;
+    std::string d_mailer;
 
     FBB::LinearMap<std::string, FBB::Facility>::const_iterator 
                                                         d_syslogFacility;
@@ -45,6 +46,7 @@ class Options
     static char const       s_defaultConfigFile[];
     static char const       s_defaultIPCfile[];
     static char const       s_defaultSyslogIdent[];
+    static char const       s_defaultMailer[];
 
     static FBB::LinearMap<std::string, FBB::Facility> const 
                                                        s_syslogFacilities;
@@ -65,6 +67,7 @@ class Options
         std::string const &agent() const;
         std::string const &basename() const;
         std::string const &ipcFile() const;
+        std::string const &mailer() const;
 
         std::ostream &msg();
 
@@ -126,6 +129,11 @@ inline std::string const &Options::basename() const
 inline std::string const &Options::ipcFile() const
 {   
     return d_IPCfile;
+}
+
+inline std::string const &Options::mailer() const
+{   
+    return d_mailer;
 }
 
 #endif

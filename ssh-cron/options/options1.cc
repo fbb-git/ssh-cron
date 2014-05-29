@@ -43,6 +43,9 @@ Options::Options()
         d_multiStreambuf.insert(d_log);
     }
 
+    if (not d_arg.option(&d_mailer, 'm'))
+        d_mailer = s_defaultMailer;
+
     bool useSyslog = setSyslog();
 
     if (not d_arg.option(0, "verbose"))     // verbose messages appear in the
