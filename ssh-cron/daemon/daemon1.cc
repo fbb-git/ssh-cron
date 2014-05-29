@@ -5,6 +5,9 @@ Daemon::Daemon()
     d_options(Options::instance()),
     d_cron(d_cronData)
 {
+    if (not d_options.cronfile())
+        return;
+
     Parser parser(d_cronData);
     parser.parse();
 

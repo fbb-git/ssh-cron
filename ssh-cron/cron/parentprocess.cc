@@ -6,13 +6,9 @@
 void Cron::parentProcess()
 {
         // Set up the parent's sides of the pipes
-    IFdStream fromChild(d_childOutput.readOnly());
     OFdStream toChild(d_childInput.writeOnly());
 
-    d_fromChild = &fromChild;
     d_toChild = &toChild;
-
-    d_selector.addReadFd(d_childOutput.readFd());
 
     thread requestThread;
 
@@ -22,17 +18,21 @@ void Cron::parentProcess()
         requestThread.detach();         // ends when main() ends
     }
 
-    try
-    {
-        defineRunFunction();
-        sendCommand("/usr/bin/ssh-add");
-        cronLoop();
-    }
-    catch (Leave)
-    {}
+    defineRunFunction();
+    sendCommand("/usr/bin/ssh-add");
 
-    imsg << "child returns " << waitForChild() << endl;
+    cronLoop();
+
+    if (int status = waitForChild())
+        d_options.msg() << "child process " << pid() << 
+                            " unexpectedly returned " << status << endl;
+    else
+        imsg << "child process " << pid() << " ended normally" << endl;
 }
+
+
+
+
 
 
 

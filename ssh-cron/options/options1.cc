@@ -5,7 +5,6 @@ Options::Options()
     d_arg(ArgConfig::instance()),
     d_msg(&d_multiStreambuf)
 {
-
     // --help and --version already handled by versionHelp, but if nothing
     // is requested on the command line help is also provided.
     if (
@@ -24,6 +23,14 @@ Options::Options()
     d_reload = d_arg.option('r');
     d_terminate = d_arg.option('t');
     checkAction();
+
+    if (d_arg.option('s'))
+    {
+        if (d_foreground)
+            d_multiStreambuf.insert(cout);
+        else
+            wmsg << "--stdout needs --no-daemon" << endl;
+    }
 
     loadConfigFile();
 

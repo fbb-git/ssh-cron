@@ -3,5 +3,11 @@
 void Cron::childRedirections()
 {
     d_childInput.readFrom(STDIN_FILENO);
-    d_childOutput.writtenBy(STDOUT_FILENO);
+
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+
+    open("/dev/null", O_WRONLY);        // reopen cout
+    open("/dev/null", O_WRONLY);        // reopen cerr
+
 }

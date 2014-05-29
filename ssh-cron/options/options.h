@@ -63,6 +63,7 @@ class Options
         bool ipc() const;
         bool terminate() const;
         bool list() const;
+        bool cronfile() const;
 
         std::string const &agent() const;
         std::string const &basename() const;
@@ -114,6 +115,11 @@ inline bool Options::terminate() const
 inline bool Options::list() const
 {   
     return d_list;
+}
+
+inline bool Options::cronfile() const
+{   
+    return d_arg.nArgs();
 }
 
 inline std::string const &Options::agent() const

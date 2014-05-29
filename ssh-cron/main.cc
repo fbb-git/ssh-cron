@@ -13,6 +13,7 @@ namespace   // the anonymous namespace can be used here
         Arg::LongOption("list", 'l'),
         Arg::LongOption("no-daemon", Arg::None),
         Arg::LongOption("reload", 'r'),
+        Arg::LongOption("stdout", 's'),
         Arg::LongOption("terminate", 't'),
 
         Arg::LongOption("config", 'c'),
@@ -39,7 +40,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:mrtv", 
+    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:m:rstv", 
                         longOptions, longEnd, argc, argv);
         arg.versionHelp(Options::usage, Icmbuild::version, 0);
 

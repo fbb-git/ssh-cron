@@ -38,6 +38,8 @@ void Options::usage(std::string const &progname)
     "      --no-daemon      - do not run as a daemon\n"
     "      --reload (-r)    - reload a running " << progname << " program\n"
     "                         with the specifications in the crontab-file\n"
+    "      --stdout (-s)    - logged messages are also written to stdout\n"
+    "                         (only in combination with --no-daemon)\n"
     "      --syslog         - (C) write syslog messages\n"
     "      --syslog-facility fac  - (C) fac: syslog facility to use\n"
     "                         (default `" << s_defaultSyslogFacility << "')\n"

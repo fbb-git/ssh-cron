@@ -13,7 +13,7 @@ void Daemon::terminate() const
         throw Exception() << "Can't read the remote process ID from " <<
                                 Options::instance().ipcFile();
 
-    imsg << "terminating process " << pid << '\n';
+    imsg << "terminating process " << pid << endl;
     kill(pid, SIGTERM);
 }
 

@@ -6,7 +6,6 @@
 
 #include <bobcat/fork>
 #include <bobcat/pipe>
-#include <bobcat/selector>
 
 namespace FBB
 {
@@ -30,20 +29,12 @@ struct Cron: public FBB::Fork
     private:
         enum EndOfRun
         {};
-    
-        enum Leave 
-        {};
-    
+
         Options &d_options;
         CronData const &d_cronData;
     
         FBB::Pipe d_childInput;     // child reads this
-        FBB::Pipe d_childOutput;    // child writes this
-    
-    
-        FBB::Selector d_selector;
         
-        std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
         std::ostream *d_toChild = 0;
 
         volatile bool d_run = true;     // set to false by stop
