@@ -26,11 +26,6 @@ void Cron::handleRequests()
         {
             default:
             break;
-
-            case TERMINATE:
-                d_run = false;
-                shmem.kill();
-            return;
         }
     }
 }

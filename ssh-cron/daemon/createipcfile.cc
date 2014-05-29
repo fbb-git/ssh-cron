@@ -1,5 +1,7 @@
 #include "daemon.ih"
 
+// called from daemonize()
+    
 void Daemon::createIPCfile()
 {
     string const &ipcFile = d_options.ipcFile();

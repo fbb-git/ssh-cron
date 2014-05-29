@@ -46,8 +46,7 @@ struct Cron: public FBB::Fork
         std::istream *d_fromChild = 0;  // not allocated, set by parentProcess
         std::ostream *d_toChild = 0;
 
-        volatile bool d_run = true;     // set to false by requestHandler
-        volatile bool d_interrupted = false;
+        volatile bool d_run = true;     // set to false by stop
 
         static std::string s_agent;
     

@@ -1,5 +1,8 @@
 #include "cron.ih"
 
+// stop() handles the termination of the child process
+// daemon/terminate ends the process via --terminate
+
 void Cron::parentProcess()
 {
         // Set up the parent's sides of the pipes
@@ -16,24 +19,16 @@ void Cron::parentProcess()
     if (d_options.daemon())
     {
         requestThread = thread(requestHandler, this);
-        requestThread.detach();
+        requestThread.detach();         // ends when main() ends
     }
 
     try
     {
         sendCommand("/usr/bin/ssh-add");
         cronLoop();
-
-        sendCommand("exit");
     }
     catch (Leave)
     {}
-
-//    if (d_options.daemon())
-//    {
-//        imsg << "waiting for the thread" << endl;
-//
-//        requestThread.join();
 
     imsg << "child returns " << waitForChild() << endl;
 }
