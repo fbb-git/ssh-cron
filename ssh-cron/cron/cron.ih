@@ -17,7 +17,7 @@
 #include <bobcat/ofdstream>
 #include <bobcat/process>
 #include <bobcat/sharedcondition>
-#include <bobcat/sharedmemory>
+#include <bobcat/sharedstream>
 
 #include "../crondata/crondata.h"
 #include "../cronentry/cronentry.h"

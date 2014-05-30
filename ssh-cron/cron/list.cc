@@ -1,25 +1,15 @@
 #include "cron.ih"
 
-void Cron::list(size_t *index, SharedMemory &shmem)
+void Cron::list(size_t *index, SharedStream &sharedStream)
 {
-    shmem.seek(sizeof(size_t), ios::cur);
-
-    streamsize length = 0;
-
     for (; *index != d_cronData.size(); ++*index)
     {
-        ostringstream out;
+        streamsize lastOK = sharedStream.tellp();
 
-        out << d_cronData[*index] << endl;
-
-        streamsize outLen = out.str().length();
-
-        if (shmem.offset() + outLen > shmem.maxOffset())
+        if (not (sharedStream << d_cronData[*index] << endl))
+        {
+            sharedStream.truncate(lastOK);
             break;
-
-        length += outLen;
-        shmem.write(out.str().data(), outLen);
+        }
     }
-
-    shmem.write(sizeof(SharedCondition) + sizeof(Function), &length);
 }

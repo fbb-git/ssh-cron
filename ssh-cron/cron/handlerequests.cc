@@ -9,8 +9,9 @@ void Cron::handleRequests()
 
     ipcFile >> shmemId;
 
-    SharedMemory shmem(shmemId);
-    SharedCondition &cond = SharedCondition::attach(shmem);
+    SharedStream sharedStream(shmemId);
+
+    SharedCondition &cond = sharedStream.attachSharedCondition();
     
     cond.lock();
 
@@ -21,7 +22,8 @@ void Cron::handleRequests()
         cond.wait();
 
         Function request;
-        shmem.read(sizeof(SharedCondition), &request);
+        
+        sharedStream.read(sizeof(SharedCondition), &request);
 
         switch (request)
         {
@@ -30,30 +32,26 @@ void Cron::handleRequests()
                 index = 0;  
                 request = MORE;
 
-                shmem.write(sizeof(SharedCondition), &request);
-                list(&index, shmem);
+                sharedStream.write(sizeof(SharedCondition), &request);
+                list(&index, sharedStream);
             }
             break;
         
             case MORE:
                 if (index != d_cronData.size())
-                    list(&index, shmem);
+                    list(&index, sharedStream);
                 else
                 {
                     request = DONE;
-                    shmem.write(sizeof(SharedCondition), &request);
+                    sharedStream.write(sizeof(SharedCondition), &request);
                 }
             break;
             
             default:
             break;
         }
-        shmem.seek(0);
+        sharedStream.seekg(0);
         cond.notify();
     }
 }
-
-
-
-
 
