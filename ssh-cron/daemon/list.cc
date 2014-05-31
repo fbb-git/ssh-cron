@@ -4,11 +4,15 @@ void Daemon::list()
 {
     imsg << "--list requested" << endl;
 
-    size_t pid = getSharedMemory();
+    IPCInfo info = getIPCInfo();
 
-    SharedCondition &cond = SharedCondition::attach(d_shmem);
+    SharedStream sharedStream(info.shmemID);
+
+    SharedCondition cond(sharedStream.attachSharedCondition(0));
     
-    request(cond, LIST);        // returns at shmem offset 0 (= at cond)
+    cond.lock();
+    Cron::writeRequest(sharedStream, LIST);
+
     do
     {
         imsg << "client: notifies the server" << endl;
@@ -19,13 +23,13 @@ void Daemon::list()
         if (status == cv_status::timeout)
         {
             cond.unlock();
-            fmsg << "--list request: no response from process " << pid << 
-                                                                        endl;
+            fmsg << "--list request: no response from process " << 
+                        info.pid << endl;
         }
         imsg << "client: received a reply" << endl;
 
     }
-    while (listInfo(cond));     // process the reply
+    while (listInfo(sharedStream));     // process the reply
 
     cond.unlock();              // allow the server to wait again
 }

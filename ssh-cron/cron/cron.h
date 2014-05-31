@@ -40,6 +40,9 @@ class Cron: public IPCFunction, public FBB::Fork
         void runParentProcess();
         void stop(size_t signal);
 
+        static Function readRequest(std::istream &in);
+        static void writeRequest(std::ostream &out, Function value);
+
     private:
         void childRedirections()    override;
         void childProcess()         override;
@@ -56,7 +59,8 @@ class Cron: public IPCFunction, public FBB::Fork
         static void requestHandler(Cron *cron);
         void handleRequests();      // separate thread
 
-        void list(size_t *index, FBB::SharedStream &sharedStream);
+        void list(size_t *index, std::streamsize offset,
+                  FBB::SharedStream &sharedStream);
 
 };
 

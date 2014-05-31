@@ -14,10 +14,13 @@ class Options;
 namespace FBB
 {
     class SharedCondition;
+    class SharedStream;
 }
 
 class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
 {
+    struct IPCInfo;
+
     Options &d_options;
     CronData d_cronData;
     Cron d_cron;
@@ -41,11 +44,10 @@ class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
         void signalHandler(size_t signum)   override;
 
         void terminate() const;
-        size_t getSharedMemory();
+        IPCInfo getIPCInfo();
 
         void list();
-        void request(FBB::SharedCondition &cond, Function function);
-        bool listInfo(FBB::SharedCondition &cond);
+        bool listInfo(std::istream &in);
 };
         
 #endif

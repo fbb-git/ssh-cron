@@ -11,16 +11,14 @@ void Daemon::daemonize()
     
     d_shmem = SharedMemory(1, SharedMemory::kB);// create the shared memory
 
-    streamsize pos;                             // create the shared condition
-    SharedCondition::create(&pos, d_shmem);
-
-    if (pos != 0)
+    try
     {
-        d_shmem.kill();
+        SharedCondition::create(d_shmem);  // create the shared condition
+    }
+    catch (exception const &exc)
+    {
         unlink(ipcFile.c_str());
-
-        fmsg << "Daemon::daemonize internal error: "
-                                        "SharedCondition not at 0" << endl;
+        throw;
     }
 
     fork();

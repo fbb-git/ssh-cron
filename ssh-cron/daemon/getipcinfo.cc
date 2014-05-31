@@ -1,19 +1,17 @@
 #include "daemon.ih"
 
-size_t Daemon::getSharedMemory()
+Daemon::IPCInfo Daemon::getIPCInfo()
 {
     ifstream ipcFile;
     Exception::open(ipcFile, Options::instance().ipcFile());
 
-    size_t shmemID;
-    size_t pid;
+    IPCInfo info;
 
-    if (not (ipcFile >> shmemID >> pid))
+    if (not (ipcFile >> info.shmemID >> info.pid))
         throw Exception() << "Can't read the Shared Memory ID from " <<
                                 Options::instance().ipcFile();
 
-    imsg << "shared memory ID: " << shmemID << endl;
+    imsg << "shared memory ID: " << info.shmemID << endl;
 
-    d_shmem = SharedMemory(shmemID);
-    return pid;
+    return info;
 }

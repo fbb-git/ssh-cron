@@ -4,14 +4,11 @@ void Cron::handleRequests()
 {
     ifstream ipcFile;
     Exception::open(ipcFile, Options::instance().ipcFile());
-
     int shmemId;
-
     ipcFile >> shmemId;
 
     SharedStream sharedStream(shmemId);
-
-    SharedCondition &cond = sharedStream.attachSharedCondition();
+    SharedCondition cond(sharedStream.attachSharedCondition());
     
     cond.lock();
 
@@ -21,36 +18,31 @@ void Cron::handleRequests()
     {
         cond.wait();
 
-        Function request;
+        Function request = readRequest(sharedStream);
         
-        sharedStream.read(sizeof(SharedCondition), &request);
+        streamsize writeOffset = sharedStream.tellg();
 
         switch (request)
         {
             case LIST:
             {
                 index = 0;  
-                request = MORE;
+                writeRequest(sharedStream, MORE);
 
-                sharedStream.write(sizeof(SharedCondition), &request);
-                list(&index, sharedStream);
+                list(&index, writeOffset, sharedStream);
             }
             break;
         
             case MORE:
-                if (index != d_cronData.size())
-                    list(&index, sharedStream);
+                if (index == d_cronData.size())
+                    writeRequest(sharedStream, DONE);
                 else
-                {
-                    request = DONE;
-                    sharedStream.write(sizeof(SharedCondition), &request);
-                }
+                    list(&index, writeOffset, sharedStream);
             break;
             
             default:
             break;
         }
-        sharedStream.seekg(0);
         cond.notify();
     }
 }
