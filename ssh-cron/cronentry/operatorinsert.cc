@@ -16,19 +16,8 @@ ostream &operator<<(ostream &out, CronEntry const &entry)
     if (envVars)                // separate env. vars from command(s)
         out.put('\n');
 
-    CronEntry::showSet(out, entry.d_minutes);
-    out << "    ";
+    entry.insert(out);
 
-    CronEntry::showSet(out, entry.d_hours);
-    out << "    ";
-
-    CronEntry::showSet(out, entry.d_dayOfMonth);
-    out << "    ";
-
-    CronEntry::showSet(out, entry.d_monthOfYear);
-    out << "    ";
-
-    CronEntry::showSet(out, entry.d_dayOfWeek);
-    return out << "    " << entry.d_command;
+    return out;
 }
 

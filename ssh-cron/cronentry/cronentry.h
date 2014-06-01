@@ -47,6 +47,8 @@ class CronEntry
         std::set<size_t> const &monthOfYear() const;
         std::set<size_t> const &dayOfWeek() const;
 
+        std::ostream &insert(std::ostream &out) const;
+
     private:
         static void showSet(std::ostream &out, std::set<size_t> const &nrSet);
 };

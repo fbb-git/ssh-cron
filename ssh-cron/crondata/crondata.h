@@ -9,6 +9,9 @@
 
 class CronData
 {
+    friend 
+        std::ostream &operator<<(std::ostream &out, CronData const &cronData);
+
     std::vector<std::string> d_environment;
     std::vector<CronEntry> d_cronEntries;
     size_t d_lastSize = 0;
@@ -21,7 +24,8 @@ class CronData
 
     std::set<size_t> d_wip;
 
-    std::vector<std::string> d_names;
+    std::vector<std::string> d_names;   // names used for time specifications
+                                        // at a cron-job line
 
     size_t d_lineNr;
     bool d_all = false;
@@ -65,6 +69,8 @@ class CronData
         void invalidRange(size_t first, size_t last) const;
         void outOfRange(size_t nr);
         void addCronCommand();
+            
+        std::ostream &insert(std::ostream &out) const;
 };
 
 inline size_t CronData::lineNr() const
@@ -90,6 +96,11 @@ inline size_t CronData::size() const
 inline std::vector<std::string> const &CronData::environment() const
 {
     return d_environment;
+}
+
+inline std::ostream &operator<<(std::ostream &out, CronData const &cronData)
+{
+    return cronData.insert(out);
 }
         
 #endif
