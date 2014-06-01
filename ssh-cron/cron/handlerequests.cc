@@ -26,9 +26,8 @@ void Cron::handleRequests()
         {
             case LIST:
             {
-                index = 0;  
+                index = 0;
                 writeRequest(sharedStream, MORE);
-
                 list(&index, writeOffset, sharedStream);
             }
             break;

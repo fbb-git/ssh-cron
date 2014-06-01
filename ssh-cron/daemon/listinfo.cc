@@ -4,14 +4,22 @@ bool Daemon::listInfo(istream &in)
 {
     Function function = Cron::readRequest(in);
 
-    imsg << "client: received function " << function << endl;
+    imsg << "daemon: received function " << function << endl;
 
-    if (function < NONE || function == DONE || function > TERMINATE)
+    if (function == DONE)
         return false;
 
+    if (function > TERMINATE)
+    {
+        d_options.msg() << 
+                "daemon: received corrupted function request, value = " <<
+                function << endl;
+        return false;
+    }
+        
     string line;
     while (getline(in, line))
-        cout << line;
+        cout << line << '\n';
 
     return true;
 }

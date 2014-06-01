@@ -4,6 +4,9 @@ void Cron::list(size_t *index, streamsize offset, SharedStream &out)
 {
     out.seekp(offset);
 
+    if (*index == 0)
+        out.put('\n');
+
     for (; *index != d_cronData.size(); ++*index)
     {
         streamsize lastOK = out.tellp();
@@ -11,7 +14,8 @@ void Cron::list(size_t *index, streamsize offset, SharedStream &out)
         if (not (out << d_cronData[*index] << endl))
         {
             out.truncate(lastOK);
-            break;
+            return;
         }
     }
+    out << endl;
 }

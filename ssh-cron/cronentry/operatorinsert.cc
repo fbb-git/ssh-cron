@@ -2,15 +2,19 @@
 
 ostream &operator<<(ostream &out, CronEntry const &entry)
 {
-    for 
-    (
-        auto begin = entry.d_environment->begin() + entry.d_begin,
-             end   = entry.d_environment->begin() + entry.d_end;
+    auto begin = entry.d_environment->begin() + entry.d_begin;
+    auto end   = entry.d_environment->begin() + entry.d_end;
 
-            begin != end;
-                ++begin
-    )
-        out << *begin << '\n';
+    bool envVars = begin != end;
+
+    if (envVars && entry.d_begin > 0)   // separate previous command list by
+        out.put('\n');                  // empty line
+
+    for ( ; begin != end; ++begin)
+        out << "Envvar: " << *begin << '\n';
+
+    if (envVars)                // separate env. vars from command(s)
+        out.put('\n');
 
     CronEntry::showSet(out, entry.d_minutes);
     out << "    ";

@@ -87,6 +87,9 @@ itemization(
         currently stored commands and environment definitions.
     )
 
+Shell control characters (like redirection symbols) in command
+specifications should be escaped. E.g., tt(echo hello world \> /dev/null).
+
 The user originally providing the passphrase may leave the system, and the
 daemon continues to performs its duties. If, in the meantime, the computer is
 broken into, the hacker may find the ssh keys, but will not be able to use

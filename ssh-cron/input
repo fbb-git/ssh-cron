@@ -2,11 +2,18 @@
     # comment
 
 PATH = /usr/local/bin:/usr/bin
-
+SSH-CRON = ssh-cron
 # min hr day-of-month month-of-year day-of-week  cmnd
 
 # */15   0   *   *   *    
 # 90   25   32   Jan,Feb   Sun   /usr/bin/hello world
 
-*   *   *   *   *   echo hello world
+*   *   *   *   *   echo hello world \> /dev/null
+0   0   1   1   0   noaction
+
+MORE="additional var"
+
+0   0   1   1   0   noaction
+
+
 

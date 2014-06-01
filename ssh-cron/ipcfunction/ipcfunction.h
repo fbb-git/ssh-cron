@@ -3,7 +3,7 @@
 
 struct IPCFunction
 {
-    enum Function
+    enum Function: unsigned int
     {
         NONE,
         DONE,
