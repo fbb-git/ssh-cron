@@ -15,7 +15,7 @@ void Daemon::list()
 
     do
     {
-        imsg << "client: notifies the server" << endl;
+        imsg << d_options.basename() << ": notifying the daemon" << endl;
         cond.notify();          // notify the server (waiting remote process)
 
                                 // now wait for the answer
@@ -26,7 +26,7 @@ void Daemon::list()
             fmsg << "--list request: no response from process " << 
                         info.pid << endl;
         }
-        imsg << "client: received a reply" << endl;
+        imsg << d_options.basename() << ": received a reply" << endl;
 
     }
     while (listInfo(sharedStream));     // process the reply
