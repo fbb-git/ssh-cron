@@ -8,7 +8,10 @@ Daemon::Daemon()
     if (not d_options.cronfile())
         return;
 
-    Parser parser(d_cronData);
+    ifstream in;
+    Exception::open(in, ArgConfig::instance()[0]);
+
+    Parser parser(in, d_cronData);
     parser.parse();
 
     if (d_cronData.size() == 0)

@@ -19,7 +19,7 @@ class Parser: public ParserBase
     Scanner d_scanner;
 
     public:
-        Parser(CronData &cronData);
+        Parser(std::istream &in, CronData &cronData);
         int parse();
 
     private:

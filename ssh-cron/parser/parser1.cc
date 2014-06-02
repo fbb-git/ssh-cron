@@ -1,7 +1,7 @@
 #include "parser.ih"
 
-Parser::Parser(CronData &cronData)
+Parser::Parser(istream &in, CronData &cronData)
 :
     d_cronData(cronData),
-    d_scanner(ArgConfig::instance()[0], "-")
+    d_scanner(in)
 {}
