@@ -29,6 +29,7 @@ class CronData
 
     size_t d_lineNr;
     bool d_all = false;
+    bool  d_info = true;
 
     static size_t s_values[60];
     static char const *const s_month[12];
@@ -44,6 +45,8 @@ class CronData
         void setCommand(std::string const &command);
         void process();
         void reset(size_t lineNr = 0);  // 0 means: do not update lineNr
+
+        void messages(bool on = true);
 
         void setMinutes();
         void setHours();
@@ -76,6 +79,11 @@ class CronData
 inline size_t CronData::lineNr() const
 {
     return d_lineNr;
+}
+
+inline void CronData::messages(bool onOff)
+{
+    d_info = onOff;
 }
 
 inline CronEntry const &CronData::operator[](size_t index) const

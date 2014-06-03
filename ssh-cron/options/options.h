@@ -66,6 +66,7 @@ class Options: public IPCFunction
         bool daemon() const;
         bool ipc() const;
         bool cronfile() const;
+        bool reload() const;
 
         Function ipcFunction() const;
 
@@ -104,6 +105,11 @@ inline bool Options::foreground() const
 inline bool Options::daemon() const
 {   
     return not d_foreground;
+}
+
+inline bool Options::reload() const
+{   
+    return d_reload;
 }
 
 inline bool Options::ipc() const

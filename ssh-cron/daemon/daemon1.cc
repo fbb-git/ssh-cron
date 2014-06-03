@@ -12,6 +12,7 @@ Daemon::Daemon()
     Exception::open(in, ArgConfig::instance()[0]);
 
     Parser parser(in, d_cronData);
+
     parser.parse();
 
     if (d_cronData.size() == 0)

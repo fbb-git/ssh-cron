@@ -7,5 +7,6 @@ void CronData::addCronCommand()
 
     d_cronEntries.push_back(d_next);
 
-    imsg << "Cron " << d_cronEntries.size() << ": " << d_next << endl;
+    if (d_info)
+        imsg << "Cron " << d_cronEntries.size() << ": " << d_next << endl;
 }

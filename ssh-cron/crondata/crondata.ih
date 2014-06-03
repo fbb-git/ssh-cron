@@ -5,6 +5,8 @@
 #include <bobcat/mstream>
 #include <bobcat/string>
 
+#include "../options/options.h"
+
 using namespace std;
 using namespace FBB;
 

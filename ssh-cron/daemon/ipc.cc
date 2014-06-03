@@ -12,6 +12,10 @@ void Daemon::ipc()
             list();
         break;
 
+        case RELOAD:
+            reload();
+        break;
+
         default:
         break;
     }

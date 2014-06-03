@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include <cstring>
 #include <memory>
+#include <climits>
+#include <cstdlib>
 
 #include <bobcat/exception>
 #include <bobcat/syslogstream>
