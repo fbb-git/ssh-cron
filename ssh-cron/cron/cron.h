@@ -25,7 +25,7 @@ class Cron: public IPCFunction, public FBB::Fork
     {};
 
     Options &d_options;
-    CronData const &d_cronData;
+    CronData &d_cronData;
 
     FBB::Pipe d_childInput;     // child reads this
     
@@ -36,7 +36,7 @@ class Cron: public IPCFunction, public FBB::Fork
     static std::string s_agent;
     
     public:
-        Cron(CronData const &cronData);
+        Cron(CronData &cronData);
         void runParentProcess();
         void stop(size_t signal);
 
@@ -62,6 +62,7 @@ class Cron: public IPCFunction, public FBB::Fork
         void list(size_t *index, std::streamsize offset,
                   FBB::SharedStream &sharedStream);
 
+        void reload(std::istream &in);
 };
 
 #endif

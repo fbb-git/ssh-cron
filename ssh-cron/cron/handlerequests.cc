@@ -38,6 +38,10 @@ void Cron::handleRequests()
                 else
                     list(&index, writeOffset, sharedStream);
             break;
+
+            case RELOAD:
+                reload(sharedStream);
+            break;
             
             default:
             break;

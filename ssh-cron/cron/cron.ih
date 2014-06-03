@@ -19,6 +19,7 @@
 #include <bobcat/sharedcondition>
 #include <bobcat/sharedstream>
 
+#include "../parser/parser.h"
 #include "../crondata/crondata.h"
 #include "../cronentry/cronentry.h"
 #include "../options/options.h"
