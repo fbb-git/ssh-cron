@@ -35,7 +35,7 @@ Options::Options()
         if (d_foreground)
             d_multiStreambuf.insert(cout);
         else
-            wmsg << "--stdout ignored: " << d_options.basename() << 
+            wmsg << "--stdout ignored: " << d_arg.basename() << 
                     " runs as a daemon process" << endl;
     }
 

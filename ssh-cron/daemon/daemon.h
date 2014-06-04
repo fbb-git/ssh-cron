@@ -49,6 +49,9 @@ class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
         void reload();
         void list();
         bool listInfo(std::istream &in);
+
+        static void enterThread(Daemon *obj);
+
 };
         
 #endif

@@ -10,6 +10,7 @@
 #include <memory>
 #include <climits>
 #include <cstdlib>
+#include <thread>
 
 #include <bobcat/exception>
 #include <bobcat/syslogstream>
