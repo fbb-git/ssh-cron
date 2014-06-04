@@ -6,7 +6,7 @@ void Daemon::reload()
 
     cout << d_cronData << endl;
 
-    imsg << "Reloading the daemon with " << path.get() << endl;
+    imsg << d_options.basename() << ": reload " << path.get() << endl;
 
     IPCInfo info = getIPCInfo();
 

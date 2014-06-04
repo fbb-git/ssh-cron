@@ -2,9 +2,10 @@
 
 bool Daemon::listInfo(istream &in)
 {
+    in.clear();
     Function function = Cron::readRequest(in);
 
-    imsg << "daemon: received function " << function << endl;
+    imsg << "daemon: received function " << nameOf(function) << endl;
 
     if (function == DONE)
         return false;

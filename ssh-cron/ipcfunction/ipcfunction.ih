@@ -1,0 +1,3 @@
+#include "ipcfunction.h"
+
+using namespace FBB;
