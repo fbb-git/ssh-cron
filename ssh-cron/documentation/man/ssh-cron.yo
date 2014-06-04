@@ -150,7 +150,7 @@ quotes. Examples:
         holding the daemon's shared memory ID and process ID. The ipc file
         must be available if s() is starting or connecting to a daemon process
         (the latter situation occurs with the options tt(--list, --reload),
-        and tt(--terminate). S() will not start a daemon process if it detects
+        and tt(--terminate)). S() will not start a daemon process if it detects
         an existing tt(ipc-file): it has to be removed by the user first. To
         end a daemon process use tt(ssh-cron --terminate), or send a SIGINT
         (tt(ctrl-C)) or SIGTERM signal to the process-id found in the
