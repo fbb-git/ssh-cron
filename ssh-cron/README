@@ -1,2 +1,7 @@
+
+I've changed ssh-cron's development status to Alpha. See also the 0.80.00
+changelog entry.
+
+
 Simply starting ssh-agent and then crontab as a child process doesn't work:
 crontab loses access to ssh-agent's pass phrases.

@@ -1,3 +1,15 @@
+ssh-cron (0.80.00)
+
+  * SSH-cron's development status is now ALPHA: daemon,--no-daemon, --list,
+    --reload, and --terminate have been shown to work as planned. 
+
+  * Be advised that compiling and running ssh-cron requires at least Bobcat
+    3.23.00, which is currently only available from Bobcat's git repo:
+        commit 9eb8bc8029a4472d12a92a350b302ae2f71f496e
+        Date:   Wed Jun 4 21:21:05 2014 +0200
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Wed, 04 Jun 2014 21:35:39 +0200
+
 ssh-cron (0.10.00)
 
   * Proof of concept operational
