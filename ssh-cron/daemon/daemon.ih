@@ -16,6 +16,7 @@
 #include <bobcat/mstream>
 #include <bobcat/sharedcondition>
 #include <bobcat/sharedstream>
+#include <bobcat/tty>
 
 #include "../options/options.h"
 #include "../parser/parser.h"
