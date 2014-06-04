@@ -44,11 +44,11 @@ class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
         void signalHandler(size_t signum)   override;
 
         void terminate() const;
-        IPCInfo getIPCInfo();
+        IPCInfo getIPCInfo() const;
 
         void reload();
-        void list();
-        bool listInfo(std::istream &in);
+        void listRequest();
+        bool list(std::istream &in);
 
         static void enterThread(Daemon *obj);
 

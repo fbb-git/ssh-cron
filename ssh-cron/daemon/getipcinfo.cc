@@ -1,6 +1,6 @@
 #include "daemon.ih"
 
-Daemon::IPCInfo Daemon::getIPCInfo()
+Daemon::IPCInfo Daemon::getIPCInfo() const
 {
     ifstream ipcFile;
     Exception::open(ipcFile, Options::instance().ipcFile());
@@ -8,10 +8,10 @@ Daemon::IPCInfo Daemon::getIPCInfo()
     IPCInfo info;
 
     if (not (ipcFile >> info.shmemID >> info.pid))
-        throw Exception() << "Can't read the Shared Memory ID from " <<
-                                Options::instance().ipcFile();
+        fmsg << "corrupted " << Options::instance().ipcFile() << endl;
 
-    imsg << "shared memory ID: " << info.shmemID << endl;
+    imsg << "IPC info: shared memory ID: " << info.shmemID << 
+            ", daemon PID: " << info.pid << endl;
 
     return info;
 }

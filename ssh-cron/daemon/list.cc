@@ -1,40 +1,29 @@
 #include "daemon.ih"
 
-void Daemon::list()
+bool Daemon::list(istream &in)
 {
-    imsg << "--list requested" << endl;
+    in.clear();
+    Function function = Cron::readRequest(in);
 
-    IPCInfo info = getIPCInfo();
+    imsg << "daemon: received reply " << nameOf(function) << endl;
 
-    SharedStream sharedStream(info.shmemID);
+    if (function == DONE)
+        return false;
 
-    SharedCondition cond(sharedStream.attachSharedCondition(0));
-    
-    cond.lock();
-    Cron::writeRequest(sharedStream, LIST);
-
-    do
+    if (function > TERMINATE)
     {
-        imsg << d_options.basename() << ": notifying the daemon" << endl;
-        cond.notify();          // notify the server (waiting remote process)
-
-                                // now wait for the answer
-        cv_status status = cond.wait_for(chrono::seconds(2));
-        if (status == cv_status::timeout)
-        {
-            cond.unlock();
-            fmsg << "--list request: no response from process " << 
-                        info.pid << endl;
-        }
-        imsg << d_options.basename() << ": received a reply" << endl;
-
+        d_options.msg() << 
+                "daemon: received corrupted function request, value = " <<
+                function << endl;
+        return false;
     }
-    while (listInfo(sharedStream));     // process the reply
+        
+    string line;
+    while (getline(in, line))
+        cout << line << '\n';
 
-    cond.unlock();              // allow the server to wait again
+    return true;
 }
-
-
 
 
 

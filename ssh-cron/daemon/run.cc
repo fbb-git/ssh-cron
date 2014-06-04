@@ -3,9 +3,9 @@
 void Daemon::run()
 {
     if (d_options.ipc())
-        ipc();
+        ipc();                          // handles commands to the daemon
     else if (d_options.foreground())
-        foreground();
+        foreground();                   // ssh-cron runs in the foreground
     else
-        daemonize();     
+        daemonize();                    // ssh-cron runs in the background
 }

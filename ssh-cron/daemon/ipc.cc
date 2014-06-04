@@ -9,7 +9,7 @@ void Daemon::ipc()
         break;
 
         case LIST:
-            list();
+            listRequest();
         break;
 
         case RELOAD:

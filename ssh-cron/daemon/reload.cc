@@ -2,11 +2,11 @@
 
 void Daemon::reload()
 {
+    d_options.msg() << "--reload issued" << endl;
+
     unique_ptr<char> path(realpath(ArgConfig::instance()[0], 0));
 
     cout << d_cronData << endl;
-
-    imsg << d_options.basename() << ": reload " << path.get() << endl;
 
     IPCInfo info = getIPCInfo();
 

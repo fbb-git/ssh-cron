@@ -42,7 +42,7 @@ try
 {
     ArgConfig &arg = ArgConfig::initialize("c:hi:lL:m:rstv", 
                         longOptions, longEnd, argc, argv);
-        arg.versionHelp(Options::usage, Icmbuild::version, 0);
+    arg.versionHelp(Options::usage, Icmbuild::version, 0);
 
     Daemon daemon;
     daemon.run();
@@ -57,5 +57,3 @@ catch (int x)
 {
     return ArgConfig::instance().option("hv") ? 0 : x;
 }
-
-
