@@ -16,9 +16,20 @@ void Cron::handleRequests()
 
     while (true)
     {
+        idmsg() << "waiting for requests" << endl;
         cond.wait();
 
         Function request = readRequest(sharedStream);
+
+        if (request > TERMINATE)
+        {
+            scheduler() << "received invalid function request " << request << 
+                                                                        endl;
+            continue;
+        }
+
+        (request == MORE ? idmsg() : scheduler()) << "received request " << 
+                            nameOf(request) << endl;
         
         streamsize writeOffset = sharedStream.tellg();
 
@@ -27,16 +38,20 @@ void Cron::handleRequests()
             case LIST:
             {
                 index = 0;
+                idmsg() << "answering MORE" << endl;
                 writeRequest(sharedStream, MORE);
                 list(&index, writeOffset, sharedStream);
             }
             break;
         
             case MORE:
-                if (index == d_cronData.size())
-                    writeRequest(sharedStream, DONE);
-                else
+                if (index != d_cronData.size())
                     list(&index, writeOffset, sharedStream);
+                else
+                {
+                    idmsg() << "answering DONE" << endl;
+                    writeRequest(sharedStream, DONE);
+                }
             break;
 
             case RELOAD:
@@ -46,7 +61,10 @@ void Cron::handleRequests()
             default:
             break;
         }
+        idmsg() << "notifying the requestor" << endl;
         cond.notify();
     }
 }
+
+
 

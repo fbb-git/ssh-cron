@@ -48,6 +48,9 @@ class Cron: public IPCFunction, public FBB::Fork
         void childProcess()         override;
         void parentProcess()        override;
 
+        std::ostream &idmsg() const;        // imsg << "scheduler: "
+        std::ostream &scheduler() const;    // d_options.msg() << "scheduler: "
+
         void defineRunFunction();
         void sendCommand(std::string line);
         void cronLoop();
@@ -66,11 +69,3 @@ class Cron: public IPCFunction, public FBB::Fork
 };
 
 #endif
-
-
-
-
-
-
-
-

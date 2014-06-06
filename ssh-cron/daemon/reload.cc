@@ -2,7 +2,9 @@
 
 void Daemon::reload()
 {
-    d_options.msg() << "--reload issued" << endl;
+    basename() << "--reload" << endl;
+
+        // send the name of the cron-file to the daemon
 
     unique_ptr<char> path(realpath(ArgConfig::instance()[0], 0));
 
@@ -17,6 +19,7 @@ void Daemon::reload()
     cond.lock();
     Cron::writeRequest(sharedStream, RELOAD);
     sharedStream << path.get() << endl;
+    idmsg() << "notifying the daemon: RELOAD " << path.get() << endl;
     cond.notify();
     cond.unlock();
 }

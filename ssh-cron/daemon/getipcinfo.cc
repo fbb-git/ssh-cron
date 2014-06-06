@@ -10,7 +10,7 @@ Daemon::IPCInfo Daemon::getIPCInfo() const
     if (not (ipcFile >> info.shmemID >> info.pid))
         fmsg << "corrupted " << Options::instance().ipcFile() << endl;
 
-    imsg << "IPC info: shared memory ID: " << info.shmemID << 
+    idmsg() << "IPC info: shared memory ID: " << info.shmemID << 
             ", daemon PID: " << info.pid << endl;
 
     return info;

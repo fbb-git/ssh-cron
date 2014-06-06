@@ -6,7 +6,8 @@ void CronData::setEnvVar(string const &var, string const &value)
     {
         d_environment.push_back(var + '=' + String::trim(value));
         if (d_info)
-            imsg << "Envvar " << d_environment.size() << ": " <<
-                d_environment.back() << endl;
+            imsg << Options::instance().basename() << ": envvar " << 
+                    d_environment.size() << " `" << d_environment.back() << 
+                    '\'' << endl;
     }
 }

@@ -17,5 +17,6 @@ void Daemon::createIPCfile()
     }
 
     if (fd == -1)
-        fmsg << "cannot create ipc file " << d_options.ipcFile() << endl;
+        fmsg << "cannot create ipc file `" << d_options.ipcFile() << '\'' << 
+                                                                        endl;
 }

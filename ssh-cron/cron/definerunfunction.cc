@@ -2,14 +2,24 @@
 
 void Cron::defineRunFunction()
 {
-    *d_toChild << R"(
+    std::string const &mailer = d_options.mailer();
+
+    if (mailer.empty())
+        *d_toChild << R"(
+_run_()
+{
+    eval $* 2>&1 > /dev/null
+}
+)";
+    else
+        *d_toChild << R"(
 _run_()
 {
     out=`eval $* 2>&1`
     [ "$out" == "" ] || echo "$out" | 
-        )" << d_options.mailer() << R"(
+        )" << mailer << R"(
 }
 )";
 
-    imsg << "defined the run function" << endl;
+    idmsg() << "defined _run_()" << endl;
 }

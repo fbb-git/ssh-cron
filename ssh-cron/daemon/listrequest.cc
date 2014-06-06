@@ -2,7 +2,7 @@
 
 void Daemon::listRequest()
 {
-    d_options.msg() << "--list issued" << endl;
+    basename() << "--list" << endl;
 
     IPCInfo info = getIPCInfo();
 
@@ -12,17 +12,19 @@ void Daemon::listRequest()
     
     cond.lock();
     Cron::writeRequest(sharedStream, LIST);
-
+    Function function = LIST;
     do
     {
-        imsg << d_options.basename() << ": notifying (LIST) the daemon " << 
-                endl;
+        idmsg() << "notifying [" << nameOf(function) << "] the daemon " << 
+                    endl;
 
         cond.notify();          // notify the server (waiting remote process)
 
                                 // now wait for the answer
         cv_status status = cond.wait_for(chrono::seconds(2));
-        if (status == cv_status::timeout)
+        if (status == cv_status::no_timeout)
+            function = MORE;
+        else
         {
             cond.unlock();
             fmsg << "--list: no response from process " << info.pid << endl;

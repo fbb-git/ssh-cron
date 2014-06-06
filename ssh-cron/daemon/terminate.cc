@@ -2,11 +2,11 @@
 
 void Daemon::terminate() const
 {
-    d_options.msg() << "--terminate issued" << endl;
+    basename() << "--terminate" << endl;
 
     IPCInfo info = getIPCInfo();
 
-    imsg << "terminating process " << info.pid << endl;
+    idmsg() << "terminating process " << info.pid << endl;
     kill(info.pid, SIGTERM);
 }
 

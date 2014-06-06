@@ -1,3 +1,10 @@
+ssh-cron (0.90.00)
+
+  * SSH-cron's development status is now BETA.
+
+
+
+
 ssh-cron (0.80.00)
 
   * SSH-cron's development status is now ALPHA: daemon,--no-daemon, --list,

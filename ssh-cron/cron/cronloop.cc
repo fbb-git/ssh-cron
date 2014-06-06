@@ -3,7 +3,7 @@
 void Cron::cronLoop()               // called from parentprocess
 try
 {
-    imsg << "Cron::cronloop" << endl;
+    idmsg() << "starting cronloop" << endl;
 
     while (d_run)
     {
@@ -11,7 +11,8 @@ try
         
         if (seconds != 0)
         {
-            imsg << "Sleeping for " << (60 - seconds) << " seconds" << endl;
+            idmsg() << "sleeping for " << (60 - seconds) << " seconds" << 
+                                                                        endl;
             sleep(60 - seconds);    // ends at a sigint signal
         }
 

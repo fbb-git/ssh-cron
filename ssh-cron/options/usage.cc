@@ -25,7 +25,7 @@ void Options::usage(std::string const &progname)
     "      --help (-h)      - provide this help\n"
     "      --ipc-file (-i) path - (C) `path' is the path name of the file\n"
     "                         containing the info used for IPC\n"
-    "                         (default `" << s_defaultIPCfile << "')\n"
+    "                         (default `$HOME/" << s_defaultIPCfile << "')\n"
     "      --list (-l)      - list the currently defined cron-commands\n"
     "                         (the `crontab' file is only used to specify "
                                                             "options)\n"

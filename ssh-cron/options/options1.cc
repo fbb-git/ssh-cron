@@ -45,7 +45,7 @@ Options::Options()
         d_agent = s_defaultAgent;
 
     if (not d_arg.option(&d_IPCfile, 'i'))
-        d_IPCfile = s_defaultIPCfile;
+        d_IPCfile = User().homedir() + s_defaultIPCfile;
 
     string logName;
     if (d_arg.option(&logName, 'L'))
@@ -59,9 +59,6 @@ Options::Options()
 
     if (not d_arg.option(&d_mailer, 'm'))
         d_mailer = s_defaultMailer;
-    else if (d_mailer.empty())
-        d_mailer = "/bin/cat > /dev/null";
-
 
     bool useSyslog = setSyslog();
 

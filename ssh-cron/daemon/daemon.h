@@ -32,6 +32,9 @@ class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
         void run();
 
     private:
+        std::ostream &idmsg() const;    // imsg inserts basename :
+        std::ostream &basename() const; // options.msg() inserts basename :
+
         void foreground();          // don't fork, just call the child process
         void daemonize();           // run the daemon in the background
         void ipc();                 // do the other commands, involving ipc

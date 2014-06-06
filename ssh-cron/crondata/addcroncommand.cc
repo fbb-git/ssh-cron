@@ -8,5 +8,6 @@ void CronData::addCronCommand()
     d_cronEntries.push_back(d_next);
 
     if (d_info)
-        imsg << "Cron " << d_cronEntries.size() << ": " << d_next << endl;
+        imsg << Options::instance().basename() << ": cron " << 
+                d_cronEntries.size() << '\n' << d_next << endl;
 }

@@ -3,7 +3,7 @@
 Options *Options::s_options = 0;
 
 char const Options::s_defaultAgent[]        = "/usr/bin/ssh-agent /bin/bash";
-char const Options::s_defaultIPCfile[]      = "/tmp/ssh-cron.ipc";
+char const Options::s_defaultIPCfile[]      = ".ssh-cron.ipc";
 char const Options::s_defaultConfigFile[]   = ".ssh-cron";
 char const Options::s_defaultMailer[]       = 
             "/usr/bin/mail -s \"Ssh-cron $*\" $USER@localhost";

@@ -19,15 +19,17 @@ void Cron::parentProcess()
     }
 
     defineRunFunction();
+    
+    d_options.msg() << "scheduler: executing /usr/bin/ssh-add" << endl;
     sendCommand("/usr/bin/ssh-add");
 
     cronLoop();
 
     if (int status = waitForChild())
-        d_options.msg() << "child process " << pid() << 
-                            " unexpectedly returned " << status << endl;
+        scheduler() << "ssh-agent (pid = " << pid() << ") returned " << 
+                                                            status << endl;
     else
-        imsg << "child process " << pid() << " ended normally" << endl;
+        idmsg() << "normal end of ssh-agent (pid = " << pid() << ')' << endl;
 }
 
 

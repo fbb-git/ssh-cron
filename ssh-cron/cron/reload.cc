@@ -4,9 +4,10 @@ void Cron::reload(istream &sharedIn)
 {
     string path;
     getline(sharedIn, path);
-    imsg << "daemon: RELOAD " << path << endl;
+    idmsg() << "reloading from " << path << endl;
 
     d_cronData = CronData();
+
     d_cronData.messages(false);
     
     ifstream in;

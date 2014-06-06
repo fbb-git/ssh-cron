@@ -9,7 +9,7 @@ void Cron::execute(CronEntry const &entry)
 
     command += "_run_ " + entry.command() + ")&";
 
-    d_options.msg() << entry.command() << endl;
-
+    scheduler() << entry.command() << endl;
+    idmsg() << "executed as " << command << endl;
     sendCommand(command);
 }
