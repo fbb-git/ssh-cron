@@ -55,5 +55,5 @@ catch (exception const &exc)
 }
 catch (int x)
 {
-    return ArgConfig::instance().option("hv") ? 0 : x;
+    return ArgConfig::instance().option("hv") ? 0 : 1;
 }

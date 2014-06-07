@@ -1,4 +1,4 @@
-gagmacrowarning(cron)
+gagmacrowarning(cron argument)
 
 includefile(../../release.yo)
 
@@ -43,23 +43,24 @@ This program is in its alpha stage.
 
 Consider the situation where a computer every now and then must access a
 remote computer to do some useful things (like running a bf(stealth)(1) file
-integrity scan). In order to do that it must be allowed to make bf(ssh)(1)
-connections, but since the commands are not executed by the user, but by 
-bf(cron)(1), the ssh-keys which are required to access the remote systems
-cannot use passwords.
+integrity scan). In order to do so the computer must be allowed to make
+bf(ssh)(1) connections to the remote computer. But since the commands are not
+executed by the user but by bf(cron)(1), the ssh-keys which are required to
+access the remote computer cannot use pass phrases.
 
-Often this is an undesirable situation: if the computer running the tt(ssh)
-commands gets compromised, then the remote computers are compromised as well,
-since the attacker may access these remote systems using the ssh
-keys which do not require pass phrases.
+This is an undesirable situation: if the computer running the tt(ssh) commands
+gets compromised, then the remote computers are compromised as well, since the
+attacker may access these remote systems using the ssh keys which do not
+require pass phrases.
 
-S() intends to solve this problem as follows:
+S() offers a way out of this undesirable situation, while still allowing
+commands to be executed on remote computers. Here's how this is realized:
 
 itemization(
     it() S() is a daemon program. When the program starts it first reads and
         parses a crontab-like specification file. Unless a s() program is
         already running, the following actions are performed by the daemon's
-        child program, which itself spawns a child process:
+        child program, which itself spawns a bf(ssh-agent)(1) child process:
     
     it() The viable cron commands are passed to the program's child (the
        daemon), and s()'s parent process dies;
@@ -79,26 +80,27 @@ itemization(
        computer, then this access is granted, as em(ssh-agent) is able to
        provide the pass phrase.
 
-    it() If an existing (default or specified using the tt(-p) option, see
-        below) ipc-file is found, then the tt(crontab-file) argument is
-        parsed, and the recognized commands and environment variable
-        specifications are sent to the running s() program, replacing its
-        currently stored commands and environment definitions.
+    it() If a daemon process is already active, then the tt(--reload) option
+        (see below), can be used to parse the tt(crontab-file), and the
+        recognized commands and environment variable specifications are sent
+        to the running s() program, replacing its currently stored commands
+        and environment definitions.
     )
 
-Shell control characters (like redirection symbols) in command
-specifications should be escaped. E.g., tt(echo hello world \> /dev/null).
+When shell control characters (like redirection symbols) must be used in
+command specifications, they should be escaped. E.g., tt(echo hello world \>
+/dev/null).
 
-The user originally providing the passphrase may leave the system, and the
-daemon continues to performs its duties. If, in the meantime, the computer is
-broken into, the hacker may find the ssh keys, but will not be able to use
-them to compromise another computer, as he/she doesn't have the required pass
-phrases.
+The user originally providing the passphrase may logout and leave the
+system. If so, the daemon will continue to performs its duties. If the
+computer running s() gets compromised, the hacker may find the user's ssh
+keys, but will not be able to use them to compromise another computer, as
+he/she doesn't have the required pass phrases.
 
-The above-mentioned scenario doesn't work using bf(crontab)(1) itself. E.g.,
-when loading a crontab file using em(crontab), after having started
-em(ssh-agent), access to the ssh keys through em(ssh-agent) is lost for the
-commands fired off by em(cron) itself.
+The above-mentioned scenario doesn't work using bf(crontab)(1) itself.
+bf(Cron)(1), which is responsible for executing scheduled crontab commands,
+has no access to the pass phrases of ssh-keys (which are otherwise provided
+em(ssh-agent)).
 
 manpagesection(RETURN VALUE)
 
@@ -109,13 +111,12 @@ manpageoptions()
 
     Where available, single letter options are listed between parentheses
 following their associated long-option variants. Single letter options require
-arguments if their associated long options require arguments as well.
+arguments if their associated long options also require arguments.
 
-Many options have default values. Run tt(ssh-cron --help) for an overview of
-the implemented default option values.
-
-Most options can also be specified in a configuration file (where this is not
-true it is explicitly mentioned in the overview shown below).
+Several options have default values. Run tt(ssh-cron --help) for an overview
+of the implemented default option values. Also, several options can be
+specified in a configuration file (where this doesn't hold true, it is
+explicitly mentioned at the relevant options).
 
 The configuration file ignores empty lines and all information on lines
 beginning with a hash-mark (tt(#), optionally preceded by blanks and/or
@@ -126,40 +127,47 @@ quotes. Examples:
             verb(
     stdout
     syslog-facility: LOCAL0
+    mailer: /usr/bin/mail -s "some subject" me@myhost.warpnet.nl
             )
     Command-line options always override configuration file options.
 
     itemization(
-    it() laption(agent)(agent)nl()
+    it() laoption(agent)(agent)nl()
        absolute path to the agent program (plus its argument(s)) providing the
         ssh-keys. 
 
+        By default tt(/usr/bin/ssh-agent /bin/bash) is used.
+
     it() lsoption(config-file)(c)(path)nl()
         config file containing long option specifications.
+
+        By default tt(~/.ssh-cron) is used.
 
         This option cannot be specified in the configuration file.
 
     it() loption(help) (soption(h))nl()
        basic usage information is written to the standard output
-        stream.
+        stream (only interpreted in combination with tt(--no-daemon)).
 
         This option cannot be specified in the configuration file.
 
     it() lsoption(ipc-file)(p)(path)nl()
        When s() runs as a daemon, then tt(path) specifies the path of the file
         holding the daemon's shared memory ID and process ID. The ipc file
-        must be available if s() is starting or connecting to a daemon process
-        (the latter situation occurs with the options tt(--list, --reload),
-        and tt(--terminate)). S() will not start a daemon process if it detects
-        an existing tt(ipc-file): it has to be removed by the user first. To
-        end a daemon process use tt(ssh-cron --terminate), or send a SIGINT
-        (tt(ctrl-C)) or SIGTERM signal to the process-id found in the
-        tt(ipc-file). 
+        must be available if s() is connecting to or starting a daemon process
+        (the former situation occurs with the options tt(--list, --reload),
+        and tt(--terminate)). S() does not start a daemon process if it
+        detects an existing tt(ipc-file), which has to be removed by the user
+        first. To end a daemon process use tt(ssh-cron --terminate), or send a
+        SIGINT (tt(ctrl-C)) or SIGTERM signal to the process-id found as the
+        second value in the tt(ipc-file).
+
+        By default tt(~/.ssh-cron.ipc) is used.
         
     it() loption(list) (soption(l))nl()
-       list the currently defined cron-commands (the tt(crontab-file) argument
-        must be omitted). This option is incompatible with (--no-daemon,
-        --reload) and tt(--terminate).
+       list the currently defined environment settings and cron-commands (the
+        tt(crontab-file) argument must be omitted). This option is
+        incompatible with (--no-daemon, --reload,) and tt(--terminate).
 
         This option cannot be specified in the configuration file.
 
@@ -168,15 +176,20 @@ quotes. Examples:
         is created first.
  
     it() lsoption(mailer)(m)(command)nl()
-       output generated by the commands executed by s() is sent by e-mail to
-        the current user. Use tt(--mailer) to redefine (or to suppress sending
-        e-mail by specifying an empty mailer command: tt(--mailer "")).
+       information written to the standard output or standard error streams of
+        the commands executed by s() is sent by e-mail to the current
+        user. Use tt(--mailer) to redefine (or to suppress sending e-mail by
+        specifying an empty mailer command (i.e., tt(--mailer ""))).
+
+        By default tt(/usr/bin/mail -s \"Ssh-cron $*\" $USER@localhost) is
+        used, with tt($*) replaced by the exected command as specified in the
+        tt(crontab) file argument.
  
     it() loption(no-daemon) nl()
        S() is not run as a daemon. To properly end s() if not running as a
         daemon, press the `Enter' key, enter tt(ctrl-C) or send s() a
         tt(SIGTERM) signal. This option is incompatible with ( --list,
-        --reload) and tt(--terminate).
+        --reload,) and tt(--terminate).
 
        This option cannot be specified in the configuration file.
 
@@ -206,6 +219,8 @@ quotes. Examples:
         LOCAL0, LOCAL1, LOCAL2, LOCAL3, LOCAL4, LOCAL5, LOCAL6, LOCAL7), and
         tt(USER) can be used.
 
+        By default facility tt(DAEMON) is used.
+
     it() laoption(syslog-priority)(priority)nl()
        The priority that is used to write the syslog messages to. By default
         this is tt(NOTICE). For an overview of priorities and their meanings,
@@ -213,17 +228,20 @@ quotes. Examples:
         be used. E.g., tt( EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO) and
         tt(DEBUG).
 
+        By default priority tt(NOTICE) is used.
+
     it() laoption(syslog-tag)(tag)nl()
-       When syslog messages are generated they can be provided with a
-        em(tag), which can be used to filter s()'s syslog messages from
-        the log-files. By default the tag tt(SSH-CRON) is used. 
-        See also section tt(RSYSLOG FILTERING) below.
+       Syslog messages can be provided with a em(tag), which can be used to
+        filter them from the log-files. See also section tt(RSYSLOG
+        FILTERING) below.
+
+        By default the tag tt(SSH-CRON) is used.  
 
     it() loption(terminate) (soption(t))nl()
        terminate a running s() daemon program, using the daemon's process ID
-        found in the ipc-file. The tt(crontab-file) argument must be
-        omitted. This option is incompatible tt with (--list, --nodaemon,)
-        and tt(--reload)
+        found in the ipc-file's second value. The tt(crontab-file) argument
+        must be omitted. This option is incompatible tt with (--list,
+        --nodaemon,) and tt(--reload)
 .
         This option cannot be specified in the configuration file.
 
@@ -264,7 +282,7 @@ bf(ssh-add)(1), bf(ssh-agent)(1), bf(ssh-askpass)(1), bf(stealth)(1),
 bf(syslog)(3)
 
 manpagebugs()
-    Too early to say anything useful here, but as yet: none reported :-)
+    None reported.
 
 manpagesection(COPYRIGHT)
     This is free software, distributed under the terms of the `GNU General
