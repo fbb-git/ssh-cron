@@ -18,6 +18,7 @@
 #include <bobcat/process>
 #include <bobcat/sharedcondition>
 #include <bobcat/sharedstream>
+#include <bobcat/hmacbuf>
 
 #include "../parser/parser.h"
 #include "../crondata/crondata.h"

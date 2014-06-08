@@ -1,3 +1,11 @@
+ssh-cron (0.91.00)
+
+  * A pass phrase is required when starting the ssh-cron daemon or when
+    modifiying the daemon's scheduled commands.
+
+
+
+
 ssh-cron (0.90.00)
 
   * Commands using an ssh-key requiring a pass phrase have been successfully

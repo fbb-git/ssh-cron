@@ -48,6 +48,7 @@ class Daemon: public IPCFunction, public FBB::Fork, public FBB::SignalHandler
 
         void terminate() const;
         IPCInfo getIPCInfo() const;
+        void getPassPhrase();
 
         void reload();
         void listRequest();

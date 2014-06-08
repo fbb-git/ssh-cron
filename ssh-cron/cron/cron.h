@@ -31,6 +31,8 @@ class Cron: public IPCFunction, public FBB::Fork
     
     std::ostream *d_toChild = 0;
 
+    std::string d_passPhrase;
+
     volatile bool d_run = true;     // set to false by stop
 
     static std::string s_agent;
@@ -39,10 +41,11 @@ class Cron: public IPCFunction, public FBB::Fork
         Cron(CronData &cronData);
         void runParentProcess();
         void stop(size_t signal);
+        void setPassPhrase(std::string const &passPhrase);
 
         static Function readRequest(std::istream &in);
         static void writeRequest(std::ostream &out, Function value);
-
+    
     private:
         void childRedirections()    override;
         void childProcess()         override;
@@ -66,6 +69,14 @@ class Cron: public IPCFunction, public FBB::Fork
                   FBB::SharedStream &sharedStream);
 
         void reload(std::istream &in);
+
+        std::string hmac(std::string const &passPhrase);
+
 };
 
 #endif
+
+
+
+
+

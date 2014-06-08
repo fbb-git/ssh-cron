@@ -102,6 +102,10 @@ bf(Cron)(1), which is responsible for executing scheduled crontab commands,
 has no access to the pass phrases of ssh-keys (which are otherwise provided
 em(ssh-agent)).
 
+To prevent unauthorized modifications of the commands scheduled by the s()
+daemon a pass phrase is required when starting the daemon or modifying the
+daemon's scheduled commands.
+
 manpagesection(RETURN VALUE)
 
     S() returns 0 if the daemon was successfully started. Otherwise 1 is
