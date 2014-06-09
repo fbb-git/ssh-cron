@@ -39,72 +39,81 @@ manpagesynopsis()
 
 manpagedescription()
 
-This program is in its alpha stage. 
-
 Consider the situation where a computer every now and then must access a
-remote computer to do some useful things (like running a bf(stealth)(1) file
-integrity scan). In order to do so the computer must be allowed to make
-bf(ssh)(1) connections to the remote computer. But since the commands are not
-executed by the user but by bf(cron)(1), the ssh-keys which are required to
-access the remote computer cannot use pass phrases.
+remote computer to do some useful things at that remote computer (like running
+a bf(stealth)(1) file integrity scan). In order to do so the computer must be
+allowed to make bf(ssh)(1) connections to the remote computer. But since the
+commands are not executed by the user but by bf(cron)(1), the ssh-keys which
+are required to access the remote computer cannot use pass phrases.
 
 This is an undesirable situation: if the computer running the tt(ssh) commands
 gets compromised, then the remote computers are compromised as well, since the
-attacker may access these remote systems using the ssh keys which do not
-require pass phrases.
+attacker may access these remote systems using ssh keys not requiring pass
+phrases.
 
 S() offers a way out of this undesirable situation, while still allowing
 commands to be executed on remote computers. Here's how this is realized:
 
 itemization(
-    it() S() is a daemon program. When the program starts it first reads and
-        parses a crontab-like specification file. Unless a s() program is
-        already running, the following actions are performed by the daemon's
-        child program, which itself spawns a bf(ssh-agent)(1) child process:
+    it() Normally, s() runs as a daemon program. When s() starts it first
+        reads and parses a crontab-like specification file. Following this,
+        s() spawns a child process, and terminates.
+
+    it() S()'s daemon process itself spawns an bf(ssh-agent)(1) child
+        process, executing all scheduled commands.
     
-    it() The viable cron commands are passed to the program's child (the
-       daemon), and s()'s parent process dies;
+    it() In addition, s()'s daemon defines communcation channels between
+       itself and its bf(ssh-agent)(1) child process;
 
-    it() Next, the daemon spawns its own child process, which executes
-       em(/usr/bin/ssh-agent /bin/bash). In addition, the daemon defines
-       communcation channels between the daemon and the bf(ssh-agent)(1) child
-       process;
-
-    it() The daemon then sends its child as its first command to execute the
-       command bf(ssh-add)(1), and through normal user-interaction means
+    it() S()'s daemon sends the command bf(ssh-add)(1) to its child process as
+       its first command to execute, and using normal user-interaction means
        (e.g., using bf(ssh-askpass)(1)) em(ssh-agent) is provided with the
-       required pass phrase for the ssh key.
+       required pass phrase(s) for the ssh key(s).
 
-    it() The daemon now monitors the time, firing off the commands at their
-       required moments in time. If these commands require access to a remote
-       computer, then this access is granted, as em(ssh-agent) is able to
-       provide the pass phrase.
+    it() S()'s daemon now monitors the time, firing off scheduled commands at
+       their required moments in time. If these commands require access to
+       remote computers, then this access is granted, as em(ssh-agent) is able
+       to provide the pass phrase(s).
 
-    it() If a daemon process is already active, then the tt(--reload) option
-        (see below), can be used to parse the tt(crontab-file), and the
-        recognized commands and environment variable specifications are sent
-        to the running s() program, replacing its currently stored commands
-        and environment definitions.
+    it() If an s() daemon process is already running, then the tt(--reload)
+       option (see below), can be used to load the s() daemon with the
+       commands and environment variable settings from another
+       tt(crontab-file), replacing the currently stored commands and
+       environment settings by the ones provided in the reloaded file.
     )
 
 When shell control characters (like redirection symbols) must be used in
-command specifications, they should be escaped. E.g., tt(echo hello world \>
-/dev/null).
+command specifications, they should be escaped. E.g., as in tt(echo hello
+world \> /dev/null).
 
-The user originally providing the passphrase may logout and leave the
-system. If so, the daemon will continue to performs its duties. If the
-computer running s() gets compromised, the hacker may find the user's ssh
-keys, but will not be able to use them to compromise another computer, as
-he/she doesn't have the required pass phrases.
+Users sharing a computer each define their own s() specification file. When a
+user logs out and leaves the
+system the daemon process continues to run, executing its scheduled commands
+at their scheduled times, using ssh-keys whenever required.
 
-The above-mentioned scenario doesn't work using bf(crontab)(1) itself.
+If the accounts for which s() jobs are running are ever compromised,
+the remote computers remain safe, as the pass phrases of the available 
+ssh-keys remain unavailable.
+
+To prevent unauthorized modifications of the commands scheduled by the s()
+daemon themselves a pass phrase is required when starting s()'s daemon
+process. The pass phrase itself is not stored by the daemon (instead, it
+stores a bf(sha256)(1) hash value), which avoids access to the s() daemon's
+pass phrase by browsing the computer's memory. The pass phrase may be empty,
+but even then that empty pass phrase must be provided when reloading s()
+daemon's scheduled commands. The scheduled commands may be listed,
+however. This is allowed without providing a pass phrase since the file
+containing the scheduled commands will usually also be available on the
+computer. Likewise, since a user may always terminate his/her own programs an
+s() daemon process can be terminated from another s() program using the
+tt(--terminate) command line option.
+
+
+The above-mentioned facilities are not supported by bf(crontab)(1) itself.
 bf(Cron)(1), which is responsible for executing scheduled crontab commands,
 has no access to the pass phrases of ssh-keys (which are otherwise provided
 em(ssh-agent)).
 
-To prevent unauthorized modifications of the commands scheduled by the s()
-daemon a pass phrase is required when starting the daemon or modifying the
-daemon's scheduled commands.
 
 manpagesection(RETURN VALUE)
 
@@ -122,11 +131,14 @@ of the implemented default option values. Also, several options can be
 specified in a configuration file (where this doesn't hold true, it is
 explicitly mentioned at the relevant options).
 
-The configuration file ignores empty lines and all information on lines
-beginning with a hash-mark (tt(#), optionally preceded by blanks and/or
-tabs). In the configuration file initial hyphens of command-line options must
-not be used, and optionally a colon may be appended to an option's
-name. Multi-word option arguments should not be surrounded by
+The configuration file (not to be confused with the file containing the
+scheduled commands, which is provided as s() command-line file argument)
+ignores empty lines and all information on lines starting at a hash-mark
+(tt(#), optionally preceded by blanks and/or tabs). The configuration file is
+used to specify s()'s options using their long variants. However, in the
+configuration file the initial hyphens of command-line options must be
+omitted, and optionally a colon may be appended to these long options
+names. Note that multi-word option arguments should not be surrounded by
 quotes. Examples:
             verb(
     stdout
@@ -156,7 +168,7 @@ quotes. Examples:
         This option cannot be specified in the configuration file.
 
     it() lsoption(ipc-file)(p)(path)nl()
-       When s() runs as a daemon, then tt(path) specifies the path of the file
+       when s() runs as a daemon, then tt(path) specifies the path of the file
         holding the daemon's shared memory ID and process ID. The ipc file
         must be available if s() is connecting to or starting a daemon process
         (the former situation occurs with the options tt(--list, --reload),
@@ -190,7 +202,7 @@ quotes. Examples:
         tt(crontab) file argument.
  
     it() loption(no-daemon) nl()
-       S() is not run as a daemon. To properly end s() if not running as a
+       s() is not run as a daemon. To properly end s() if not running as a
         daemon, press the `Enter' key, enter tt(ctrl-C) or send s() a
         tt(SIGTERM) signal. This option is incompatible with ( --list,
         --reload,) and tt(--terminate).
@@ -205,19 +217,19 @@ quotes. Examples:
         This option cannot be specified in the configuration file.
 
     it() loption(stdout) (soption(s))nl() 
-       In addition to using a log file and syslog messages send all messages
+       in addition to using a log file and syslog messages send all messages
         to the standard output. This option is not available if s() runs as a
         daemon process.
 
         This option cannot be specified in the configuration file.
 
     it() loption(syslog)nl()
-       Messages are sent to the syslog daemon when this option is specified.
+       messages are sent to the syslog daemon when this option is specified.
         By default syslog messages are written to the tt(DAEMON) facility with
         priority tt(NOTICE).
 
     it() laoption(syslog-facility)(facility)nl()
-       The facility that is used to write the syslog messages to. By default
+       the facility that is used to write the syslog messages to. By default
         this is tt(DAEMON). For an overview of facilities and their meanings,
         see, e.g., bf(syslog)(3). With s() the facilities tt(DAEMON,
         LOCAL0, LOCAL1, LOCAL2, LOCAL3, LOCAL4, LOCAL5, LOCAL6, LOCAL7), and
@@ -226,7 +238,7 @@ quotes. Examples:
         By default facility tt(DAEMON) is used.
 
     it() laoption(syslog-priority)(priority)nl()
-       The priority that is used to write the syslog messages to. By default
+       the priority that is used to write the syslog messages to. By default
         this is tt(NOTICE). For an overview of priorities and their meanings,
         see, e.g., bf(syslog)(3). With s() all defined priorities can
         be used. E.g., tt( EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO) and
@@ -235,7 +247,7 @@ quotes. Examples:
         By default priority tt(NOTICE) is used.
 
     it() laoption(syslog-tag)(tag)nl()
-       Syslog messages can be provided with a em(tag), which can be used to
+       syslog messages can be provided with a em(tag), which can be used to
         filter them from the log-files. See also section tt(RSYSLOG
         FILTERING) below.
 
@@ -250,7 +262,7 @@ quotes. Examples:
         This option cannot be specified in the configuration file.
 
     it() loption(verbose)nl() 
-       Additional messages about s()'s mode of operation are sent to
+       additional messages about s()'s mode of operation are sent to
         s()'s log facilities (specified by tt(--log, --syslog,) and/or
         tt(--stdout)). 
 
@@ -298,6 +310,11 @@ manpagesection(ORGANIZATION)
 
 manpageauthor()
     Frank B. Brokken (bf(f.b.brokken@rug.nl)).
+
+
+
+
+
 
 
 

@@ -3,8 +3,7 @@ ssh-cron (0.91.00)
   * A pass phrase is required when starting the ssh-cron daemon or when
     modifiying the daemon's scheduled commands.
 
-
-
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Mon, 09 Jun 2014 13:45:06 +0200
 
 ssh-cron (0.90.00)
 
