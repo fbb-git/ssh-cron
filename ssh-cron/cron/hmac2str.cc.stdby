@@ -1,0 +1,13 @@
+#include "cron.ih"
+
+string Cron::hmac2str(string const &passPhrase)
+{
+    ostringstream out;
+
+    out << setfill('0');
+
+    for (unsigned char ch: passPhrase)
+        out << setw(2) << (ch >> 4) << setw(2) << (ch & 0xff);
+
+    return out.str();
+}

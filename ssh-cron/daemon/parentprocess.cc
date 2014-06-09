@@ -8,6 +8,10 @@ void Daemon::parentProcess()
             // see also cron/handlerequests and daemon/terminate
     ipcFile << d_shmem.id() << '\n' <<
                pid() << endl;
+
+    cout << '\n' <<
+        d_cronData << endl;
+
 }
 
 

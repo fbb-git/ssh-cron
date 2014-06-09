@@ -55,16 +55,14 @@ void Cron::handleRequests()
             break;
 
             case RELOAD:
-                reload(sharedStream);
+                if (not reload(sharedStream))
+                    continue;
             break;
             
             default:
             break;
         }
         idmsg() << "notifying the requestor" << endl;
-        cond.notify();
+        cond.notify();      
     }
 }
-
-
-

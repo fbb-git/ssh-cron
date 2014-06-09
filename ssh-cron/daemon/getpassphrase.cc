@@ -25,7 +25,7 @@ void Daemon::getPassPhrase()
             break;
         }
 
-        cout << "Pass phrases differ. Try again\n\n";
+        cout << "Different pass phrases. Try again\n\n";
     }
 
 }

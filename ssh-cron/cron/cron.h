@@ -45,6 +45,7 @@ class Cron: public IPCFunction, public FBB::Fork
 
         static Function readRequest(std::istream &in);
         static void writeRequest(std::ostream &out, Function value);
+        static std::string hmac2str(std::string const &passPhrase);
     
     private:
         void childRedirections()    override;
@@ -60,19 +61,22 @@ class Cron: public IPCFunction, public FBB::Fork
         void runCronJobs();
         bool call(FBB::DateTime const &now, CronEntry const &entry);
         void execute(CronEntry const &entry);
-        static bool specified(size_t value, std::set<size_t> const &request);
-
-        static void requestHandler(Cron *cron);
         void handleRequests();      // separate thread
 
         void list(size_t *index, std::streamsize offset,
                   FBB::SharedStream &sharedStream);
 
-        void reload(std::istream &in);
+        bool reload(std::istream &in);
 
-        std::string hmac(std::string const &passPhrase);
-
+        static bool specified(size_t value, std::set<size_t> const &request);
+        static void requestHandler(Cron *cron);
+        static std::string hmac(std::string const &passPhrase);
 };
+
+inline void Cron::setPassPhrase(std::string const &passPhrase)
+{
+    d_passPhrase = hmac(passPhrase);
+}
 
 #endif
 

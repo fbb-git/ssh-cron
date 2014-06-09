@@ -9,7 +9,7 @@ PATH = /usr/local/bin:/usr/bin:/bin
 # 90   25   32   Jan,Feb   Sun   /usr/bin/hello world
 
 # *   *   *   *   *   ssh styx "date \> /tmp/date"
-*   *   *   *   *   date \> /tmp/date
+# *   *   *   *   *   date \> /tmp/date
 
 MORE="additional var"
 

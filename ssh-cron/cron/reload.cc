@@ -1,7 +1,13 @@
 #include "cron.ih"
 
-void Cron::reload(istream &sharedIn)
+bool Cron::reload(istream &sharedIn)
 {
+    string passPhrase;
+    getline(sharedIn, passPhrase);
+
+    if (hmac(passPhrase) != d_passPhrase)
+        return false;
+
     string path;
     getline(sharedIn, path);
     idmsg() << "reloading from " << path << endl;
@@ -16,4 +22,17 @@ void Cron::reload(istream &sharedIn)
     Parser parser(in, d_cronData);
 
     parser.parse();
+
+    return true;
 }
+
+
+
+
+
+
+
+
+
+
+
