@@ -10,11 +10,11 @@ void Daemon::getPassPhrase()
 
     while (true)
     {
-        cout << "Enter pass phrase: " << flush;
+        cout << "Enter passphrase: " << flush;
         string passphrase1;
         getline(in, passphrase1);
         
-        cout << "\nEnter same pass phrase again: " << flush;
+        cout << "\nEnter same passphrase again: " << flush;
         string passphrase2;
         getline(in, passphrase2);
         cout << endl;
@@ -25,7 +25,7 @@ void Daemon::getPassPhrase()
             break;
         }
 
-        cout << "Different pass phrases. Try again\n\n";
+        cout << "Different passphrases. Try again\n\n";
     }
 
 }

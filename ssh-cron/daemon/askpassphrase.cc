@@ -8,7 +8,7 @@ string Daemon::askPassPhrase()
     ifstream in;
     Exception::open(in, "/dev/tty");
 
-    cout << "Enter pass phrase: " << flush;
+    cout << "Enter passphrase: " << flush;
     string passphrase;
     getline(in, passphrase);
 

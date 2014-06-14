@@ -44,7 +44,7 @@ remote computer to do some useful things at that remote computer (like running
 a bf(stealth)(1) file integrity scan). In order to do so the computer must be
 allowed to make bf(ssh)(1) connections to the remote computer. But since the
 commands are not executed by the user but by bf(cron)(1), the ssh-keys which
-are required to access the remote computer cannot use pass phrases.
+are required to access the remote computer cannot use passphrases.
 
 This is an undesirable situation: if the computer running the tt(ssh) commands
 gets compromised, then the remote computers are compromised as well, since the
@@ -68,12 +68,12 @@ itemization(
     it() S()'s daemon sends the command bf(ssh-add)(1) to its child process as
        its first command to execute, and using normal user-interaction means
        (e.g., using bf(ssh-askpass)(1)) em(ssh-agent) is provided with the
-       required pass phrase(s) for the ssh key(s).
+       required passphrase(s) for the ssh key(s).
 
     it() S()'s daemon now monitors the time, firing off scheduled commands at
        their required moments in time. If these commands require access to
        remote computers, then this access is granted, as em(ssh-agent) is able
-       to provide the pass phrase(s).
+       to provide the passphrase(s).
 
     it() If an s() daemon process is already running, then the tt(--reload)
        option (see below), can be used to load the s() daemon with the
@@ -92,17 +92,17 @@ system the daemon process continues to run, executing its scheduled commands
 at their scheduled times, using ssh-keys whenever required.
 
 If the accounts for which s() jobs are running are ever compromised,
-the remote computers remain safe, as the pass phrases of the available 
+the remote computers remain safe, as the passphrases of the available 
 ssh-keys remain unavailable.
 
 To prevent unauthorized modifications of the commands scheduled by the s()
-daemon themselves a pass phrase is required when starting s()'s daemon
-process. The pass phrase itself is not stored by the daemon (instead, it
+daemon themselves a passphrase is required when starting s()'s daemon
+process. The passphrase itself is not stored by the daemon (instead, it
 stores a bf(sha256)(1) hash value), which avoids access to the s() daemon's
-pass phrase by browsing the computer's memory. The pass phrase may be empty,
-but even then that empty pass phrase must be provided when reloading s()
+passphrase by browsing the computer's memory. The passphrase may be empty,
+but even then that empty passphrase must be provided when reloading s()
 daemon's scheduled commands. The scheduled commands may be listed,
-however. This is allowed without providing a pass phrase since the file
+however. This is allowed without providing a passphrase since the file
 containing the scheduled commands will usually also be available on the
 computer. Likewise, since a user may always terminate his/her own programs an
 s() daemon process can be terminated from another s() program using the
@@ -111,7 +111,7 @@ tt(--terminate) command line option.
 
 The above-mentioned facilities are not supported by bf(crontab)(1) itself.
 bf(Cron)(1), which is responsible for executing scheduled crontab commands,
-has no access to the pass phrases of ssh-keys (which are otherwise provided
+has no access to the passphrases of ssh-keys (which are otherwise provided
 em(ssh-agent)).
 
 

@@ -22,7 +22,7 @@ void Daemon::reload()
 
         // the offset is just beyond the request
 
-        // retrieve the pass phrase
+        // retrieve the passphrase
         string passPhrase = askPassPhrase();
 
         sharedStream << passPhrase << '\n' << path.get() << endl;
@@ -42,7 +42,7 @@ void Daemon::reload()
             return;
         }
 
-        cout << "Invalid pass phrase.\n" << endl;
+        cout << "Invalid passphrase.\n" << endl;
     }
     
     cout << "Giving up after three attempts." << endl;
