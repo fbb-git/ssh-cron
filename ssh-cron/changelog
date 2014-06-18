@@ -1,6 +1,6 @@
 ssh-cron (0.91.01)
 
-  * Changed 'pass phrase' into 'passphrase' following Tony Manill's advice
+  * Changed 'pass phrase' into 'passphrase' following Tony Mancill's advice
 
  -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 14 Jun 2014 22:31:08 +0200
 
