@@ -1,0 +1,31 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+    Ssh-cron implements a cron-like daemon that is able to use ssh-connections
+    using ssh keys that are protected by passphrases.
+
+    Copyright (C) 2012-2014  Frank B. Brokken (f.b.brokken@rug.nl)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEVAwUBU+ESSH2yqL7q5NiqAQjaKAf/Ysdc6tSEAOUZz/rKWawJIlIhWmZI5U28
+EIHg7A93edB5OV9emtIwXJ/j7YpAkLJKM5m8zX/RenOmmYuvDNIwhy4j8QTnxcEC
+Gm4w/OvFWgzHxbewRTSCeqjR3OML8NrJyzM6hSHtMrG00ifusp/2ldgEuwKTbZvX
+weqUFCKFkqQrf/CnkkG+phZmZl5/ubUClcCR1lJF+rmPMcHtbGyiFqbjNWH/o+VY
++ry261sGzcgGxA2x3BKAGv0YuHCb0vco8OymBnuKk27OyAUn8hrgGQ0KlEl3hOqN
+ydhuEqUZibu7Dm3ufLzzWTrecb+niFc1bQqXRxpDtt6nWNXVaoDByA==
+=kAf+
+-----END PGP SIGNATURE-----

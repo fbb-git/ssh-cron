@@ -1,7 +1,35 @@
+Welcome to SSH-CRON.
 
-I've changed ssh-cron's development status to Alpha. See also the 0.80.00
-changelog entry.
+Ssh-cron is now in its beta stage. 
+
+I wrote ssh-cron after a discussion with Jean-Paul van Oosten about the
+dangers of using ssh keys without passphrases. But when using ssh keys with
+passphrases your cron jobs performing tasks at remote computers, suddenly
+can't be used anymore, since cron cannot provide the passphrases.
+
+It's also not possible to simply start ssh-agent and then crontab as a child
+process, as crontab loses access to ssh-agent's passphrases.
+
+Ssh-cron was subsequently designed to allow jobs requiring access to
+ssh-keys to be run regularly. In other words, ssh-cron combines crontab
+facilities with the use of ssh keys protected by passphrases.
+
+More information about ssh-cron and how to use its options and crontab-like
+specification file is found in ssh-cron's man-page.
 
 
-Simply starting ssh-agent and then crontab as a child process doesn't work:
-crontab loses access to ssh-agent's passphrases.
+To compile ssh-cron from scratch you need a fairly recent Gnu g++ compiler
+(e.g. version 4.9.1 or more recent) and you need the Bobcat library (available
+at SourceForge and also as, e.g. Debian package). Compilation involves
+compiling all .cc files in this and all subdirectories, and then linking these
+components together. However, program construction is simplified if you also
+install icmake (also available at Sourceforge and as Debian package). If you
+have icmake available, check the defines in INSTALL.im for appropriateness for
+your system. Adapt them if necessary and simply run './build program' from
+this directory.
+
+
+Frank B. Brokken
+(f.b.brokken@rug.nl)
+
+
