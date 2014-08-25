@@ -6,7 +6,7 @@
     // For more information about this file: 'man 7 icmconf'
 
     // define any additional libraries the program may need:
-#define ADD_LIBRARIES       "bobcat"
+#define ADD_LIBRARIES       "pthread bobcat"
 
     // define any additional paths (other than the standard paths) the
     // additional libraries are located in:
