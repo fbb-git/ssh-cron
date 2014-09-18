@@ -1,9 +1,16 @@
-ssh-cron (0.91.02)
+ssh-cron (0.91.03)
 
   * Michael Tautschnig reported a FTBFS error, probably due to a missing
     -lpthread flag. Now added.
 
- -- Frank B. Brokken <f.b.brokken@rug.nl>  Mon, 25 Aug 2014 22:45:21 +0200
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Tue, 26 Aug 2014 09:11:41 +0200
+
+ssh-cron (0.91.02)
+
+  * No idea what required this subminor version, but according to Debian's
+    changelog we're at 0.91.02....
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Tue, 26 Aug 2014 09:11:41 +0200
 
 ssh-cron (0.91.01)
 
