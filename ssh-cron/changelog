@@ -1,3 +1,12 @@
+ssh-cron (0.92.00)
+
+ * cron/call checked the need to activate a program by either looking for a
+   matching month daynr, OR by looking for a matching day-of-week number. This
+   is wrong: a spec. like * * * * 4 should only run on Wednesdays. The check
+   now requires all time specifications to match the current time.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 18 Sep 2014 08:33:24 +0200
+
 ssh-cron (0.91.03)
 
   * Michael Tautschnig reported a FTBFS error, probably due to a missing

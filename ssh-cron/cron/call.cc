@@ -9,9 +9,7 @@ bool Cron::call(DateTime const &now, CronEntry const &entry)
         &&
         specified(now.month() + 1, entry.monthOfYear())
         &&
-        (
-            specified(now.monthDayNr(), entry.dayOfMonth())
-            ||
-            specified(now.weekday(), entry.dayOfWeek())
-        );
+        specified(now.monthDayNr(), entry.dayOfMonth())
+        &&
+        specified(now.weekday(), entry.dayOfWeek());
 }
