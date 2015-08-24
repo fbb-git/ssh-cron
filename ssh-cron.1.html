@@ -1,0 +1,335 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>ssh-cron</title>
+<style type="text/css">
+    figure {text-align: center;}
+    img {vertical-align: center;}
+</style>
+<link rev="made" href="mailto:f.b.brokken@rug.nl">
+</head>
+<body text="#27408B" bgcolor="#FFFAF0">
+<hr>
+<h1>ssh-cron</h1>
+<h2>ssh-cron_0.92.00.tar.gz</h2>
+<h2>2014</h2>
+
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<style type="text/css">
+    figure {text-align: center;}
+    img {vertical-align: center;}
+    figure {text-align: center;}
+    img {vertical-align: center;}
+</style>
+<link rev="made" href="mailto:f.b.brokken@rug.nl">
+</head>
+<body text="#27408B" bgcolor="#FFFAF0">
+<hr>
+<h1></h1>
+
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>ssh-cron(1)</title>
+<style type="text/css">
+    figure {text-align: center;}
+    img {vertical-align: center;}
+    figure {text-align: center;}
+    img {vertical-align: center;}
+    figure {text-align: center;}
+    img {vertical-align: center;}
+</style>
+<link rev="made" href="mailto:f.b.brokken@rug.nl">
+</head>
+<body text="#27408B" bgcolor="#FFFAF0">
+<hr>
+<h1>ssh-cron(1)</h1>
+<h2>ssh-cron_0.92.00.tar.gz ssh-cron - ssh-aware cron-like daemon</h2>
+<h2>2014</h2>
+
+
+<p>
+<h2>NAME</h2>ssh-cron - cron-like daemon able to use ssh-connections
+<p>
+<h2>SYNOPSIS</h2>
+       <strong>ssh-cron</strong> [OPTIONS] <em>[crontab-file]</em> <br>
+        [OPTIONS] - cf. section <strong>OPTIONS</strong><br>
+        [crontab-file] - file containing jobs to run.<br>
+<p>
+<h2>DESCRIPTION</h2>
+<p>
+Consider the situation where a computer every now and then must access a
+remote computer to do some useful things at that remote computer (like running
+a <strong>stealth</strong>(1) file integrity scan). In order to do so the computer must be
+allowed to make <strong>ssh</strong>(1) connections to the remote computer. But since the
+commands are not executed by the user but by <strong>cron</strong>(1), the ssh-keys which
+are required to access the remote computer cannot use passphrases.
+<p>
+This is an undesirable situation: if the computer running the <em>ssh</em> commands
+gets compromised, then the remote computers are compromised as well, since the
+attacker may access these remote systems using ssh keys not requiring pass
+phrases.
+<p>
+<strong>Ssh-Cron</strong> offers a way out of this undesirable situation, while still allowing
+commands to be executed on remote computers. Here's how this is realized:
+<p>
+<ul>
+    <li> Normally, <strong>ssh-cron</strong> runs as a daemon program. When <strong>ssh-cron</strong> starts it first
+        reads and parses a crontab-like specification file. Following this,
+        <strong>ssh-cron</strong> spawns a child process, and terminates.
+<p>
+<li> <strong>Ssh-Cron</strong>'s daemon process itself spawns an <strong>ssh-agent</strong>(1) child
+        process, executing all scheduled commands.
+<p>
+<li> In addition, <strong>ssh-cron</strong>'s daemon defines communcation channels between
+       itself and its <strong>ssh-agent</strong>(1) child process;
+<p>
+<li> <strong>Ssh-Cron</strong>'s daemon sends the command <strong>ssh-add</strong>(1) to its child process as
+       its first command to execute, and using normal user-interaction means
+       (e.g., using <strong>ssh-askpass</strong>(1)) <em>ssh-agent</em> is provided with the
+       required passphrase(s) for the ssh key(s).
+<p>
+<li> <strong>Ssh-Cron</strong>'s daemon now monitors the time, firing off scheduled commands at
+       their required moments in time. If these commands require access to
+       remote computers, then this access is granted, as <em>ssh-agent</em> is able
+       to provide the passphrase(s).
+<p>
+<li> If an <strong>ssh-cron</strong> daemon process is already running, then the <em>--reload</em>
+       option (see below), can be used to load the <strong>ssh-cron</strong> daemon with the
+       commands and environment variable settings from another
+       <em>crontab-file</em>, replacing the currently stored commands and
+       environment settings by the ones provided in the reloaded file.
+    </ul>
+<p>
+When shell control characters (like redirection symbols) must be used in
+command specifications, they should be escaped. E.g., as in <em>echo hello
+world \&gt; /dev/null</em>.
+<p>
+Users sharing a computer each define their own <strong>ssh-cron</strong> specification file. When a
+user logs out and leaves the
+system the daemon process continues to run, executing its scheduled commands
+at their scheduled times, using ssh-keys whenever required.
+<p>
+If the accounts for which <strong>ssh-cron</strong> jobs are running are ever compromised,
+the remote computers remain safe, as the passphrases of the available 
+ssh-keys remain unavailable.
+<p>
+To prevent unauthorized modifications of the commands scheduled by the <strong>ssh-cron</strong>
+daemon themselves a passphrase is required when starting <strong>ssh-cron</strong>'s daemon
+process. The passphrase itself is not stored by the daemon (instead, it
+stores a <strong>sha256</strong>(1) hash value), which avoids access to the <strong>ssh-cron</strong> daemon's
+passphrase by browsing the computer's memory. The passphrase may be empty,
+but even then that empty passphrase must be provided when reloading <strong>ssh-cron</strong>
+daemon's scheduled commands. The scheduled commands may be listed,
+however. This is allowed without providing a passphrase since the file
+containing the scheduled commands will usually also be available on the
+computer. Likewise, since a user may always terminate his/her own programs an
+<strong>ssh-cron</strong> daemon process can be terminated from another <strong>ssh-cron</strong> program using the
+<em>--terminate</em> command line option.
+<p>
+The above-mentioned facilities are not supported by <strong>crontab</strong>(1) itself.
+<strong>Cron</strong>(1), which is responsible for executing scheduled crontab commands,
+has no access to the passphrases of ssh-keys (which are otherwise provided
+<em>ssh-agent</em>).
+<p>
+<h2>RETURN VALUE</h2>
+<p>
+<strong>Ssh-Cron</strong> returns 0 if the daemon was successfully started. Otherwise 1 is
+returned. 
+<p>
+<h2>OPTIONS</h2>
+<p>
+Where available, single letter options are listed between parentheses
+following their associated long-option variants. Single letter options require
+arguments if their associated long options also require arguments.
+<p>
+Several options have default values. Run <em>ssh-cron --help</em> for an overview
+of the implemented default option values. Also, several options can be
+specified in a configuration file (where this doesn't hold true, it is
+explicitly mentioned at the relevant options).
+<p>
+The configuration file (not to be confused with the file containing the
+scheduled commands, which is provided as <strong>ssh-cron</strong> command-line file argument)
+ignores empty lines and all information on lines starting at a hash-mark
+(<em>#</em>, optionally preceded by blanks and/or tabs). The configuration file is
+used to specify <strong>ssh-cron</strong>'s options using their long variants. However, in the
+configuration file the initial hyphens of command-line options must be
+omitted, and optionally a colon may be appended to these long options
+names. Note that multi-word option arguments should not be surrounded by
+quotes. Examples:
+            <pre>
+
+    stdout
+    syslog-facility: LOCAL0
+    mailer: /usr/bin/mail -s "some subject" me@myhost.warpnet.nl
+            
+</pre>
+
+    Command-line options always override configuration file options.
+<p>
+<ul>
+    <li> <strong>--agent</strong>=<em>agent</em><br>
+       absolute path to the agent program (plus its argument(s)) providing the
+        ssh-keys. 
+<p>
+By default <em>/usr/bin/ssh-agent /bin/bash</em> is used.
+<p>
+<li> <strong>--config-file</strong>=<em>path</em> (<strong>-c</strong>)<br>
+        config file containing long option specifications.
+<p>
+By default <em>~/.ssh-cron</em> is used.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--help</strong> (<strong>-h</strong>)<br>
+       basic usage information is written to the standard output
+        stream (only interpreted in combination with <em>--no-daemon</em>).
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--ipc-file</strong>=<em>path</em> (<strong>-p</strong>)<br>
+       when <strong>ssh-cron</strong> runs as a daemon, then <em>path</em> specifies the path of the file
+        holding the daemon's shared memory ID and process ID. The ipc file
+        must be available if <strong>ssh-cron</strong> is connecting to or starting a daemon process
+        (the former situation occurs with the options <em>--list, --reload</em>,
+        and <em>--terminate</em>). <strong>Ssh-Cron</strong> does not start a daemon process if it
+        detects an existing <em>ipc-file</em>, which has to be removed by the user
+        first. To end a daemon process use <em>ssh-cron --terminate</em>, or send a
+        SIGINT (<em>ctrl-C</em>) or SIGTERM signal to the process-id found as the
+        second value in the <em>ipc-file</em>.
+<p>
+By default <em>~/.ssh-cron.ipc</em> is used.
+<p>
+<li> <strong>--list</strong> (<strong>-l</strong>)<br>
+       list the currently defined environment settings and cron-commands (the
+        <em>crontab-file</em> argument must be omitted). This option is
+        incompatible with (--no-daemon, --reload,) and <em>--terminate</em>.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--log</strong>=<em>path</em> (<strong>-L</strong>)<br>
+       log messages are appended to <em>path</em>. If <em>path</em> does not exist, it
+        is created first.
+<p>
+<li> <strong>--mailer</strong>=<em>command</em> (<strong>-m</strong>)<br>
+       information written to the standard output or standard error streams of
+        the commands executed by <strong>ssh-cron</strong> is sent by e-mail to the current
+        user. Use <em>--mailer</em> to redefine (or to suppress sending e-mail by
+        specifying an empty mailer command (i.e., <em>--mailer ""</em>)).
+<p>
+By default <em>/usr/bin/mail -s \"Ssh-cron $*\" $USER@localhost</em> is
+        used, with <em>$*</em> replaced by the exected command as specified in the
+        <em>crontab</em> file argument.
+<p>
+<li> <strong>--no-daemon</strong> <br>
+       <strong>ssh-cron</strong> is not run as a daemon. To properly end <strong>ssh-cron</strong> if not running as a
+        daemon, press the `Enter' key, enter <em>ctrl-C</em> or send <strong>ssh-cron</strong> a
+        <em>SIGTERM</em> signal. This option is incompatible with ( --list,
+        --reload,) and <em>--terminate</em>.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--reload</strong> (<strong>-r</strong>)<br>
+       reload the <strong>ssh-cron</strong> daemon with de cron-commands defined in the
+        <em>crontab-file</em> argument (which must be provided). This option is
+        incompatible with (--list, --no-daemon,) and <em>--terminate</em>.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--stdout</strong> (<strong>-s</strong>)<br> 
+       in addition to using a log file and syslog messages send all messages
+        to the standard output. This option is not available if <strong>ssh-cron</strong> runs as a
+        daemon process.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--syslog</strong><br>
+       messages are sent to the syslog daemon when this option is specified.
+        By default syslog messages are written to the <em>DAEMON</em> facility with
+        priority <em>NOTICE</em>.
+<p>
+<li> <strong>--syslog-facility</strong>=<em>facility</em><br>
+       the facility that is used to write the syslog messages to. By default
+        this is <em>DAEMON</em>. For an overview of facilities and their meanings,
+        see, e.g., <strong>syslog</strong>(3). With <strong>ssh-cron</strong> the facilities <em>DAEMON,
+        LOCAL0, LOCAL1, LOCAL2, LOCAL3, LOCAL4, LOCAL5, LOCAL6, LOCAL7</em>, and
+        <em>USER</em> can be used.
+<p>
+By default facility <em>DAEMON</em> is used.
+<p>
+<li> <strong>--syslog-priority</strong>=<em>priority</em><br>
+       the priority that is used to write the syslog messages to. By default
+        this is <em>NOTICE</em>. For an overview of priorities and their meanings,
+        see, e.g., <strong>syslog</strong>(3). With <strong>ssh-cron</strong> all defined priorities can
+        be used. E.g., <em> EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO</em> and
+        <em>DEBUG</em>.
+<p>
+By default priority <em>NOTICE</em> is used.
+<p>
+<li> <strong>--syslog-tag</strong>=<em>tag</em><br>
+       syslog messages can be provided with a <em>tag</em>, which can be used to
+        filter them from the log-files. See also section <em>RSYSLOG
+        FILTERING</em> below.
+<p>
+By default the tag <em>SSH-CRON</em> is used.  
+<p>
+<li> <strong>--terminate</strong> (<strong>-t</strong>)<br>
+       terminate a running <strong>ssh-cron</strong> daemon program, using the daemon's process ID
+        found in the ipc-file's second value. The <em>crontab-file</em> argument
+        must be omitted. This option is incompatible tt with (--list,
+        --nodaemon,) and <em>--reload</em>
+.
+        This option cannot be specified in the configuration file.
+<p>
+<li> <strong>--verbose</strong><br> 
+       additional messages about <strong>ssh-cron</strong>'s mode of operation are sent to
+        <strong>ssh-cron</strong>'s log facilities (specified by <em>--log, --syslog,</em> and/or
+        <em>--stdout</em>). 
+<p>
+<li> <strong>--version</strong> (<strong>-v</strong>)<br>
+       <strong>ssh-cron</strong>'s version number is written to the standard output stream.
+<p>
+This option cannot be specified in the configuration file.
+<p>
+</ul> 
+<p>
+<h2>RSYSLOG FILTERING</h2>
+<p>
+When using <strong>rsyslogd</strong>(1) property based filters may be used to filter
+syslog messages and write them to a file of your choice. E.g., to filter
+messages starting with the syslog message tag (e.g., <em>SSH-CRON</em>) use
+        <pre>
+
+:syslogtag, isequal, "SSH-CRON:"   /var/log/ssh-cron.log
+:syslogtag, isequal, "SSH-CRON:"   ~
+        
+</pre>
+
+    Note that the colon is part of the tag, but is not specified with the 
+<em>syslog-tag</em> option.
+<p>
+This causes all messages having the <em>SSH-CRON:</em> tag to be written on
+<em>/var/log/ssh-cron.log</em> after which they are discarded. More extensive
+filtering is also supported, see, e.g.,
+<em>http://www.rsyslog.com/doc/rsyslog_conf_filter.html</em> and
+<em>http://www.rsyslog.com/doc/property_replacer.html</em>
+<p>
+<h2>SEE ALSO</h2> 
+<p>
+<strong>cron</strong>(1), <strong>crontab</strong>(1), <strong>crontab</strong>(5), , <strong>rsyslogd</strong>(1), <strong>ssh</strong>(1), 
+<strong>ssh-add</strong>(1), <strong>ssh-agent</strong>(1), <strong>ssh-askpass</strong>(1), <strong>stealth</strong>(1), 
+<strong>syslog</strong>(3)
+<p>
+<h2>BUGS</h2>
+    None reported.
+<p>
+<h2>COPYRIGHT</h2>
+    This is free software, distributed under the terms of the `GNU General
+Public License'. Copyright remains with the author. <strong>ssh-cron</strong> is available at
+<em>https://fbb-git.github.io/ssh-cron/</em>.
+<p>
+<h2>ORGANIZATION</h2>
+    Center for Information Technology, University of Groningen.
+<p>
+<h2>AUTHOR</h2>
+    Frank B. Brokken (<strong>f.b.brokken@rug.nl</strong>).
+<p>

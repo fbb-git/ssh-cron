@@ -1,0 +1,43 @@
+#!/bin/bash
+
+_project_=ssh-cron
+_product_=ssh-cron
+
+echo -n "Need to (re)create ${_project_}'s wip files for gh-pages [y/n] ? "
+read yesno
+
+if [ "$yesno" == "y" ] ; then
+    git co master
+
+    cd ${_product_}
+    ./build man
+
+    ./build github
+    ./build distclean
+    cd ..    
+    git co gh-pages
+fi
+
+cp -r ../wip/changelog.txt ../wip/${_product_}.1.html .
+
+yodl2html index.yo || exit 1
+
+echo "Running 'git st': no untracked files or ignorable files should be shown"
+git st
+
+echo
+
+echo -n "git ci changes to index.html etc., push the result and \
+git co master [y/n] ? "
+
+read yesno
+
+if [ "$yesno" == "y" ] ; then
+    RELEASE=`head -n1 ../wip/release.yo | 
+		sed 's/SUBST(_CurVers_)(\(.*\))/\1/'`
+    git ci -am "updated index.html for gh-pages, release $RELEASE"
+    git push
+    git co master
+fi
+
+

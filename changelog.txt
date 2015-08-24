@@ -1,0 +1,71 @@
+ssh-cron (0.92.00)
+
+ * cron/call checked the need to activate a program by either looking for a
+   matching month daynr, OR by looking for a matching day-of-week number. This
+   is wrong: a spec. like * * * * 4 should only run on Wednesdays. The check
+   now requires all time specifications to match the current time.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 18 Sep 2014 08:33:24 +0200
+
+ssh-cron (0.91.03)
+
+  * Michael Tautschnig reported a FTBFS error, probably due to a missing
+    -lpthread flag. Now added.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Tue, 26 Aug 2014 09:11:41 +0200
+
+ssh-cron (0.91.02)
+
+  * No idea what required this subminor version, but according to Debian's
+    changelog we're at 0.91.02....
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Tue, 26 Aug 2014 09:11:41 +0200
+
+ssh-cron (0.91.01)
+
+  * Changed 'pass phrase' into 'passphrase' following Tony Mancill's advice
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 14 Jun 2014 22:31:08 +0200
+
+ssh-cron (0.91.00)
+
+  * A passphrase is required when starting the ssh-cron daemon or when
+    modifiying the daemon's scheduled commands.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Mon, 09 Jun 2014 13:45:06 +0200
+
+ssh-cron (0.90.00)
+
+  * Commands using an ssh-key requiring a passphrase have been successfully
+    executed when scheduled. When running ssh-cron as a daemon scheduling
+    continued after the user starting the daemon had logged out.
+
+  * Be advised: to run (or compile) ssh-cron, bobcat >= 3.23.00 is required.
+
+  * SSH-cron's development status is now BETA.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 07 Jun 2014 16:39:32 +0200
+
+ssh-cron (0.80.00)
+
+  * SSH-cron's development status is now ALPHA: daemon,--no-daemon, --list,
+    --reload, and --terminate have been shown to work as planned. 
+
+  * Be advised that compiling and running ssh-cron requires at least Bobcat
+    3.23.00, which is currently only available from Bobcat's git repo:
+        commit 9eb8bc8029a4472d12a92a350b302ae2f71f496e
+        Date:   Wed Jun 4 21:21:05 2014 +0200
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Wed, 04 Jun 2014 21:35:39 +0200
+
+ssh-cron (0.10.00)
+
+  * Proof of concept operational
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Mon, 12 May 2014 10:43:33 +0200
+
+ssh-cron (0.00.00)
+
+  * Start of Project.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 07 May 2014 20:44:12 +0200
