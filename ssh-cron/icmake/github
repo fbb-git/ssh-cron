@@ -1,0 +1,6 @@
+void github()
+{
+    run("cp -r release.yo tmp/manhtml/ssh-cron.1.html ../../wip");
+    run("cp changelog ../../wip/changelog.txt");
+    exit(0);
+}
