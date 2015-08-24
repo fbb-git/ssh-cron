@@ -57,7 +57,7 @@ Jun 4, 2014.
     Additional information about _product_:
     itemization(
     it() The url(html-version of the _Product_ man-page)
-                (_product_man.html).
+                (_product_.1.html).
     it() The complete url(_Product_ changelog)(changelog.txt).
     )
 
