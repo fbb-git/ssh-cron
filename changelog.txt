@@ -1,3 +1,14 @@
+ssh-cron (1.00.00)
+
+ * Update to version 1.00.00 after being operational for one year without
+   issues. 
+
+ * Added 'INSTALL' and 'required'
+
+ * Standardized the (de)installation procedures
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 03 Oct 2015 10:10:18 +0200
+
 ssh-cron (0.92.00)
 
  * cron/call checked the need to activate a program by either looking for a
