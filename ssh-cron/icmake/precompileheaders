@@ -22,7 +22,7 @@ void precompileHeaders()
                                     setOpt(CXXFLAGS, "CXXFLAGS") + " ";
 
 
-    _precompile("flexc++");         // precompile the main program .ih file
+    _precompile("main");         // precompile the main program .ih file
 
 
     for (idx = sizeof(classes); idx--; )
