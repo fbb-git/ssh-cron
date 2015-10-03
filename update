@@ -33,6 +33,7 @@ echo -n "Check index.yo: version and last 5 releases [y/n] ? "
 read yesno
 
 if [ "$yesno" == "y" ] ; then
+    cat ../wip/release.yo
     emacs index.yo
 fi
 
