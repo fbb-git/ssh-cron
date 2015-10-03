@@ -1,4 +1,4 @@
-    // Specify the name of the project:
+    // The name of the project:
 #define PROJECT             "ssh-cron"
 
     // When defined, these overrule COMPILER and COMPILER_OPTIONS
@@ -7,26 +7,41 @@
     // Their #define values are overruled by identically named environment
     // variables. 
 
-#define CXX                 "g++"
     // the compiler to use. 
+#define CXX                 "g++"
 
-#define CXXFLAGS            "--std=c++11 -pthread -Wall -O2"
     // the compiler options to use.
+#define CXXFLAGS  "--std=c++14 -pthread -Wall -O2  -fdiagnostics-color=never"
 
-#define LDFLAGS             ""
     // flags passed to the linker
+#define LDFLAGS             ""
 
-// =========================================================================
-// The following locations are overruled by `build install' arguments
+#define CPOPTS
 
-#define BINARY     "/usr/bin/"${PROJECT}
-    // the full path of the final program
+// COMPONENTS TO INSTALL
+// =====================
 
-#define MAN     "/usr/share/man/man1"
-    // the directory whre the manual page is stored
+    // For an operational non-Debian installation, you probably must be
+    // `root'.
 
-#define STD     "/usr/share/doc/"${PROJECT}
+    // If necessary, adapt DOC, HDR, LIB and MAN (below) to your situation.
+    // The provided locations are used by Debian Linux.
+
+    // With 'build install' you can dynamically specify a location to prepend
+    // to the locations configured here, and select which components you want 
+    // to install
+
+// ONLY USE ABSOLUTE DIRECTORY NAMES:
+
+    // the final program
+#define BINARY  "/usr/bin/"${PROJECT}
+
     // the directory where the standard documentation is stored 
+#define DOC     "/usr/share/doc/"${PROJECT}
+
+    // the directory whre the manual page is stored
+#define MAN     "/usr/share/man/man1"
+
 
 
 

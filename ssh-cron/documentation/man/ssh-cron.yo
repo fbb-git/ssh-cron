@@ -1,4 +1,4 @@
-gagmacrowarning(cron argument phrase key)
+gagmacrowarning(cron argument phrase key passphrase)
 
 includefile(../../release.yo)
 
