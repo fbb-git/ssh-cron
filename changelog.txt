@@ -1,3 +1,15 @@
+ssh-cron (1.01.00)
+
+  * The user is interactively given an opportunity to remove an existing
+    (left-over) ipc file when (re)starting ssh-cron.
+
+  * Added option --forced (or: -f) to force the removal of an already existing
+    ipc-file during daemon startup.
+
+  * Build scripts adapted to icmake 8.00.04.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Mon, 14 Dec 2015 13:15:41 +0100
+
 ssh-cron (1.00.01)
 
   * Kevin Brodsky observed that the installation scripts used 'chdir' rather
