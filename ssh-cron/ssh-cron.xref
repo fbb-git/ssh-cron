@@ -1,0 +1,611 @@
+oxref by Frank B. Brokken (f.b.brokken@rug.nl)
+oxref V1.00.03 2012-2015
+
+CREATED Mon, 14 Dec 2015 12:58:48 +0000
+CROSS REFERENCE FOR: -fxs tmp/libmodules.a 
+----------------------------------------------------------------------
+
+addCronCommand()
+  Full name: CronData::addCronCommand()
+  Source:    addcroncommand.cc 
+  Used By:
+    process.cc: CronData::process()
+
+addName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: CronData::addName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Source:    addname.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+addNr(unsigned int)
+  Full name: CronData::addNr(unsigned int)
+  Source:    addnr.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+addRange(unsigned int, unsigned int, unsigned int)
+  Full name: CronData::addRange(unsigned int, unsigned int, unsigned int)
+  Source:    addrange.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+    setall.cc: CronData::setAll(unsigned int)
+
+assign()
+  Full name: CronData::assign()
+  Source:    assign.cc 
+  Used By:
+    assign2.cc: CronData::assign(char const* const*, bool)
+    setdayofmonth.cc: CronData::setDayOfMonth()
+    sethours.cc: CronData::setHours()
+    setminutes.cc: CronData::setMinutes()
+
+assign(char const* const*, bool)
+  Full name: CronData::assign(char const* const*, bool)
+  Source:    assign2.cc 
+  Used By:
+    setdayofweek.cc: CronData::setDayOfWeek()
+    setmonthofyear.cc: CronData::setMonthOfYear()
+
+author
+  Full name: Icmbuild::author
+  Source:    version.cc 
+  Used By:
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+basename() const
+  Full name: Daemon::basename() const
+  Source:    basename.cc 
+  Used By:
+    list.cc: Daemon::list(std::istream&)
+    listrequest.cc: Daemon::listRequest()
+    reload.cc: Daemon::reload()
+    terminate.cc: Daemon::terminate() const
+
+call(FBB::DateTime const&, CronEntry const&)
+  Full name: Cron::call(FBB::DateTime const&, CronEntry const&)
+  Source:    call.cc 
+  Used By:
+    runcronjobs.cc: Cron::runCronJobs()
+
+checkAction() const
+  Full name: Options::checkAction() const
+  Source:    checkaction.cc 
+  Used By:
+    options1.cc: Options::Options()
+
+childProcess()
+  Full name: Daemon::childProcess()
+  Source:    childprocess.cc 
+  Used By:
+    parentprocess.cc: Daemon::parentProcess()
+
+childProcess()
+  Full name: Cron::childProcess()
+  Source:    childprocess.cc 
+  Used By:
+    childredirections.cc: Cron::childRedirections()
+
+cleanup()
+  Full name: Daemon::cleanup()
+  Source:    cleanup.cc 
+  Used By:
+    childprocess.cc: Daemon::childProcess()
+
+createIPCfile()
+  Full name: Daemon::createIPCfile()
+  Source:    createipcfile.cc 
+  Used By:
+    daemonize.cc: Daemon::daemonize()
+
+Cron(CronData&)
+  Full name: Cron::Cron(CronData&)
+  Source:    cron1.cc 
+  Used By:
+    daemon1.cc: Daemon::Daemon()
+
+CronData()
+  Full name: CronData::CronData()
+  Source:    crondata1.cc 
+  Used By:
+    reload.cc: Cron::reload(std::istream&)
+    daemon1.cc: Daemon::Daemon()
+
+cronLoop()
+  Full name: Cron::cronLoop()
+  Source:    cronloop.cc 
+  Used By:
+    parentprocess.cc: Cron::parentProcess()
+
+cxx11]
+  Full name: Cron::s_agent[abi:cxx11]
+  Source:    data.cc 
+  Used By:
+    childprocess.cc: Cron::childProcess()
+
+cxx11]
+  Full name: Options::s_syslogPriorities[abi:cxx11]
+  Source:    data.cc 
+  Used By:
+    syslogpriority.cc: Options::syslogPriority() const
+
+cxx11]
+  Full name: Options::s_syslogFacilities[abi:cxx11]
+  Source:    data.cc 
+  Used By:
+    syslogfacility.cc: Options::syslogFacility() const
+
+cxx11]()
+  Full name: Daemon::askPassPhrase[abi:cxx11]()
+  Source:    askpassphrase.cc 
+  Used By:
+    reload.cc: Daemon::reload()
+
+cxx11]() const
+  Full name: Options::syslogTag[abi:cxx11]() const
+  Source:    syslogtag.cc 
+  Used By:
+    setsyslog.cc: Options::setSyslog()
+
+daemonize()
+  Full name: Daemon::daemonize()
+  Source:    daemonize.cc 
+  Used By:
+    run.cc: Daemon::run()
+
+defineRunFunction()
+  Full name: Cron::defineRunFunction()
+  Source:    definerunfunction.cc 
+  Used By:
+    parentprocess.cc: Cron::parentProcess()
+
+enterThread(Daemon*)
+  Full name: Daemon::enterThread(Daemon*)
+  Source:    enterthread.cc 
+  Used By:
+    childprocess.cc: Daemon::childProcess()
+
+error(char const*)
+  Full name: Parser::error(char const*)
+  Source:    error.cc 
+  Used By:
+    parse.cc: Parser::errorRecovery()
+
+execute(CronEntry const&)
+  Full name: Cron::execute(CronEntry const&)
+  Source:    execute.cc 
+  Used By:
+    runcronjobs.cc: Cron::runCronJobs()
+
+getIPCInfo() const
+  Full name: Daemon::getIPCInfo() const
+  Source:    getipcinfo.cc 
+  Used By:
+    listrequest.cc: Daemon::listRequest()
+    reload.cc: Daemon::reload()
+    terminate.cc: Daemon::terminate() const
+
+getPassPhrase()
+  Full name: Daemon::getPassPhrase()
+  Source:    getpassphrase.cc 
+  Used By:
+    daemonize.cc: Daemon::daemonize()
+
+handleRequests()
+  Full name: Cron::handleRequests()
+  Source:    handlerequests.cc 
+  Used By:
+    requesthandler.cc: Cron::requestHandler(Cron*)
+
+hmac(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Cron::hmac(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Source:    hmac.cc 
+  Used By:
+    reload.cc: Cron::reload(std::istream&)
+    getpassphrase.cc: Daemon::getPassPhrase()
+
+idmsg() const
+  Full name: Daemon::idmsg() const
+  Source:    idmsg.cc 
+  Used By:
+    childprocess.cc: Daemon::childProcess()
+    daemonize.cc: Daemon::daemonize()
+    getipcinfo.cc: Daemon::getIPCInfo() const
+    list.cc: Daemon::list(std::istream&)
+    listrequest.cc: Daemon::listRequest()
+    reload.cc: Daemon::reload()
+    terminate.cc: Daemon::terminate() const
+
+idmsg() const
+  Full name: Cron::idmsg() const
+  Source:    idmsg.cc 
+  Used By:
+    cronloop.cc: Cron::cronLoop()
+    definerunfunction.cc: Cron::defineRunFunction()
+    execute.cc: Cron::execute(CronEntry const&)
+    handlerequests.cc: Cron::handleRequests()
+    parentprocess.cc: Cron::parentProcess()
+    reload.cc: Cron::reload(std::istream&)
+
+insert(std::ostream&) const
+  Full name: CronEntry::insert(std::ostream&) const
+  Source:    insert.cc 
+  Used By:
+    operatorinsert.cc: operator<<(std::ostream&, CronEntry const&)
+    insert.cc: CronData::insert(std::ostream&) const
+
+insert(std::ostream&) const
+  Full name: CronData::insert(std::ostream&) const
+  Source:    insert.cc 
+  Used By:
+    parentprocess.cc: Daemon::parentProcess()
+    reload.cc: Daemon::reload()
+
+instance()
+  Full name: Options::instance()
+  Source:    instance.cc 
+  Used By:
+    addcroncommand.cc: CronData::addCronCommand()
+    crondata1.cc: CronData::CronData()
+    setenvvar.cc: CronData::setEnvVar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+    cron1.cc: Cron::Cron(CronData&)
+    handlerequests.cc: Cron::handleRequests()
+    daemon1.cc: Daemon::Daemon()
+    getipcinfo.cc: Daemon::getIPCInfo() const
+    parentprocess.cc: Daemon::parentProcess()
+
+invalidRange(unsigned int, unsigned int) const
+  Full name: CronData::invalidRange(unsigned int, unsigned int) const
+  Source:    invalidrange.cc 
+  Used By:
+    addrange.cc: CronData::addRange(unsigned int, unsigned int, unsigned int)
+
+ipc()
+  Full name: Daemon::ipc()
+  Source:    ipc.cc 
+  Used By:
+    run.cc: Daemon::run()
+
+lex__()
+  Full name: Scanner::lex__()
+  Source:    lex.cc 
+  Used By:
+    parse.cc: Parser::nextToken()
+
+list(std::istream&)
+  Full name: Daemon::list(std::istream&)
+  Source:    list.cc 
+  Used By:
+    listrequest.cc: Daemon::listRequest()
+
+list(unsigned int*, int, FBB::SharedStream&)
+  Full name: Cron::list(unsigned int*, int, FBB::SharedStream&)
+  Source:    list.cc 
+  Used By:
+    handlerequests.cc: Cron::handleRequests()
+
+listRequest()
+  Full name: Daemon::listRequest()
+  Source:    listrequest.cc 
+  Used By:
+    ipc.cc: Daemon::ipc()
+
+loadConfigFile()
+  Full name: Options::loadConfigFile()
+  Source:    loadconfigfile.cc 
+  Used By:
+    options1.cc: Options::Options()
+
+operator<<(std::ostream&, CronEntry const&)
+  Full name: operator<<(std::ostream&, CronEntry const&)
+  Source:    operatorinsert.cc 
+  Used By:
+    addcroncommand.cc: CronData::addCronCommand()
+    list.cc: Cron::list(unsigned int*, int, FBB::SharedStream&)
+
+Options()
+  Full name: Options::Options()
+  Source:    options1.cc 
+  Used By:
+    instance.cc: Options::instance()
+
+outOfRange(unsigned int)
+  Full name: CronData::outOfRange(unsigned int)
+  Source:    outofrange.cc 
+  Used By:
+    addnr.cc: CronData::addNr(unsigned int)
+    assign.cc: CronData::assign()
+
+parentProcess()
+  Full name: Cron::parentProcess()
+  Source:    parentprocess.cc 
+  Used By:
+    childredirections.cc: Cron::childRedirections()
+
+parse()
+  Full name: Parser::parse()
+  Source:    parse.cc 
+  Used By:
+    reload.cc: Cron::reload(std::istream&)
+    daemon1.cc: Daemon::Daemon()
+
+Parser(std::istream&, CronData&)
+  Full name: Parser::Parser(std::istream&, CronData&)
+  Source:    parser1.cc 
+  Used By:
+    reload.cc: Cron::reload(std::istream&)
+    daemon1.cc: Daemon::Daemon()
+
+ParserBase()
+  Full name: ParserBase::ParserBase()
+  Source:    parse.cc 
+  Used By:
+    parser1.cc: Parser::Parser(std::istream&, CronData&)
+
+process()
+  Full name: CronData::process()
+  Source:    process.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+readRequest(std::istream&)
+  Full name: Cron::readRequest(std::istream&)
+  Source:    readrequest.cc 
+  Used By:
+    handlerequests.cc: Cron::handleRequests()
+    list.cc: Daemon::list(std::istream&)
+
+reload()
+  Full name: Daemon::reload()
+  Source:    reload.cc 
+  Used By:
+    ipc.cc: Daemon::ipc()
+
+reload(std::istream&)
+  Full name: Cron::reload(std::istream&)
+  Source:    reload.cc 
+  Used By:
+    handlerequests.cc: Cron::handleRequests()
+
+requestHandler(Cron*)
+  Full name: Cron::requestHandler(Cron*)
+  Source:    requesthandler.cc 
+  Used By:
+    parentprocess.cc: Cron::parentProcess()
+
+reset(unsigned int)
+  Full name: CronData::reset(unsigned int)
+  Source:    reset.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+runCronJobs()
+  Full name: Cron::runCronJobs()
+  Source:    runcronjobs.cc 
+  Used By:
+    cronloop.cc: Cron::cronLoop()
+
+s_day
+  Full name: CronData::s_day
+  Source:    data.cc 
+  Used By:
+    setdayofweek.cc: CronData::setDayOfWeek()
+
+s_defaultAgent
+  Full name: Options::s_defaultAgent
+  Source:    data.cc 
+  Used By:
+    options1.cc: Options::Options()
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultConfigFile
+  Full name: Options::s_defaultConfigFile
+  Source:    data.cc 
+  Used By:
+    loadconfigfile.cc: Options::loadConfigFile()
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultIPCfile
+  Full name: Options::s_defaultIPCfile
+  Source:    data.cc 
+  Used By:
+    options1.cc: Options::Options()
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultMailer
+  Full name: Options::s_defaultMailer
+  Source:    data.cc 
+  Used By:
+    options1.cc: Options::Options()
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultSyslogFacility
+  Full name: Options::s_defaultSyslogFacility
+  Source:    data.cc 
+  Used By:
+    syslogfacility.cc: Options::syslogFacility() const
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultSyslogIdent
+  Full name: Options::s_defaultSyslogIdent
+  Source:    data.cc 
+  Used By:
+    syslogtag.cc: Options::syslogTag[abi:cxx11]() const
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_defaultSyslogPriority
+  Full name: Options::s_defaultSyslogPriority
+  Source:    data.cc 
+  Used By:
+    syslogpriority.cc: Options::syslogPriority() const
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+s_month
+  Full name: CronData::s_month
+  Source:    data.cc 
+  Used By:
+    setmonthofyear.cc: CronData::setMonthOfYear()
+
+s_nameMap
+  Full name: IPCFunction::s_nameMap
+  Source:    data.cc 
+  Used By:
+    handlerequests.cc: Cron::handleRequests()
+    list.cc: Daemon::list(std::istream&)
+    listrequest.cc: Daemon::listRequest()
+
+s_options
+  Full name: Options::s_options
+  Source:    data.cc 
+  Used By:
+    instance.cc: Options::instance()
+
+s_values
+  Full name: CronData::s_values
+  Source:    data.cc 
+  Used By:
+    assign.cc: CronData::assign()
+
+ScannerBase(std::istream&, std::ostream&)
+  Full name: ScannerBase::ScannerBase(std::istream&, std::ostream&)
+  Source:    lex.cc 
+  Used By:
+    parser1.cc: Parser::Parser(std::istream&, CronData&)
+
+scheduler() const
+  Full name: Cron::scheduler() const
+  Source:    scheduler.cc 
+  Used By:
+    execute.cc: Cron::execute(CronEntry const&)
+    handlerequests.cc: Cron::handleRequests()
+    parentprocess.cc: Cron::parentProcess()
+
+sendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  Full name: Cron::sendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  Source:    sendcommand.cc 
+  Used By:
+    execute.cc: Cron::execute(CronEntry const&)
+    parentprocess.cc: Cron::parentProcess()
+
+setAll(unsigned int)
+  Full name: CronData::setAll(unsigned int)
+  Source:    setall.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: CronData::setCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Source:    setcommand.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setDayOfMonth()
+  Full name: CronData::setDayOfMonth()
+  Source:    setdayofmonth.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setDayOfWeek()
+  Full name: CronData::setDayOfWeek()
+  Source:    setdayofweek.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setEnvironment(unsigned int, unsigned int, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const*)
+  Full name: CronEntry::setEnvironment(unsigned int, unsigned int, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const*)
+  Source:    setenvironment.cc 
+  Used By:
+    addcroncommand.cc: CronData::addCronCommand()
+
+setEnvVar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: CronData::setEnvVar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Source:    setenvvar.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setHours()
+  Full name: CronData::setHours()
+  Source:    sethours.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setMinutes()
+  Full name: CronData::setMinutes()
+  Source:    setminutes.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setMonthOfYear()
+  Full name: CronData::setMonthOfYear()
+  Source:    setmonthofyear.cc 
+  Used By:
+    parse.cc: Parser::executeAction(int)
+
+setSyslog()
+  Full name: Options::setSyslog()
+  Source:    setsyslog.cc 
+  Used By:
+    options1.cc: Options::Options()
+
+showSet(std::ostream&, std::set<unsigned int, std::less<unsigned int>, std::allocator<unsigned int> > const&)
+  Full name: CronEntry::showSet(std::ostream&, std::set<unsigned int, std::less<unsigned int>, std::allocator<unsigned int> > const&)
+  Source:    showset.cc 
+  Used By:
+    insert.cc: CronEntry::insert(std::ostream&) const
+
+signalHandler(unsigned int)
+  Full name: Daemon::signalHandler(unsigned int)
+  Source:    signalhandler.cc 
+  Used By:
+    parentprocess.cc: Daemon::parentProcess()
+
+stop(unsigned int)
+  Full name: Cron::stop(unsigned int)
+  Source:    stop.cc 
+  Used By:
+    signalhandler.cc: Daemon::signalHandler(unsigned int)
+
+syslogFacility() const
+  Full name: Options::syslogFacility() const
+  Source:    syslogfacility.cc 
+  Used By:
+    setsyslog.cc: Options::setSyslog()
+
+syslogPriority() const
+  Full name: Options::syslogPriority() const
+  Source:    syslogpriority.cc 
+  Used By:
+    setsyslog.cc: Options::setSyslog()
+
+terminate() const
+  Full name: Daemon::terminate() const
+  Source:    terminate.cc 
+  Used By:
+    ipc.cc: Daemon::ipc()
+
+usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Source:    usage.cc 
+  Used By:
+    options1.cc: Options::Options()
+
+version
+  Full name: Icmbuild::version
+  Source:    version.cc 
+  Used By:
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+writeRequest(std::ostream&, IPCFunction::Function)
+  Full name: Cron::writeRequest(std::ostream&, IPCFunction::Function)
+  Source:    writerequest.cc 
+  Used By:
+    handlerequests.cc: Cron::handleRequests()
+    listrequest.cc: Daemon::listRequest()
+    reload.cc: Daemon::reload()
+
+years
+  Full name: Icmbuild::years
+  Source:    version.cc 
+  Used By:
+    usage.cc: Options::usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+
+

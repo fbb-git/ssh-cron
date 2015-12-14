@@ -5,7 +5,22 @@ void Daemon::daemonize()
     string const &ipcFile = d_options.ipcFile();
 
     if (access(ipcFile.c_str(), F_OK) == 0)
-        fmsg << ipcFile << " is in the way. Remove it first" << endl;
+    {
+        bool remove = d_options.forced();
+
+        if (not remove)
+        {
+            wmsg << ipcFile << " is in the way. Remove it [Ny]? ";
+            string answer;
+    
+            remove = getline(cin, answer) 
+                        && (answer == "y" || answer == "yes");
+        }
+
+        if (not remove or unlink(ipcFile.c_str()) != 0)
+            fmsg << "cannot continue as " << ipcFile << 
+                                            " cannot be removed " << endl;
+    }
 
     getPassPhrase();
 

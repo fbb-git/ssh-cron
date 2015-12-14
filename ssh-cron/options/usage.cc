@@ -22,6 +22,9 @@ void Options::usage(std::string const &progname)
                                                             "specifications\n"
     "                         (default `$HOME/" <<
                                     s_defaultConfigFile << ")`\n"
+    "      --forced (-f)    - (C) When restarting " << progname << 
+                                                            " an existing\n"
+    "                         (leftover) ipc-file is removed\n"
     "      --help (-h)      - (C) provide this help\n"
     "      --ipc-file (-i) path - `path' is the path name of the file\n"
     "                         containing the info used for IPC\n"

@@ -28,6 +28,8 @@ Options::Options()
     if ((d_terminate = d_arg.option('t')))
         d_ipcFunction = TERMINATE;
 
+    d_forced = d_arg.option('f');
+
     checkAction();
 
     if (d_arg.option('s'))
@@ -69,9 +71,6 @@ Options::Options()
     else
         wmsg << "--verbose ignored: --syslog or --log not specified" << endl;
 }       
-
-
-
 
 
 

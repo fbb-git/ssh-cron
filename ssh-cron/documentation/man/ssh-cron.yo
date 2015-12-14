@@ -154,12 +154,17 @@ quotes. Examples:
 
         By default tt(/usr/bin/ssh-agent /bin/bash) is used.
 
-    it() lsoption(config-file)(c)(path)nl()
+    it() lsoption(config)(c)(path)nl()
         config file containing long option specifications.
 
         By default tt(~/.ssh-cron) is used.
 
         This option cannot be specified in the configuration file.
+
+    it() loption(forced) (soption(f))nl()
+        When restarting s() and an existing (leftover) ipc-file file
+        exists, then the user is interactively given the opportunity to remove
+        the existing ipc-file during daemon-startup.
 
     it() loption(help) (soption(h))nl()
        basic usage information is written to the standard output
@@ -172,11 +177,13 @@ quotes. Examples:
         holding the daemon's shared memory ID and process ID. The ipc file
         must be available if s() is connecting to or starting a daemon process
         (the former situation occurs with the options tt(--list, --reload),
-        and tt(--terminate)). S() does not start a daemon process if it
-        detects an existing tt(ipc-file), which has to be removed by the user
-        first. To end a daemon process use tt(ssh-cron --terminate), or send a
-        SIGINT (tt(ctrl-C)) or SIGTERM signal to the process-id found as the
-        second value in the tt(ipc-file).
+        and tt(--terminate)). If s() detects an existing tt(ipc-file) at
+        daemon startup and the option tt(--forced) was not specified, then the
+        user is interactively given the opportunity to remove the existing
+        file. If the existing ipc-file can or should not be removed, then the
+        daemon is not started. To end a daemon process use tt(ssh-cron
+        --terminate), or send a SIGINT (tt(ctrl-C)) or SIGTERM signal to the
+        process-id found as the second value in the tt(ipc-file).
 
         By default tt(~/.ssh-cron.ipc) is used.
         
@@ -280,7 +287,7 @@ syslog messages and write them to a file of your choice. E.g., to filter
 messages starting with the syslog message tag (e.g., tt(SSH-CRON)) use
         verb(
 :syslogtag, isequal, "SSH-CRON:"   /var/log/ssh-cron.log
-:syslogtag, isequal, "SSH-CRON:"   ~
+:syslogtag, isequal, "SSH-CRON:"   stop
         )
     Note that the colon is part of the tag, but is not specified with the 
 tt(syslog-tag) option.

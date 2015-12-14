@@ -17,6 +17,7 @@ namespace   // the anonymous namespace can be used here
         Arg::LongOption("terminate", 't'),
 
         Arg::LongOption("config", 'c'),
+        Arg::LongOption("forced", 'f'),
 
                 // all options below are also interpreted when specified by
                 // the config file
@@ -40,7 +41,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    ArgConfig &arg = ArgConfig::initialize("c:hi:lL:m:rstv", 
+    ArgConfig &arg = ArgConfig::initialize("c:fhi:lL:m:rstv", 
                         longOptions, longEnd, argc, argv);
     arg.versionHelp(Options::usage, Icmbuild::version, 0);
 

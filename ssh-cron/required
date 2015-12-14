@@ -9,11 +9,11 @@ libbobcat-dev (>= 4.01.00),
 
 To use the provided build-script:
 
-    icmake (>= 7.22.01)
+    icmake (>= 8.00.04)
 
 To construct the man-page:
         
-    yodl (>= 3.05.0)
+    yodl (>= 3.06.0)
 
 
 

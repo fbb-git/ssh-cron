@@ -39,6 +39,7 @@ class Options: public IPCFunction
     bool d_list;
     bool d_reload;
     bool d_terminate;
+    bool d_forced;
 
     Function d_ipcFunction = NONE;
 
@@ -67,6 +68,7 @@ class Options: public IPCFunction
         bool ipc() const;
         bool cronfile() const;
         bool reload() const;
+        bool forced() const;
 
         Function ipcFunction() const;
 
@@ -105,6 +107,11 @@ inline bool Options::foreground() const
 inline bool Options::daemon() const
 {   
     return not d_foreground;
+}
+
+inline bool Options::forced() const
+{   
+    return d_forced;
 }
 
 inline bool Options::reload() const
