@@ -1,35 +1,8 @@
 Ssh-cron is a cron daemon allowing connections to remote computers requiring
 the use of ssh keys with passphrases.
 
-Ssh-cron acts like cron, but utilizes ssh-agent to obtain ssh key
-passphrases. Thus it allows scheduled commands to run on remote systems
-without requiring the ssh key passphrase to be stored in a clear-text file, or
-resorting to ssh keys without passphrases.
+Ssh-cron's repository has moved to https://gitlab.com/fbb-git/ssh-cron
+and is not maintained at this location anymore.
 
-Consider the situation where a computer every now and then must access a
-remote computer to do some useful things at that remote computer (like running
-a stealth(1) file integrity scan). In order to do so the computer must be
-allowed to make ssh(1) connections to the remote computer.  But since the
-commands are not executed by the user but by cron(1), the ssh-keys which are
-required to access the remote computer cannot use passphrases.
-
-This is an undesirable situation: if the computer running the ssh commands
-gets compromised, then the remote computers are compromised as well, since the
-attacker may access these remote systems using ssh keys not requiring pass
-phrases.
-
-Ssh-Cron offers a way out of this undesirable  situation,  while  still
-allowing  commands  to be executed on remote computers.
-
-
-To create the program from its sources, either descend into the ssh-cron
-directory, or unpack a created archive, cd into its top-level directory 
-and follow the instructions provided in the INSTALL file found there.
-
-Alternatively, binary ready-to-install versions of ssh-cron are available in
-verious Linux distributions, in particular Debian. See, e.g.,
-https://packages.debian.org/search?keywords=ssh-cron&searchon=names&suite=all&section=all
-
-Github's web-pages for ssh-cron are here:
-https://fbb-git.github.io/ssh-cron/
-
+The project's web-page can be found at 
+http://fbb-git.gitlab.io/ssh-cron/
